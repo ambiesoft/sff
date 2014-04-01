@@ -13,6 +13,7 @@ public:
 	}
 
 	void calcit(LPCTSTR pName);
+	LONGLONG getCalc();
 };
 class CALC2
 {
@@ -41,4 +42,5 @@ public:
 	}
 
 	void Calculate1();
+	LONGLONG GetCalculate1();
 };

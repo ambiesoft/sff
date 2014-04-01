@@ -59,3 +59,7 @@ void CFileData::Calculate1()
 	c1_->calcit(name_.c_str());
 
 }
+LONGLONG CFileData::GetCalculate1()
+{
+	return c1_->GetCalculate1();
+}
