@@ -152,28 +152,28 @@ String^ getResult()
 		{  // calculate1
 			for(TOPRO::iterator itp = topro.begin(); itp != topro.end(); ++itp)
 			{
-				sb.AppendLine(itp->first.ToString());
 				for(set<CFileData*>::iterator itts = itp->second->begin(); itts != itp->second->end(); ++itts)
 				{
 					// same files
 					CFileData* pFD = *itts;
 					pFD->Calculate1();
-					sb.AppendLine(gcnew String((*itts)->GetName()));
+					// sb.AppendLine(gcnew String((*itts)->GetName()));
 				}
-				sb.AppendLine(L"============================");
+				// sb.AppendLine(L"============================");
 			}
 		}
 
-		TOPRO topro2;
+		typedef map<string,set<CFileData*>* > TOPRO2;
+		TOPRO2 topro2;
 		{  // check calculate1
 			for(TOPRO::iterator itp = topro.begin(); itp != topro.end(); ++itp)
 			{
-				map<ULONGLONG, CFileData*> kouhos;
+				map<string, CFileData*> kouhos;
 				for(set<CFileData*>::iterator itts = itp->second->begin(); itts != itp->second->end(); ++itts)
 				{
 					// same files
 					CFileData* pFD = *itts;
-					ULONGLONG ret = pFD->GetCalculate1();
+					string ret = pFD->GetCalculate1();
 
 					if(kouhos[ret] != NULL)
 					{
@@ -183,14 +183,29 @@ String^ getResult()
 							 tp = new set<CFileData*>;
 							 tp->insert(kouhos[ret]);
 							 tp->insert(pFD);
+							 topro2[ret]=tp;
 						 }
+
 					}
 					kouhos[ret] = pFD;
+				}
+				
+			}
+		}
+
+		{ // check topro2
+			for(TOPRO2::iterator it = topro2.begin(); it != topro2.end(); ++it)
+			{
+				string cal = it->first;
+				set<CFileData*>* pSet = it->second;
+				for(set<CFileData*>::iterator its=pSet->begin(); its != pSet->end(); ++its)
+				{
+					CFileData* pFD = *its;
+					sb.AppendLine(gcnew String(pFD->GetName()));
 				}
 				sb.AppendLine(L"============================");
 			}
 		}
-
 		{ // cleanup
 			for(TOPRO::iterator itp = topro.begin(); itp != topro.end(); ++itp)
 			{

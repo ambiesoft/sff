@@ -13,7 +13,7 @@ public:
 	}
 
 	void calcit(LPCTSTR pName);
-	LONGLONG getCalc();
+	string getCalc();
 };
 class CALC2
 {
@@ -42,5 +42,5 @@ public:
 	}
 
 	void Calculate1();
-	LONGLONG GetCalculate1();
+	string GetCalculate1();
 };

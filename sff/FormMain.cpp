@@ -13,9 +13,11 @@ namespace sff {
 		try
 		{
 			UINT oldmode = SetErrorMode(SEM_FAILCRITICALERRORS);
-			dowork(_T("y:\\download"));
-			dowork(_T("z:\\download"));
-			dowork(_T("E:\\Movie"));
+			// dowork(_T("\\\\?\\y:\\download"));
+			
+			dowork(_T("z:\\"));
+			dowork(_T("E:\\"));
+			dowork(_T("y:\\"));
 			
 			//dowork(_T("z:"));
 			//dowork(_T("X:"));
