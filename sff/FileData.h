@@ -1,3 +1,4 @@
+#pragma once
 class CALC1
 {
 	BOOL fSuc;
@@ -13,7 +14,7 @@ public:
 	}
 
 	void calcit(LPCTSTR pName);
-	string getCalc();
+	string getCalc(ULL leng);
 };
 class CALC2
 {
@@ -21,17 +22,10 @@ class CALC2
 class CFileData
 {
 	tstring name_;
-	ULONGLONG leng_;
+	ULL leng_;
 	CALC1* c1_;
 public:
-	CFileData(LPCTSTR pDir, LPCTSTR pN, ULONGLONG leng)
-	{
-		c1_ = NULL;
-		name_ = pDir;
-		name_ += _T("\\");
-		name_ += pN;
-		leng_ = leng;
-	}
+	CFileData(LPCTSTR pDir, LPCTSTR pN, ULL leng);
 	~CFileData()
 	{
 		delete c1_;
@@ -40,7 +34,7 @@ public:
 	LPCTSTR GetName() const {
 		return name_.c_str();
 	}
+	string GetLengString() const ;
 
-	void Calculate1();
 	string GetCalculate1();
 };

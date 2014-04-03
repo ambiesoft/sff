@@ -8,6 +8,7 @@
 #include <tchar.h>
 
 #include <stdlib.h>
+#include <process.h>
 #pragma warning (disable : 4996)
 #pragma warning (disable : 4291)
 
@@ -87,4 +88,20 @@ inline bool isDerived(System::Object^ o, System::Type^ t)
 #endif
 
 
+
+#define MAKEULONGLONG(a,b) \
+    ((ULONGLONG)((DWORD)(a) | ((DWORDLONG)(DWORD)(b)) << 32))
+
+#define MAKEULONGLONGWFD(wfd) \
+    ((ULONGLONG)((DWORD)((wfd).nFileSizeLow) | ((DWORDLONG)(DWORD)((wfd).nFileSizeHigh)) << 32))
+
+enum {
+	WM_APP_SEARCHDONE = WM_APP + 1,
+	WM_APP_ADDLINE,
+	WM_APP_ADDLINE2,
+	WM_APP_ADDSEPARATOR,
+
+};
+
+typedef ULONGLONG ULL;
 using namespace std;

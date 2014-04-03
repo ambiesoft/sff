@@ -5,62 +5,97 @@
 void CALC1::calcit(LPCTSTR pName)
 {
 
-
-	FILE* f = _tfopen(pName, _T("rb"));
-	if(!f)
+	HANDLE h = CreateFile(pName,
+		GENERIC_READ,
+		FILE_SHARE_READ,
+		NULL,
+		OPEN_EXISTING,
+		FILE_ATTRIBUTE_READONLY | FILE_FLAG_RANDOM_ACCESS,
+		NULL);
+	if(h==INVALID_HANDLE_VALUE)
 		return;
 
-	struct FILECLOSER {
-		FILE* f_;
-		FILECLOSER(FILE* f) {
-			f_ = f;
+	FILETIME la;
+	la.dwHighDateTime = 0xFFFFFFFF;
+	la.dwLowDateTime =  0xFFFFFFFF;
+	SetFileTime(h, NULL, &la, NULL);
+
+	struct FILECLOSERwin {
+		HANDLE h_;
+		FILECLOSERwin(HANDLE h) {
+			h_ = h;
 		}
-		~FILECLOSER() {
-			fclose(f_);
+		~FILECLOSERwin() {
+			CloseHandle(h_);
 		}
-	} fc(f);
+	} hc(h);
 
-	struct _stat64 st;
-	if(0 != _fstati64(_fileno(f), &st))
+	DWORD high = 0;
+	DWORD low = GetFileSize(h, &high);
+	if(low==INVALID_FILE_SIZE && GetLastError()!=NO_ERROR)
 		return;
 
-	LONGLONG len = st.st_size;
+	ULL len = MAKEULONGLONG(low,high);
+
+	if(INVALID_SET_FILE_POINTER==SetFilePointer(h, 0, NULL, FILE_BEGIN))
+		return;
+
+	DWORD readed=0;
+	if(high==0 && low < 20)
+	{
+		ZeroMemory(bf, sizeof(bf));
+		if(!ReadFile(h, bf, sizeof(bf), &readed, NULL))
+			return;
+
+		DASSERT(sizeof(bf)==sizeof(bc));
+		DASSERT(sizeof(bf)==sizeof(bl));
+		memcpy(bc, bf, sizeof(bf));
+		memcpy(bl, bf, sizeof(bf));
+
+		fSuc=TRUE;
+		return;
+	}
+
+	if(!ReadFile(h, bf, sizeof(bf), &readed, NULL) && readed != sizeof(bf))
+		return;
+
+
+	ULL halfsize = len/2;
 	
-	
-	if(0!=_fseeki64(f, 0, SEEK_SET))
+	LONG halflow = (LONG)(halfsize & 0xFFFFFFFF);
+	LONG halfhigh = (LONG)(halfsize>>32);
+	if(INVALID_SET_FILE_POINTER==SetFilePointer(h, halflow, &halfhigh, FILE_BEGIN) &&
+		GetLastError() != NO_ERROR)
 		return;
 
-	if(sizeof(bf) != fread(bf, sizeof(BYTE), sizeof(bf), f))
+	if(!ReadFile(h, bc, sizeof(bc), &readed, NULL) && readed != sizeof(bc))
 		return;
 
-
-
-	__int64 halfsize = st.st_size / 2;
-	if(0!=_fseeki64(f, halfsize, SEEK_SET))
-		return;
-	
-	if(sizeof(bc) != fread(bc, sizeof(BYTE), sizeof(bc), f))
+	ULL lenm10 = len - 10;
+	halflow = (ULONG)(lenm10 & 0xFFFFFFFF);
+	halfhigh = (ULONG)(lenm10>>32);
+	if(INVALID_SET_FILE_POINTER==SetFilePointer(h, halflow, &halfhigh, FILE_BEGIN) &&
+		GetLastError() != NO_ERROR)
 		return;
 
-
-
-	if(0!=_fseeki64(f, st.st_size-10, SEEK_SET))
-		return;
-	
-	if(sizeof(bl) != fread(bl, sizeof(BYTE), sizeof(bl), f))
+	if(!ReadFile(h, bl, sizeof(bl), &readed, NULL) && readed != sizeof(bl))
 		return;
 
 	fSuc = TRUE;
 }
 
 
-string CALC1::getCalc()
+string CALC1::getCalc(ULL leng)
 {
 	if(!fSuc)
 		return "";
 	string ret;
 	
+	
 	char szT[128];
+	_ui64toa(leng, szT, 10);
+	ret = szT;
+	ret += "-";
 
 	sprintf(szT, "%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X",
 		bf[0],
@@ -107,13 +142,36 @@ string CALC1::getCalc()
 	return ret;
 }
 
-void CFileData::Calculate1()
-{
-	c1_ = new CALC1;
-	c1_->calcit(name_.c_str());
 
+CFileData::CFileData(LPCTSTR pDir, LPCTSTR pN, ULL leng)
+{
+	c1_ = NULL;
+	name_ = pDir;
+	name_ += _T("\\");
+	name_ += pN;
+
+	//TCHAR* p = _tcsdup(name_.c_str());
+	//tstring aaa=name_;
+	//aaa=name_.c_str();
+	//aaa=p;
+	//System::Windows::Forms::MessageBox::Show(gcnew System::String(name_.c_str()));
+	leng_ = leng;
 }
+
+string CFileData::GetLengString() const
+{
+	char szT[128];
+	_ui64toa(leng_, szT, 10);
+	return string(szT);
+}
+
+
 string CFileData::GetCalculate1()
 {
-	return c1_->getCalc();
+	if(!c1_)
+	{
+		c1_ = new CALC1;
+		c1_->calcit(name_.c_str());
+	}
+	return c1_->getCalc(leng_);
 }

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual C++ Express 2005
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sff", "sff\sff.vcproj", "{35A17F19-3630-42E6-89F9-4F443572EA95}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sff", "sff\sff2005.vcproj", "{35A17F19-3630-42E6-89F9-4F443572EA95}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
