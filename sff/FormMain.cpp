@@ -3,7 +3,7 @@
 #include "work.h"
 #include "FormMain.h"
 #include "FileData.h"
-#include "ListGroup.h"
+//#include "ListGroup.h"
 
 namespace sff {
 
@@ -18,13 +18,13 @@ namespace sff {
 		if(gcurthread==NULL)
 		{
 			lvResult->Items->Clear();
-			LVDATA^ lvdata = (LVDATA^)lvResult->Tag;
-			if(!lvdata)
-			{
-				lvdata=gcnew LVDATA;
-				lvResult->Tag=lvdata;
-			}
-			lvdata->Clear();
+			//LVDATA^ lvdata = (LVDATA^)lvResult->Tag;
+			//if(!lvdata)
+			//{
+			//	lvdata=gcnew LVDATA;
+			//	lvResult->Tag=lvdata;
+			//}
+			//lvdata->Clear();
 
 
 			LPCTSTR pDir = _tcsdup(_T("z:"));

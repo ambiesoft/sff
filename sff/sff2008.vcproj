@@ -353,10 +353,6 @@
 				</File>
 			</File>
 			<File
-				RelativePath=".\ListGroup.h"
-				>
-			</File>
-			<File
 				RelativePath=".\resource.h"
 				>
 			</File>

@@ -1,0 +1,37 @@
+//#pragma once
+//
+//
+//namespace sff {
+//
+//	using namespace System;
+//	using namespace System::ComponentModel;
+//	using namespace System::Collections::Generic;
+//	using namespace System::Windows::Forms;
+//	using namespace System::Data;
+//	using namespace System::Drawing;
+//
+//	public ref class LVDATA
+//	{
+//		Dictionary<ULL, ListViewGroup^> groups_;
+//		
+//	public:
+//		LVDATA() {
+//		}
+//
+//		ListViewGroup^ getGroup(ULL ull)
+//		{
+//			if(!groups_.ContainsKey(ull))
+//			{
+//				ListViewGroup^ret = gcnew ListViewGroup();
+//				groups_[ull]=ret;
+//				return ret;
+//			}
+//			return groups_[ull];
+//		}
+//
+//		void Clear()
+//		{
+//			groups_.Clear();
+//		}
+//	};
+//}
