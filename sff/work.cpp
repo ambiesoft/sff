@@ -59,6 +59,9 @@ static BOOL iswfdcurdir(WIN32_FIND_DATA* pD)
 
 static void processfound(THREADPASSDATA* pD, WIN32_FIND_DATA* pf, LPCTSTR pNext=NULL)
 {
+	if(pD->thid_ != gthid)
+		return;
+
 	if(iswfdcurdir(pf))
 		return;
 
@@ -66,17 +69,33 @@ static void processfound(THREADPASSDATA* pD, WIN32_FIND_DATA* pf, LPCTSTR pNext=
 	if(pf->dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
 	{
 		LPCTSTR p = credir(pDir, pf->cFileName);
+		struct CRTFreer {
+			void* p_;
+			CRTFreer(void* p) {
+				p_=p;
+			}
+			~CRTFreer() {
+				free(p_);
+			}
+		} crtfreer((void*)p);
+
+		if(!SendMessage(pD->hwnd_, WM_APP_ADDPROGRESS, pD->thid_, (LPARAM)p))
+			return;
+
 		dowork(pD,p);
-		free((void*)p);
 		return;
 	}
 
 	ULL ull = MAKEULONGLONGWFD(*pf);
-	//if(ull < (1024*100))
-	//	return;
+	
+	if(ull < (1024*100))
+		return;
 
 	CFileData* pFD = new CFileData(pDir, pf->cFileName,ull);
 	atodel.insert(pFD);
+
+
+
 	if(alcheck1[ull] != NULL)
 	{
 		dups1.insert(THEMMV(ull,alcheck1[ull] ));

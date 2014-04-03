@@ -31,6 +31,9 @@ public:
 		delete c1_;
 	}
 
+	ULL GetLeng() const {
+		return leng_;
+	}
 	LPCTSTR GetName() const {
 		return name_.c_str();
 	}

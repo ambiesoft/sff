@@ -100,8 +100,18 @@ enum {
 	WM_APP_ADDLINE,
 	WM_APP_ADDLINE2,
 	WM_APP_ADDSEPARATOR,
+	WM_APP_ADDPROGRESS,
 
 };
 
 typedef ULONGLONG ULL;
+namespace sff {
+	ref class OptListView : public System::Windows::Forms::ListView
+	{
+	public:
+		OptListView() {
+			SetStyle(System::Windows::Forms::ControlStyles::OptimizedDoubleBuffer, true);
+		}
+	};
+}
 using namespace std;
