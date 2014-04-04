@@ -88,8 +88,8 @@ static void processfound(THREADPASSDATA* pD, WIN32_FIND_DATA* pf, LPCTSTR pNext=
 
 	ULL ull = MAKEULONGLONGWFD(*pf);
 	
-	if(ull < (1024*100))
-		return;
+	//if(ull < (1024*100))
+	//	return;
 
 	CFileData* pFD = new CFileData(pDir, pf->cFileName,ull);
 	atodel.insert(pFD);

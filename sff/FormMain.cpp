@@ -7,17 +7,68 @@
 
 namespace sff {
 
+	public ref class ListViewItemComparer : System::Collections::IComparer
+	{
+	private:
+		static int rev_;
+		int _column;
+
+	public:
+		static ListViewItemComparer()
+		{
+			rev_ = 1;
+		}
+		ListViewItemComparer(int col)
+		{
+			_column = col;
+			rev_ = rev_ * -1;
+		}
+
+		virtual int Compare(Object^ o1, Object^ o2)
+		{
+			//ListViewItem�̎擾
+			ListViewItem^ item1 = (ListViewItem^) o1;
+			ListViewItem^ item2 = (ListViewItem^) o2;
+
+			ULL u1;
+			ULL u2;
+			System::UInt64::TryParse(item1->SubItems[_column]->Text, u1);
+			System::UInt64::TryParse(item2->SubItems[_column]->Text, u2);
+
+			LONGLONG uret=u1-u2;
+			int ret=0;
+			if(uret==0)
+				ret =0;
+			else if(uret>0)
+				ret=1;
+			else
+				ret=-1;
+
+			return ret * rev_;
+		}
+	};
 
 	System::Void FormMain::FormMain_Load(System::Object^  sender, System::EventArgs^  e)
 	{
 		ThreadOn(false);
 	}
 
+	System::Void FormMain::lvResult_ColumnClick(System::Object^  sender, System::Windows::Forms::ColumnClickEventArgs^  e)
+	{
+		lvResult->ListViewItemSorter =
+			gcnew ListViewItemComparer(e->Column);
+		lvResult->Sort();
+
+
+	}
 	System::Void FormMain::btnStart_Click(System::Object^  sender, System::EventArgs^  e)
 	{
 		if(gcurthread==NULL)
 		{
 			lvResult->Items->Clear();
+			lvResult->Groups->Clear();
+			groupI_.Clear();
+			
 			//LVDATA^ lvdata = (LVDATA^)lvResult->Tag;
 			//if(!lvdata)
 			//{
@@ -27,7 +78,7 @@ namespace sff {
 			//lvdata->Clear();
 
 
-			LPCTSTR pDir = _tcsdup(_T("z:"));
+			LPCTSTR pDir = _tcsdup(_T("E:\\T\\10"));
 			//LPCTSTR pDir = _tcsdup(_T("Y:\\download"));
 			THREADPASSDATA* pData = new THREADPASSDATA(
 				0,
@@ -91,18 +142,42 @@ namespace sff {
 				CFileData* pFD = (CFileData*)m.LParam.ToPointer();
 				//ListViewGroup^ lvg= ((LVDATA^)lvResult->Tag)->getGroup(pFD->GetLeng());
 
-				ListViewGroup^ lvg = lvResult->Groups[pFD->GetLeng().ToString()];
-				if ( !lvg )
+				if(false)
 				{
-					lvg = gcnew ListViewGroup(pFD->GetLeng().ToString(), pFD->GetLeng().ToString());
-					lvResult->Groups->Add(lvg);
-				}
-				else
-				{
-					lvg->Header = pFD->GetLeng().ToString();
-				}
-				lvResult->Groups->Add(lvg);
+					ListViewGroup^ lvg = lvResult->Groups[pFD->GetLeng().ToString()];
+					if ( !lvg )
+					{
+						lvg = gcnew ListViewGroup(pFD->GetLeng().ToString(), pFD->GetLeng().ToString());
+						ULL len=pFD->GetLeng();
+						DASSERT(!groupI_.Contains(len));
+						lvResult->Groups->Add(lvg);
+						groupI_.Add(len);
+						groupI_.Sort();
+						int index = groupI_.IndexOf(len);
+						DASSERT(0 <= index);
+						if(index==0)
+						{
+							lvResult->Groups->Insert(index,lvg);// Add(lvg);
+						}
+						else
+						{
+							//ULL prev = groupI_[index-1];
+							//index = groupI_.IndexOf(prev);
+							//DASSERT(0 <= index);
+							index = lvResult->Groups->IndexOf(lvResult->Groups[index-1]);
+							lvResult->Groups->Insert(index+1,lvg);// Add(lvg);
+						}
 
+
+					}
+					else
+					{
+						lvg->Header = pFD->GetLeng().ToString();
+					}
+				}					
+				
+
+				
 
 				ListViewItem^ item = gcnew ListViewItem(
 								gcnew array<String^>
@@ -118,9 +193,11 @@ namespace sff {
 
 					//lvi.SubItems->Add(%lvis);
 				}
-				item->Group=lvg;
+				//item->Group=lvg;
 
+				
 				lvResult->Items->Add(item);
+				lvResult->Sort();
 				
 
 				m.Result=(IntPtr)1;							

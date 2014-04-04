@@ -293,6 +293,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\FormMainInitializeComponent.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\sff.cpp"
 				>
 			</File>
