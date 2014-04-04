@@ -65,9 +65,52 @@ namespace sff {
 	{
 		if(gcurthread==NULL)
 		{
+			List<String^>^ inlines = gcnew List<String^>;
+			for each(String^ inl in txtInDir->Lines)
+			{
+				inl=inl->TrimStart();
+				if(String::IsNullOrEmpty(inl))
+					continue;
+
+				try
+				{
+					System::IO::DirectoryInfo di(inl);
+					if(!di.Exists)
+					{
+						if(System::Windows::Forms::DialogResult::Yes != MessageBox::Show(L"\"" + inl + L"\"" + L" does not exist.\r\nContinue?",
+							Application::ProductName,
+							MessageBoxButtons::YesNo,
+							MessageBoxIcon::Question,
+							MessageBoxDefaultButton::Button2))
+						{
+							return;
+						}
+					}
+				}
+				catch(System::Exception^ ex)
+				{
+					MessageBox::Show(ex->Message + L"\"" + inl + L"\"",
+						Application::ProductName,
+						MessageBoxButtons::OK,
+						MessageBoxIcon::Exclamation);
+					return;
+				}
+				inlines->Add(inl);
+			}
+
+			if(inlines->Count==0)
+			{
+				MessageBox::Show(L"No Folders specifies.",
+					Application::ProductName,
+					MessageBoxButtons::OK,
+					MessageBoxIcon::Exclamation);
+				return;
+			}
+
 			lvResult->Items->Clear();
 			lvResult->Groups->Clear();
 			groupI_.Clear();
+			frmError.lvError->Items->Clear();
 			
 			//LVDATA^ lvdata = (LVDATA^)lvResult->Tag;
 			//if(!lvdata)
@@ -77,15 +120,14 @@ namespace sff {
 			//}
 			//lvdata->Clear();
 
+			//LPCTSTR pDir = _tcsdup(_T("E:\\T\\10"));
 
-			LPCTSTR pDir = _tcsdup(_T("E:\\T\\10"));
-			//LPCTSTR pDir = _tcsdup(_T("Y:\\download"));
 			THREADPASSDATA* pData = new THREADPASSDATA(
 				0,
 				NULL,
 				(HWND)this->Handle.ToPointer(),
 				0,
-				pDir);
+				inlines);
 			uintptr_t threadhandle = _beginthreadex(NULL, 0, startOfSearch, (void*)pData, CREATE_SUSPENDED, NULL);
 			if(threadhandle==0)
 			{
@@ -99,161 +141,22 @@ namespace sff {
 			DVERIFY_NOT(ResumeThread((HANDLE)threadhandle), 0xFFFFFFFF);
 			
 			ThreadOn(true);
+			tabMain->SelectedTab= tbResult;
+		}
+		else
+		{
+			CloseThread();
+			ThreadOn(false);
 		}
 	}
 		
 	void FormMain::ThreadOn(bool on)
 	{
-		btnStart->Enabled=!on;
+		btnStart->Text = on ? L"&Cancel" : L"&Start";
 		btnPause->Enabled=on;
 		btnResume->Enabled=on;
 	}
 	
-	void FormMain::WndProc(Message% m) 
-	{
-		switch( m.Msg )
-		{
-			//case WM_APP_ADDLINE:
-			//{
-			//	DWORD id = (DWORD)m.WParam.ToInt32();
-			//	if(id!=gthid)
-			//	{
-			//		m.Result = (IntPtr)0;
-			//		break;
-			//	}
-			//	
-			//	String^ line = gcnew String((LPCTSTR)m.LParam.ToPointer());
-			//	line += L"\r\n";
-			//	txtResult->Text = txtResult->Text + line;
-			//	m.Result=(IntPtr)1;
-			//
-			//}
-			//break;
-
-			case WM_APP_ADDLINE2:
-			{
-				DWORD id = (DWORD)m.WParam.ToInt32();
-				if(id!=gthid)
-				{
-					m.Result = (IntPtr)0;
-					break;
-				}
-				
-				CFileData* pFD = (CFileData*)m.LParam.ToPointer();
-				//ListViewGroup^ lvg= ((LVDATA^)lvResult->Tag)->getGroup(pFD->GetLeng());
-
-				if(false)
-				{
-					ListViewGroup^ lvg = lvResult->Groups[pFD->GetLeng().ToString()];
-					if ( !lvg )
-					{
-						lvg = gcnew ListViewGroup(pFD->GetLeng().ToString(), pFD->GetLeng().ToString());
-						ULL len=pFD->GetLeng();
-						DASSERT(!groupI_.Contains(len));
-						lvResult->Groups->Add(lvg);
-						groupI_.Add(len);
-						groupI_.Sort();
-						int index = groupI_.IndexOf(len);
-						DASSERT(0 <= index);
-						if(index==0)
-						{
-							lvResult->Groups->Insert(index,lvg);// Add(lvg);
-						}
-						else
-						{
-							//ULL prev = groupI_[index-1];
-							//index = groupI_.IndexOf(prev);
-							//DASSERT(0 <= index);
-							index = lvResult->Groups->IndexOf(lvResult->Groups[index-1]);
-							lvResult->Groups->Insert(index+1,lvg);// Add(lvg);
-						}
-
-
-					}
-					else
-					{
-						lvg->Header = pFD->GetLeng().ToString();
-					}
-				}					
-				
-
-				
-
-				ListViewItem^ item = gcnew ListViewItem(
-								gcnew array<String^>
-									{
-										gcnew String(pFD->GetName()),
-										pFD->GetLeng().ToString()
-									}
-								);
-				
-				{
-					//ListViewItem::ListViewSubItem lvis;
-					//lvis.Text=gcnew String();
-
-					//lvi.SubItems->Add(%lvis);
-				}
-				//item->Group=lvg;
-
-				
-				lvResult->Items->Add(item);
-				lvResult->Sort();
-				
-
-				m.Result=(IntPtr)1;							
-			}
-			break;
-
-			//case WM_APP_ADDSEPARATOR:
-			//{
-			//	DWORD id = (DWORD)m.WParam.ToInt32();
-			//	if(id!=gthid)
-			//	{
-			//		m.Result = (IntPtr)0;
-			//		break;
-			//	}
-
-			//	txtResult->Text += L"---------------------------------";				
-
-			//	m.Result=(IntPtr)1;
-
-			//}
-			//break;
-			
-			case WM_APP_ADDPROGRESS:
-			{
-				DWORD id = (DWORD)m.WParam.ToInt32();
-				if(id!=gthid)
-				{
-					m.Result = (IntPtr)0;
-					break;
-				}
-
-				String^ progline= gcnew String((LPCTSTR)m.LParam.ToPointer());
-				lblProgress->Text=progline;
-
-				m.Result=(IntPtr)1;
-
-			}
-			break;
-
-			case WM_APP_SEARCHDONE:
-			{
-				Application::DoEvents();
-				
-
-				lblProgress->Text=String::Empty;
-
-				gthid++;
-				gcurthread = NULL;
-				btnStart->Enabled=true;
-			}
-			break;
-
-			default:
-				Form::WndProc(m);
-		}
-	}
 
 	System::Void FormMain::btnPause_Click(System::Object^  sender, System::EventArgs^  e)
 	{
@@ -266,10 +169,8 @@ namespace sff {
 	}
 
 
-	System::Void FormMain::FormMain_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e)
+	void FormMain::CloseThread()
 	{
-
-
 		if(gcurthread == NULL)
 			return;
 
@@ -284,7 +185,52 @@ namespace sff {
 		{
 			Application::DoEvents();
 		}
+		gcurthread=NULL;
+		Enabled=true;
 		DTRACE(L"Closing Done.");
+
+	}
+	System::Void FormMain::FormMain_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e)
+	{
+		e->Cancel=false;
+		CloseThread();
 	}
 
+		
+	System::Void FormMain::btnAdd_Click(System::Object^  sender, System::EventArgs^  e)
+	{
+
+		if(System::Windows::Forms::DialogResult::OK != fbd_.ShowDialog())
+			return;
+
+		txtInDir->Text += fbd_.SelectedPath + L"\r\n";
+	}
+
+	System::Void FormMain::explorerToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
+	{
+		
+		try
+		{
+			pin_ptr<const wchar_t> pIn = PtrToStringChars(lvResult->SelectedItems[0]->Text);
+			tstring file = pIn;
+
+			tstring arg;
+			arg += _T("/select,");
+			arg += file;
+			arg += _T(",/n");
+#pragma comment(lib, "shell32.lib")
+			ShellExecute((HWND)this->Handle.ToPointer(), _T("open"), _T("explorer.exe"), 
+					arg.c_str()  ,NULL, SW_SHOW);
+		}
+		catch(System::Exception^)
+		{}
+	}
+	
+	System::Void FormMain::btnShowError_Click(System::Object^  sender, System::EventArgs^  e)
+	{
+		if(!frmError.Visible)
+			frmError.Show();
+
+		frmError.BringToFront();
+	}
 }

@@ -6,6 +6,7 @@
 // TODO: プログラムに必要な追加ヘッダーをここで参照してください。
 #include <windows.h>
 #include <tchar.h>
+#include <vcclr.h>
 
 #include <stdlib.h>
 #include <process.h>
@@ -101,6 +102,7 @@ enum {
 	WM_APP_ADDLINE2,
 	WM_APP_ADDSEPARATOR,
 	WM_APP_ADDPROGRESS,
+	WM_APP_APIERROR,
 
 };
 

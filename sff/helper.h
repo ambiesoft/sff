@@ -1,0 +1,1 @@
+tstring GetLastErrorString(DWORD dwErrorNo, BOOL* pSeikou = NULL);

@@ -2,9 +2,8 @@
 #include "FileData.h"
 #include <sys/stat.h>
 #include <sys/types.h>
-void CALC1::calcit(LPCTSTR pName)
+DWORD CALC1::calcitt(LPCTSTR pName)
 {
-
 	HANDLE h = CreateFile(pName,
 		GENERIC_READ,
 		FILE_SHARE_READ,
@@ -13,7 +12,7 @@ void CALC1::calcit(LPCTSTR pName)
 		FILE_ATTRIBUTE_READONLY | FILE_FLAG_RANDOM_ACCESS,
 		NULL);
 	if(h==INVALID_HANDLE_VALUE)
-		return;
+		return GetLastError();
 
 	FILETIME la;
 	la.dwHighDateTime = 0xFFFFFFFF;
@@ -33,19 +32,19 @@ void CALC1::calcit(LPCTSTR pName)
 	DWORD high = 0;
 	DWORD low = GetFileSize(h, &high);
 	if(low==INVALID_FILE_SIZE && GetLastError()!=NO_ERROR)
-		return;
+		return GetLastError();
 
 	ULL len = MAKEULONGLONG(low,high);
 
 	if(INVALID_SET_FILE_POINTER==SetFilePointer(h, 0, NULL, FILE_BEGIN))
-		return;
+		return GetLastError();
 
 	DWORD readed=0;
 	if(high==0 && low < 20)
 	{
 		ZeroMemory(bf, sizeof(bf));
 		if(!ReadFile(h, bf, sizeof(bf), &readed, NULL))
-			return;
+			return GetLastError();
 
 		DASSERT(sizeof(bf)==sizeof(bc));
 		DASSERT(sizeof(bf)==sizeof(bl));
@@ -53,11 +52,11 @@ void CALC1::calcit(LPCTSTR pName)
 		memcpy(bl, bf, sizeof(bf));
 
 		fSuc=TRUE;
-		return;
+		return NO_ERROR;
 	}
 
 	if(!ReadFile(h, bf, sizeof(bf), &readed, NULL) && readed != sizeof(bf))
-		return;
+		return GetLastError();
 
 
 	ULL halfsize = len/2;
@@ -66,22 +65,23 @@ void CALC1::calcit(LPCTSTR pName)
 	LONG halfhigh = (LONG)(halfsize>>32);
 	if(INVALID_SET_FILE_POINTER==SetFilePointer(h, halflow, &halfhigh, FILE_BEGIN) &&
 		GetLastError() != NO_ERROR)
-		return;
+		return GetLastError();
 
 	if(!ReadFile(h, bc, sizeof(bc), &readed, NULL) && readed != sizeof(bc))
-		return;
+		return GetLastError();
 
 	ULL lenm10 = len - 10;
 	halflow = (ULONG)(lenm10 & 0xFFFFFFFF);
 	halfhigh = (ULONG)(lenm10>>32);
 	if(INVALID_SET_FILE_POINTER==SetFilePointer(h, halflow, &halfhigh, FILE_BEGIN) &&
 		GetLastError() != NO_ERROR)
-		return;
+		return GetLastError();
 
 	if(!ReadFile(h, bl, sizeof(bl), &readed, NULL) && readed != sizeof(bl))
-		return;
+		return GetLastError();
 
 	fSuc = TRUE;
+	return NO_ERROR;
 }
 
 
@@ -166,12 +166,15 @@ string CFileData::GetLengString() const
 }
 
 
-string CFileData::GetCalculate1()
+DWORD CFileData:: GetCalculate1(string& ret)
 {
 	if(!c1_)
 	{
 		c1_ = new CALC1;
-		c1_->calcit(name_.c_str());
+		DWORD dw = c1_->calcitt(name_.c_str());
+		if(NO_ERROR != dw)
+			return dw;
 	}
-	return c1_->getCalc(leng_);
+	ret= c1_->getCalc(leng_);
+	return NO_ERROR;
 }

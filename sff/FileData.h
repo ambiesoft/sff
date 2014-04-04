@@ -13,7 +13,7 @@ public:
 		ZeroMemory(this, sizeof(this));
 	}
 
-	void calcit(LPCTSTR pName);
+	DWORD calcitt(LPCTSTR pName);
 	string getCalc(ULL leng);
 };
 class CALC2
@@ -39,5 +39,5 @@ public:
 	}
 	string GetLengString() const ;
 
-	string GetCalculate1();
+	DWORD GetCalculate1(string& ret);
 };

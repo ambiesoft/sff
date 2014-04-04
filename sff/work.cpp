@@ -57,7 +57,7 @@ static BOOL iswfdcurdir(WIN32_FIND_DATA* pD)
 }
 
 
-static void processfound(THREADPASSDATA* pD, WIN32_FIND_DATA* pf, LPCTSTR pNext=NULL)
+static void processfound(THREADPASSDATA* pD, WIN32_FIND_DATA* pf, LPCTSTR pNext)
 {
 	if(pD->thid_ != gthid)
 		return;
@@ -65,7 +65,7 @@ static void processfound(THREADPASSDATA* pD, WIN32_FIND_DATA* pf, LPCTSTR pNext=
 	if(iswfdcurdir(pf))
 		return;
 
-	LPCTSTR pDir = pNext?pNext:pD->dir_;
+	LPCTSTR pDir = pNext?pNext:pD->curdir_;;
 	if(pf->dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
 	{
 		LPCTSTR p = credir(pDir, pf->cFileName);
@@ -101,8 +101,28 @@ static void processfound(THREADPASSDATA* pD, WIN32_FIND_DATA* pf, LPCTSTR pNext=
 		dups1.insert(THEMMV(ull,alcheck1[ull] ));
 		dups1.insert(THEMMV(ull,pFD ));
 
-		string ss1 = alcheck1[ull]->GetCalculate1();
-		string ss2 = pFD->GetCalculate1();
+		string ss1;
+		DWORD dwError = alcheck1[ull]->GetCalculate1(ss1);
+		if(dwError != NO_ERROR)
+		{
+			APIERROR ae;
+			ae.pFile = pDir;
+			ae.dwLE = dwError;
+			if(!SendMessage(pD->hwnd_, WM_APP_APIERROR, (WPARAM)pD->thid_, (LPARAM)&ae))
+				return;
+		}
+
+		string ss2;
+		dwError= pFD->GetCalculate1(ss2);
+		if(dwError != NO_ERROR)
+		{
+			APIERROR ae;
+			ae.pFile = pDir;
+			ae.dwLE = dwError;
+			if(!SendMessage(pD->hwnd_, WM_APP_APIERROR, (WPARAM)pD->thid_, (LPARAM)&ae))
+				return;
+		}
+
 		if(ss1==ss2)
 		{
 			if(!alcheck2[ss1])
@@ -153,7 +173,7 @@ static LPTSTR newforfff(LPCTSTR pDir)
 
 void dowork(THREADPASSDATA* pD,LPCTSTR pNext)
 {
-	LPCTSTR pDir = pNext?pNext:pD->dir_;
+	LPCTSTR pDir = pNext?pNext:pD->curdir_;
 	LPCTSTR pDirFFF = newforfff(pDir);
 	WIN32_FIND_DATA wfd;
 	HANDLE h = FindFirstFile(pDirFFF, &wfd);
@@ -165,6 +185,15 @@ void dowork(THREADPASSDATA* pD,LPCTSTR pNext)
 		{
 			processfound(pD, &wfd,pDir);
 		}
+	}
+	else
+	{
+		DWORD le = GetLastError();
+		APIERROR ae;
+		ae.pFile = pDir;
+		ae.dwLE = le;
+		if(!SendMessage(pD->hwnd_, WM_APP_APIERROR, (WPARAM)pD->thid_, (LPARAM)&ae))
+			return;
 	}
 	free((void*)pDirFFF);
 }

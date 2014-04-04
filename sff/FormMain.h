@@ -1,5 +1,5 @@
 #pragma once
-
+#include "FormError.h"
 
 namespace sff {
 
@@ -22,6 +22,28 @@ namespace sff {
 	/// </summary>
 	public ref class FormMain : public System::Windows::Forms::Form
 	{
+	private:
+		void CloseThread();
+		void ThreadOn(bool on);
+		
+		System::Windows::Forms::FolderBrowserDialog fbd_;
+	private: System::Windows::Forms::StatusStrip^  ssMain;
+	private: System::Windows::Forms::ToolStripStatusLabel^  slMain;
+	private: System::Windows::Forms::ColumnHeader^  chFilename;
+
+			 FormError frmError;
+	protected:
+		virtual void WndProc(Message% m) override = Control::WndProc;
+
+		
+
+
+
+
+
+
+
+
 	public:
 		FormMain(void)
 		{
@@ -30,6 +52,17 @@ namespace sff {
 			//TODO: ここにコンストラクタ コードを追加します
 			//
 		}
+	private: System::Windows::Forms::SplitContainer^  spBottom;
+	private: System::Windows::Forms::TabControl^  tabMain;
+	private: System::Windows::Forms::TabPage^  tpSettings;
+	private: System::Windows::Forms::TabPage^  tbResult;
+	private: System::Windows::Forms::TextBox^  txtInDir;
+	private: System::Windows::Forms::Button^  btnAdd;
+	private: System::Windows::Forms::ContextMenuStrip^  cmList;
+	private: System::Windows::Forms::ToolStripMenuItem^  explorerToolStripMenuItem;
+	private: System::Windows::Forms::Button^  btnShowError;
+
+	public: 
 
 	private:
 		List<ULL> groupI_;
@@ -52,19 +85,19 @@ namespace sff {
 	protected: 
 
 	private: System::Windows::Forms::SplitContainer^  spRoot;
-	private: System::Windows::Forms::Label^  lblProgress;
 	private: System::Windows::Forms::ListView^  lvResult;
 	private: System::Windows::Forms::ColumnHeader^  chPath;
 	private: System::Windows::Forms::ColumnHeader^  chSize;
 	private: System::Windows::Forms::Button^  btnResume;
 	private: System::Windows::Forms::Button^  btnPause;
+	private: System::ComponentModel::IContainer^  components;
 
 
 	private:
 		/// <summary>
 		/// 必要なデザイナ変数です。
 		/// </summary>
-		System::ComponentModel::Container ^components;
+
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -75,11 +108,6 @@ namespace sff {
 
 #pragma endregion
 
-	protected:
-		virtual void WndProc(Message% m) override = Control::WndProc;
-
-	private:
-		void ThreadOn(bool on);
 		
 
 	private: 
@@ -96,6 +124,12 @@ namespace sff {
 		 
 
 		System::Void lvResult_ColumnClick(System::Object^  sender, System::Windows::Forms::ColumnClickEventArgs^  e);
+
+		System::Void btnAdd_Click(System::Object^  sender, System::EventArgs^  e);
+
+		System::Void explorerToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
+
+		System::Void btnShowError_Click(System::Object^  sender, System::EventArgs^  e);
 
 	};
 	
