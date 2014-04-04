@@ -16,7 +16,7 @@ namespace sff {
 		this->txtInDir = (gcnew System::Windows::Forms::TextBox());
 		this->btnAdd = (gcnew System::Windows::Forms::Button());
 		this->tbResult = (gcnew System::Windows::Forms::TabPage());
-		this->lvResult = (gcnew System::Windows::Forms::ListView());
+		this->lvResult = (gcnew OptListView());
 		this->chPath = (gcnew System::Windows::Forms::ColumnHeader());
 		this->chSize = (gcnew System::Windows::Forms::ColumnHeader());
 		this->cmList = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));

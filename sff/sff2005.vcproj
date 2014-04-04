@@ -286,7 +286,23 @@
 				>
 			</File>
 			<File
+				RelativePath=".\FormError.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\FormMain.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\FormMainInitializeComponent.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\FormMainWndProc.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\helper.cpp"
 				>
 			</File>
 			<File
@@ -340,6 +356,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\FormError.h"
+				>
+			</File>
+			<File
 				RelativePath=".\FormMain.h"
 				FileType="3"
 				>
@@ -348,6 +368,10 @@
 					SubType="Designer"
 					>
 				</File>
+			</File>
+			<File
+				RelativePath=".\helper.h"
+				>
 			</File>
 			<File
 				RelativePath=".\resource.h"
@@ -377,6 +401,10 @@
 			</File>
 			<File
 				RelativePath=".\app.rc"
+				>
+			</File>
+			<File
+				RelativePath=".\FormError.resx"
 				>
 			</File>
 		</Filter>
