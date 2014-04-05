@@ -122,6 +122,11 @@ namespace sff {
 
 			//LPCTSTR pDir = _tcsdup(_T("E:\\T\\10"));
 
+			// inlines to vector
+			TSTRINGVECTOR vinlines;
+			for each(String^ s in inlines)
+			{
+				vinlines.push_back(
 			THREADPASSDATA* pData = new THREADPASSDATA(
 				0,
 				NULL,

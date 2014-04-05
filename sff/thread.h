@@ -1,5 +1,5 @@
 #pragma once
-typedef gcroot<System::Collections::Generic::List<System::String^>^> GCLIST;
+// typedef gcroot<System::Collections::Generic::List<System::String^>^> GCLIST;
 struct THREADPASSDATA {
 private:
 	int curindex_;
@@ -9,12 +9,12 @@ public:
 	HWND hwnd_;
 
 	int delay_;
-	GCLIST dirs_;
+	TSTRINGVECTOR dirs_;
 	LPCTSTR curdir_;
 	THREADPASSDATA(DWORD thid,HANDLE thisthread,
 		HWND hwnd,
 		int delay,
-		GCLIST dirs)
+		const TSTRINGVECTOR& dirs)
 	{
 		thid_=thid;
 		thisthread_=thisthread;

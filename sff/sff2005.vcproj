@@ -357,7 +357,13 @@
 			</File>
 			<File
 				RelativePath=".\FormError.h"
+				FileType="3"
 				>
+				<File
+					RelativePath=".\FormError.resx"
+					SubType="Designer"
+					>
+				</File>
 			</File>
 			<File
 				RelativePath=".\FormMain.h"
@@ -401,10 +407,6 @@
 			</File>
 			<File
 				RelativePath=".\app.rc"
-				>
-			</File>
-			<File
-				RelativePath=".\FormError.resx"
 				>
 			</File>
 		</Filter>

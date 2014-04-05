@@ -12,13 +12,6 @@
 #include <process.h>
 #pragma warning (disable : 4996)
 #pragma warning (disable : 4291)
-
-#include <string>
-#ifdef UNICODE
-typedef std::wstring tstring;
-#else
-typedef std::string tstring;
-#endif
 #include <map>
 #include <set>
 
@@ -106,7 +99,15 @@ enum {
 
 };
 
+#include <string>
+#ifdef UNICODE
+typedef std::wstring tstring;
+#else
+typedef std::string tstring;
+#endif
 typedef ULONGLONG ULL;
+typedef std::vector<std::tstring> TSTRINGVECTOR;
+
 namespace sff {
 	ref class OptListView : public System::Windows::Forms::ListView
 	{
@@ -116,4 +117,5 @@ namespace sff {
 		}
 	};
 }
+
 using namespace std;
