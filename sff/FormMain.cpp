@@ -3,7 +3,7 @@
 #include "work.h"
 #include "FormMain.h"
 #include "FileData.h"
-//#include "ListGroup.h"
+#include "helper.h"
 
 namespace sff {
 
@@ -65,7 +65,8 @@ namespace sff {
 	{
 		if(gcurthread==NULL)
 		{
-			List<String^>^ inlines = gcnew List<String^>;
+			// List<String^>^ inlines = gcnew List<String^>;
+			TSTRINGVECTOR vinlines;
 			for each(String^ inl in txtInDir->Lines)
 			{
 				inl=inl->TrimStart();
@@ -95,10 +96,11 @@ namespace sff {
 						MessageBoxIcon::Exclamation);
 					return;
 				}
-				inlines->Add(inl);
+				// inlines->Add(inl);
+				vinlines.push_back(getStdWstring(inl));
 			}
 
-			if(inlines->Count==0)
+			if(vinlines.size()==0)
 			{
 				MessageBox::Show(L"No Folders specifies.",
 					Application::ProductName,
@@ -122,17 +124,12 @@ namespace sff {
 
 			//LPCTSTR pDir = _tcsdup(_T("E:\\T\\10"));
 
-			// inlines to vector
-			TSTRINGVECTOR vinlines;
-			for each(String^ s in inlines)
-			{
-				vinlines.push_back(
 			THREADPASSDATA* pData = new THREADPASSDATA(
 				0,
 				NULL,
 				(HWND)this->Handle.ToPointer(),
 				0,
-				inlines);
+				vinlines);
 			uintptr_t threadhandle = _beginthreadex(NULL, 0, startOfSearch, (void*)pData, CREATE_SUSPENDED, NULL);
 			if(threadhandle==0)
 			{

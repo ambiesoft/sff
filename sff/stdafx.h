@@ -14,7 +14,8 @@
 #pragma warning (disable : 4291)
 #include <map>
 #include <set>
-
+#include <string>
+#include <vector>
 
 #if _DEBUG
 #include <crtdbg.h>
@@ -99,14 +100,14 @@ enum {
 
 };
 
-#include <string>
+
 #ifdef UNICODE
 typedef std::wstring tstring;
 #else
 typedef std::string tstring;
 #endif
 typedef ULONGLONG ULL;
-typedef std::vector<std::tstring> TSTRINGVECTOR;
+typedef std::vector<tstring> TSTRINGVECTOR;
 
 namespace sff {
 	ref class OptListView : public System::Windows::Forms::ListView

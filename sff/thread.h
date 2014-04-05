@@ -33,17 +33,17 @@ public:
 	bool MoveNext()
 	{
 		curindex_++;
-		if(dirs_->Count <= curindex_)
+		if((int)dirs_.size() <= curindex_)
 		{
-			free((void*)curdir_);
+			// free((void*)curdir_);
 			curdir_=NULL;
 			return false;
 		}
 
-		System::String^ t = dirs_->default[curindex_];
-		pin_ptr<const wchar_t> pIn = PtrToStringChars(t);
-		free((void*)curdir_);
-		curdir_ = _tcsdup(pIn);
+		//System::String^ t = 
+		//pin_ptr<const wchar_t> pIn = PtrToStringChars(t);
+		//free((void*)curdir_);
+		curdir_ = dirs_[curindex_].c_str();
 	
 		return true;
 	}
