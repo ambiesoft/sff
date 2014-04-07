@@ -4,10 +4,12 @@
 #pragma once
 
 // TODO: プログラムに必要な追加ヘッダーをここで参照してください。
+
+
 #include <windows.h>
 #include <tchar.h>
-#include <vcclr.h>
 
+#include <vcclr.h>
 #include <stdlib.h>
 #include <process.h>
 #pragma warning (disable : 4996)

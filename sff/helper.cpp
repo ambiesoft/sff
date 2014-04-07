@@ -75,3 +75,10 @@ std::wstring getStdWstring(System::String^ s)
 	return ret;
 }
 
+void ExceptionMessageBox(System::Exception^ ex)
+{
+	System::Windows::Forms::MessageBox::Show(ex->Message,
+		System::Windows::Forms::Application::ProductName,
+		System::Windows::Forms::MessageBoxButtons::OK,
+		System::Windows::Forms::MessageBoxIcon::Exclamation);
+}

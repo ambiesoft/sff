@@ -4,6 +4,7 @@
 #include "FormMain.h"
 #include "FileData.h"
 #include "helper.h"
+#include "dnhelper.h"
 
 namespace sff {
 
@@ -210,22 +211,28 @@ namespace sff {
 
 	System::Void FormMain::explorerToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
 	{
-		
+
 		try
 		{
 			pin_ptr<const wchar_t> pIn = PtrToStringChars(lvResult->SelectedItems[0]->Text);
-			tstring file = pIn;
+			
 
 			tstring arg;
-			arg += _T("/select,");
-			arg += file;
-			arg += _T(",/n");
+			arg += _T("/select,\"");
+			arg += pIn;
+			arg += _T("\",/n");
 #pragma comment(lib, "shell32.lib")
 			ShellExecute((HWND)this->Handle.ToPointer(), _T("open"), _T("explorer.exe"), 
 					arg.c_str()  ,NULL, SW_SHOW);
 		}
-		catch(System::Exception^)
-		{}
+		catch(System::Exception^ ex)
+		{
+			ExceptionMessageBox(ex);
+		}
+		finally
+		{
+			
+		}
 	}
 	
 	System::Void FormMain::btnShowError_Click(System::Object^  sender, System::EventArgs^  e)
