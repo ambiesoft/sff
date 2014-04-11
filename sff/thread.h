@@ -1,8 +1,11 @@
 #pragma once
 // typedef gcroot<System::Collections::Generic::List<System::String^>^> GCLIST;
+
 struct THREADPASSDATA {
 private:
 	int curindex_;
+	gcroot<System::Text::RegularExpressions::Regex^> reg_;
+
 public:
 	DWORD thid_;
 	HANDLE thisthread_;
@@ -11,24 +14,24 @@ public:
 	int delay_;
 	TSTRINGVECTOR dirs_;
 	LPCTSTR curdir_;
-	THREADPASSDATA(DWORD thid,HANDLE thisthread,
+	tstring regtxt_;
+	THREADPASSDATA(
+		DWORD thid,
+		HANDLE thisthread,
 		HWND hwnd,
 		int delay,
-		const TSTRINGVECTOR& dirs)
+		const TSTRINGVECTOR* pdirs,
+		LPCTSTR pRegText)
 	{
 		thid_=thid;
 		thisthread_=thisthread;
 		hwnd_=hwnd;
 		delay_=delay;
-		dirs_=dirs;
+		dirs_=*pdirs;
 		curdir_=NULL;
 		curindex_=-1;
-		//if(dirs->Count != 0)
-		//{
-		//	System::String^ t = dirs->default[0];
-		//	pin_ptr<const wchar_t> pIn = PtrToStringChars(t);
-		//	curdir_ = _tcsdup(pIn);
-		//}
+		regtxt_=pRegText;
+		reg_=NULL;
 	}
 	bool MoveNext()
 	{
@@ -47,10 +50,8 @@ public:
 	
 		return true;
 	}
-	~THREADPASSDATA()
-	{
-		
-	}
+	bool match(LPCTSTR pName);
+	~THREADPASSDATA();
 };
 
 extern volatile HANDLE gcurthread;

@@ -65,6 +65,7 @@ static void processfound(THREADPASSDATA* pD, WIN32_FIND_DATA* pf, LPCTSTR pNext)
 	if(iswfdcurdir(pf))
 		return;
 
+
 	LPCTSTR pDir = pNext?pNext:pD->curdir_;;
 	if(pf->dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
 	{
@@ -85,6 +86,9 @@ static void processfound(THREADPASSDATA* pD, WIN32_FIND_DATA* pf, LPCTSTR pNext)
 		dowork(pD,p);
 		return;
 	}
+
+	if(!pD->match(pf->cFileName))
+		return;
 
 	ULL ull = MAKEULONGLONGWFD(*pf);
 	
@@ -148,12 +152,16 @@ static void processfound(THREADPASSDATA* pD, WIN32_FIND_DATA* pf, LPCTSTR pNext)
 static LPTSTR newforfff(LPCTSTR pDir)
 {
 	size_t olen = _tcslen(pDir);
-	size_t nlen = olen + 16;
+	//size_t wclen = pD->wildcard_.size();
+	size_t nlen = olen + 16; //(sizeof(_T('\\'))+sizeof(_T('\0')));
 	LPTSTR pRet = (LPTSTR)malloc(nlen*sizeof(TCHAR));
 	memcpy(pRet, pDir, olen*sizeof(TCHAR));
 	pRet[olen] = _T('\\');
+	//memcpy(pRet+olen+1, pD->wildcard_.c_str(), wclen*sizeof(TCHAR));
+	// pRet[olen+1+wclen] = 0;
 	pRet[olen+1] = _T('*');
 	pRet[olen+2] = 0;
+	
 	return pRet;
 }
 
@@ -170,11 +178,16 @@ static LPTSTR newforfff(LPCTSTR pDir)
 
 
 
-
+template<typename T> static void myfree(T*p)
+{
+	free((void*)p);
+}
 void dowork(THREADPASSDATA* pD,LPCTSTR pNext)
 {
 	LPCTSTR pDir = pNext?pNext:pD->curdir_;
 	LPCTSTR pDirFFF = newforfff(pDir);
+	stlsoft::scoped_handle<LPCTSTR> ma(pDirFFF, myfree);
+
 	WIN32_FIND_DATA wfd;
 	HANDLE h = FindFirstFile(pDirFFF, &wfd);
 
@@ -195,7 +208,6 @@ void dowork(THREADPASSDATA* pD,LPCTSTR pNext)
 		if(!SendMessage(pD->hwnd_, WM_APP_APIERROR, (WPARAM)pD->thid_, (LPARAM)&ae))
 			return;
 	}
-	free((void*)pDirFFF);
 }
 
 void clearwork()

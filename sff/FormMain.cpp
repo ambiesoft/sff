@@ -52,6 +52,8 @@ namespace sff {
 	System::Void FormMain::FormMain_Load(System::Object^  sender, System::EventArgs^  e)
 	{
 		ThreadOn(false);
+		cmbWildCard->Items->Add(L"*.*");
+		cmbWildCard->SelectedIndex = 0;
 	}
 
 	System::Void FormMain::lvResult_ColumnClick(System::Object^  sender, System::Windows::Forms::ColumnClickEventArgs^  e)
@@ -110,6 +112,7 @@ namespace sff {
 				return;
 			}
 
+			String^ wildcard = cmbWildCard->Text;
 			lvResult->Items->Clear();
 			lvResult->Groups->Clear();
 			groupI_.Clear();
@@ -124,13 +127,14 @@ namespace sff {
 			//lvdata->Clear();
 
 			//LPCTSTR pDir = _tcsdup(_T("E:\\T\\10"));
-
+			pin_ptr<const wchar_t> pWC = PtrToStringChars(wildcard);
 			THREADPASSDATA* pData = new THREADPASSDATA(
 				0,
 				NULL,
 				(HWND)this->Handle.ToPointer(),
 				0,
-				vinlines);
+				&vinlines,
+				pWC);
 			uintptr_t threadhandle = _beginthreadex(NULL, 0, startOfSearch, (void*)pData, CREATE_SUSPENDED, NULL);
 			if(threadhandle==0)
 			{

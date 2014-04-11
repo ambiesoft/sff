@@ -16,9 +16,10 @@ namespace sff {
 		this->txtInDir = (gcnew System::Windows::Forms::TextBox());
 		this->btnAdd = (gcnew System::Windows::Forms::Button());
 		this->tbResult = (gcnew System::Windows::Forms::TabPage());
-		this->lvResult = (gcnew OptListView());
+		this->lvResult = (gcnew System::Windows::Forms::ListView());
 		this->chPath = (gcnew System::Windows::Forms::ColumnHeader());
 		this->chSize = (gcnew System::Windows::Forms::ColumnHeader());
+		this->chFilename = (gcnew System::Windows::Forms::ColumnHeader());
 		this->cmList = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
 		this->explorerToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 		this->spBottom = (gcnew System::Windows::Forms::SplitContainer());
@@ -27,7 +28,7 @@ namespace sff {
 		this->btnResume = (gcnew System::Windows::Forms::Button());
 		this->ssMain = (gcnew System::Windows::Forms::StatusStrip());
 		this->slMain = (gcnew System::Windows::Forms::ToolStripStatusLabel());
-		this->chFilename = (gcnew System::Windows::Forms::ColumnHeader());
+		this->cmbWildCard = (gcnew System::Windows::Forms::ComboBox());
 		this->spRoot->Panel1->SuspendLayout();
 		this->spRoot->Panel2->SuspendLayout();
 		this->spRoot->SuspendLayout();
@@ -84,6 +85,7 @@ namespace sff {
 		// 
 		// tpSettings
 		// 
+		this->tpSettings->Controls->Add(this->cmbWildCard);
 		this->tpSettings->Controls->Add(this->txtInDir);
 		this->tpSettings->Controls->Add(this->btnAdd);
 		this->tpSettings->Location = System::Drawing::Point(4, 21);
@@ -151,16 +153,21 @@ namespace sff {
 		this->chSize->Text = L"Size";
 		this->chSize->Width = 101;
 		// 
+		// chFilename
+		// 
+		this->chFilename->Text = L"Name";
+		this->chFilename->Width = 135;
+		// 
 		// cmList
 		// 
 		this->cmList->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) {this->explorerToolStripMenuItem});
 		this->cmList->Name = L"cmList";
-		this->cmList->Size = System::Drawing::Size(119, 26);
+		this->cmList->Size = System::Drawing::Size(127, 26);
 		// 
 		// explorerToolStripMenuItem
 		// 
 		this->explorerToolStripMenuItem->Name = L"explorerToolStripMenuItem";
-		this->explorerToolStripMenuItem->Size = System::Drawing::Size(118, 22);
+		this->explorerToolStripMenuItem->Size = System::Drawing::Size(126, 22);
 		this->explorerToolStripMenuItem->Text = L"&Explorer...";
 		this->explorerToolStripMenuItem->Click += gcnew System::EventHandler(this, &FormMain::explorerToolStripMenuItem_Click);
 		// 
@@ -228,10 +235,13 @@ namespace sff {
 		this->slMain->Name = L"slMain";
 		this->slMain->Size = System::Drawing::Size(0, 17);
 		// 
-		// chFilename
+		// cmbWildCard
 		// 
-		this->chFilename->Text = L"Name";
-		this->chFilename->Width = 135;
+		this->cmbWildCard->FormattingEnabled = true;
+		this->cmbWildCard->Location = System::Drawing::Point(16, 164);
+		this->cmbWildCard->Name = L"cmbWildCard";
+		this->cmbWildCard->Size = System::Drawing::Size(145, 20);
+		this->cmbWildCard->TabIndex = 2;
 		// 
 		// FormMain
 		// 

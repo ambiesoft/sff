@@ -7,8 +7,25 @@ using namespace System;
 volatile HANDLE gcurthread;
 volatile DWORD gthid;
 
+THREADPASSDATA::~THREADPASSDATA()
+{
+	delete reg_;
+	reg_=NULL;
+}
 
 
+bool THREADPASSDATA::match(LPCTSTR pName)
+{
+	if(regtxt_.size()==0)
+		return true;
+
+	if(!reg_)
+	{
+		reg_ = gcnew System::Text::RegularExpressions::Regex(gcnew String(regtxt_.c_str()));
+	}
+
+	return reg_->IsMatch(gcnew String(pName));
+}
 
 unsigned  __stdcall startOfSearch(void * p)
 {

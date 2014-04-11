@@ -42,7 +42,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="L:\MSSDK\2003\Include"
+				AdditionalIncludeDirectories="L:\MSSDK\2003\Include;&quot;L:\stlsoft-1.9.108\include\&quot;;L:\boost1.47;L:\check"
 				PreprocessorDefinitions="WIN32;_DEBUG"
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="2"
@@ -62,7 +62,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="user32.lib $(NOINHERIT)"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="L:\MSSDK\2003\Lib"
+				AdditionalLibraryDirectories="L:\MSSDK\2003\Lib;L:\boost1.47lib"
 				GenerateDebugInformation="true"
 				AssemblyDebug="1"
 				SubSystem="2"
@@ -119,7 +119,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="L:\MSSDK\2003\Include"
+				AdditionalIncludeDirectories="L:\MSSDK\2003\Include;&quot;L:\stlsoft-1.9.108\include\&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
@@ -196,7 +196,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="3"
-				AdditionalIncludeDirectories="L:\MSSDK\2003\Include"
+				AdditionalIncludeDirectories="L:\MSSDK\2003\Include;&quot;L:\stlsoft-1.9.108\include\&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"

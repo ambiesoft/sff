@@ -9,7 +9,7 @@ using namespace sff;
 [STAThreadAttribute]
 int main(array<System::String ^> ^args)
 {
-	#ifdef _DEBUG
+	#if _DEBUG
 	 _CrtSetDbgFlag(_CRTDBG_LEAK_CHECK_DF | _CRTDBG_CHECK_ALWAYS_DF | _CrtSetDbgFlag(_CRTDBG_REPORT_FLAG));
 	#endif
 	

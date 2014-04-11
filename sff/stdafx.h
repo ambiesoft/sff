@@ -5,7 +5,7 @@
 
 // TODO: プログラムに必要な追加ヘッダーをここで参照してください。
 
-
+#include <checkaccess.h>
 #include <windows.h>
 #include <tchar.h>
 
@@ -18,6 +18,9 @@
 #include <set>
 #include <string>
 #include <vector>
+
+#include <stlsoft/smartptr/scoped_handle.hpp>
+
 
 #if _DEBUG
 #include <crtdbg.h>

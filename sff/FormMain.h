@@ -30,6 +30,8 @@ namespace sff {
 	private: System::Windows::Forms::StatusStrip^  ssMain;
 	private: System::Windows::Forms::ToolStripStatusLabel^  slMain;
 	private: System::Windows::Forms::ColumnHeader^  chFilename;
+	private: System::Windows::Forms::ComboBox^  cmbWildCard;
+
 
 			 FormError frmError;
 	protected:
