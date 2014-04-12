@@ -9,8 +9,8 @@ volatile DWORD gthid;
 
 THREADPASSDATA::~THREADPASSDATA()
 {
-	delete reg_;
-	reg_=NULL;
+	//delete reg_;
+	//reg_=NULL;
 }
 
 

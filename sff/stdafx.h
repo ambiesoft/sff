@@ -114,14 +114,6 @@ typedef std::string tstring;
 typedef ULONGLONG ULL;
 typedef std::vector<tstring> TSTRINGVECTOR;
 
-namespace sff {
-	ref class OptListView : public System::Windows::Forms::ListView
-	{
-	public:
-		OptListView() {
-			SetStyle(System::Windows::Forms::ControlStyles::OptimizedDoubleBuffer, true);
-		}
-	};
-}
+
 
 using namespace std;

@@ -52,8 +52,8 @@ namespace sff {
 	System::Void FormMain::FormMain_Load(System::Object^  sender, System::EventArgs^  e)
 	{
 		ThreadOn(false);
-		cmbWildCard->Items->Add(L"*.*");
-		cmbWildCard->SelectedIndex = 0;
+		cmbNameReg->Items->Add(L"\\.pdf$");
+		cmbNameReg->SelectedIndex = 0;
 	}
 
 	System::Void FormMain::lvResult_ColumnClick(System::Object^  sender, System::Windows::Forms::ColumnClickEventArgs^  e)
@@ -112,7 +112,56 @@ namespace sff {
 				return;
 			}
 
-			String^ wildcard = cmbWildCard->Text;
+			String^ namereg = cmbNameReg->Text;
+			try
+			{
+				gcnew System::Text::RegularExpressions::Regex(namereg);
+			}
+			catch(System::Exception^ ex)
+			{
+				ExceptionMessageBox(ex);
+				return;
+			}
+
+			ULL uminsize = 0;
+			do
+			{
+				String^ text = cmbMinSize->Text;
+				if(String::IsNullOrEmpty(text))
+					break;
+
+				Char lc = text[text->Length-1];
+				text = text->Substring(0, text->Length-1);
+				ULL mul=1;
+				switch(lc)
+				{
+					case L'k':mul=1000;   break;
+					case L'K':mul=1024;   break;
+					case L'm':mul=1000 * 1000;   break;
+					case L'M':mul=1024 * 1024;   break;
+					case L'g':mul=1000 * 1000 * 1000;   break;
+					case L'G':mul=1024 * 1024 * 1024;   break;
+					default:
+					{
+						MessageBox::Show(L"File size illegal.");
+						return;
+					}
+					break;
+				}
+
+				if(!System::UInt64::TryParse(text, uminsize))
+				{
+					MessageBox::Show(L"File size illegal.");
+					return;
+				}
+
+				uminsize = uminsize * mul;
+			} while(false);
+			
+			
+			// checkdone
+
+
 			lvResult->Items->Clear();
 			lvResult->Groups->Clear();
 			groupI_.Clear();
@@ -127,14 +176,15 @@ namespace sff {
 			//lvdata->Clear();
 
 			//LPCTSTR pDir = _tcsdup(_T("E:\\T\\10"));
-			pin_ptr<const wchar_t> pWC = PtrToStringChars(wildcard);
+			pin_ptr<const wchar_t> pWC = PtrToStringChars(namereg);
 			THREADPASSDATA* pData = new THREADPASSDATA(
 				0,
 				NULL,
 				(HWND)this->Handle.ToPointer(),
 				0,
 				&vinlines,
-				pWC);
+				pWC,
+				uminsize);
 			uintptr_t threadhandle = _beginthreadex(NULL, 0, startOfSearch, (void*)pData, CREATE_SUSPENDED, NULL);
 			if(threadhandle==0)
 			{
@@ -229,9 +279,9 @@ namespace sff {
 			ShellExecute((HWND)this->Handle.ToPointer(), _T("open"), _T("explorer.exe"), 
 					arg.c_str()  ,NULL, SW_SHOW);
 		}
-		catch(System::Exception^ ex)
+		catch(System::Exception^ )
 		{
-			ExceptionMessageBox(ex);
+			// ExceptionMessageBox(ex);
 		}
 		finally
 		{

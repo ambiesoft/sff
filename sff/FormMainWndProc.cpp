@@ -50,7 +50,7 @@ namespace sff {
 						lvg = gcnew ListViewGroup(pFD->GetLeng().ToString(), pFD->GetLeng().ToString());
 						ULL len=pFD->GetLeng();
 						DASSERT(!groupI_.Contains(len));
-						lvResult->Groups->Add(lvg);
+						// lvResult->Groups->Add(lvg);
 						groupI_.Add(len);
 						groupI_.Sort();
 						int index = groupI_.IndexOf(len);
@@ -102,7 +102,7 @@ namespace sff {
 
 				
 				lvResult->Items->Add(item);
-				lvResult->Sort();
+				//lvResult->Sort();
 				
 
 				m.Result=(IntPtr)1;							

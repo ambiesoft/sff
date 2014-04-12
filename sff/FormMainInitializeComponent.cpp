@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "FormMain.h"
+#include "OptListView.h"
 
 namespace sff {
 
@@ -13,10 +14,11 @@ namespace sff {
 		this->spRoot = (gcnew System::Windows::Forms::SplitContainer());
 		this->tabMain = (gcnew System::Windows::Forms::TabControl());
 		this->tpSettings = (gcnew System::Windows::Forms::TabPage());
+		this->cmbNameReg = (gcnew System::Windows::Forms::ComboBox());
 		this->txtInDir = (gcnew System::Windows::Forms::TextBox());
 		this->btnAdd = (gcnew System::Windows::Forms::Button());
 		this->tbResult = (gcnew System::Windows::Forms::TabPage());
-		this->lvResult = (gcnew System::Windows::Forms::ListView());
+		this->lvResult = (gcnew sff::OptListView());
 		this->chPath = (gcnew System::Windows::Forms::ColumnHeader());
 		this->chSize = (gcnew System::Windows::Forms::ColumnHeader());
 		this->chFilename = (gcnew System::Windows::Forms::ColumnHeader());
@@ -28,7 +30,7 @@ namespace sff {
 		this->btnResume = (gcnew System::Windows::Forms::Button());
 		this->ssMain = (gcnew System::Windows::Forms::StatusStrip());
 		this->slMain = (gcnew System::Windows::Forms::ToolStripStatusLabel());
-		this->cmbWildCard = (gcnew System::Windows::Forms::ComboBox());
+		this->cmbMinSize = (gcnew System::Windows::Forms::ComboBox());
 		this->spRoot->Panel1->SuspendLayout();
 		this->spRoot->Panel2->SuspendLayout();
 		this->spRoot->SuspendLayout();
@@ -85,7 +87,8 @@ namespace sff {
 		// 
 		// tpSettings
 		// 
-		this->tpSettings->Controls->Add(this->cmbWildCard);
+		this->tpSettings->Controls->Add(this->cmbMinSize);
+		this->tpSettings->Controls->Add(this->cmbNameReg);
 		this->tpSettings->Controls->Add(this->txtInDir);
 		this->tpSettings->Controls->Add(this->btnAdd);
 		this->tpSettings->Location = System::Drawing::Point(4, 21);
@@ -95,6 +98,14 @@ namespace sff {
 		this->tpSettings->TabIndex = 0;
 		this->tpSettings->Text = L"Settings";
 		this->tpSettings->UseVisualStyleBackColor = true;
+		// 
+		// cmbNameReg
+		// 
+		this->cmbNameReg->FormattingEnabled = true;
+		this->cmbNameReg->Location = System::Drawing::Point(16, 164);
+		this->cmbNameReg->Name = L"cmbNameReg";
+		this->cmbNameReg->Size = System::Drawing::Size(145, 20);
+		this->cmbNameReg->TabIndex = 2;
 		// 
 		// txtInDir
 		// 
@@ -235,13 +246,13 @@ namespace sff {
 		this->slMain->Name = L"slMain";
 		this->slMain->Size = System::Drawing::Size(0, 17);
 		// 
-		// cmbWildCard
+		// cmbMinSize
 		// 
-		this->cmbWildCard->FormattingEnabled = true;
-		this->cmbWildCard->Location = System::Drawing::Point(16, 164);
-		this->cmbWildCard->Name = L"cmbWildCard";
-		this->cmbWildCard->Size = System::Drawing::Size(145, 20);
-		this->cmbWildCard->TabIndex = 2;
+		this->cmbMinSize->FormattingEnabled = true;
+		this->cmbMinSize->Location = System::Drawing::Point(16, 202);
+		this->cmbMinSize->Name = L"cmbMinSize";
+		this->cmbMinSize->Size = System::Drawing::Size(145, 20);
+		this->cmbMinSize->TabIndex = 2;
 		// 
 		// FormMain
 		// 

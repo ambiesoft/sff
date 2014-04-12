@@ -42,7 +42,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="L:\MSSDK\2003\Include;&quot;L:\stlsoft-1.9.108\include\&quot;;L:\boost1.47;L:\check"
+				AdditionalIncludeDirectories="L:\MSSDK\2003\Include;&quot;L:\stlsoft-1.9.108\include\&quot;;L:\check"
 				PreprocessorDefinitions="WIN32;_DEBUG"
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="2"
@@ -62,7 +62,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="user32.lib $(NOINHERIT)"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="L:\MSSDK\2003\Lib;L:\boost1.47lib"
+				AdditionalLibraryDirectories="L:\MSSDK\2003\Lib"
 				GenerateDebugInformation="true"
 				AssemblyDebug="1"
 				SubSystem="2"
@@ -411,6 +411,10 @@
 			</File>
 			<File
 				RelativePath=".\helper.h"
+				>
+			</File>
+			<File
+				RelativePath=".\OptListView.h"
 				>
 			</File>
 			<File

@@ -1,4 +1,5 @@
 #pragma once
+#include "OptListView.h"
 #include "FormError.h"
 
 namespace sff {
@@ -10,7 +11,6 @@ namespace sff {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
-	ref class OptListView;
 	/// <summary>
 	/// FormMain ‚ÌŠT—v
 	///
@@ -30,7 +30,9 @@ namespace sff {
 	private: System::Windows::Forms::StatusStrip^  ssMain;
 	private: System::Windows::Forms::ToolStripStatusLabel^  slMain;
 	private: System::Windows::Forms::ColumnHeader^  chFilename;
-	private: System::Windows::Forms::ComboBox^  cmbWildCard;
+	private: System::Windows::Forms::ComboBox^  cmbNameReg;
+	private: System::Windows::Forms::ComboBox^  cmbMinSize;
+
 
 
 			 FormError frmError;

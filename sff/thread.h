@@ -15,13 +15,15 @@ public:
 	TSTRINGVECTOR dirs_;
 	LPCTSTR curdir_;
 	tstring regtxt_;
+	ULL minsize_;
 	THREADPASSDATA(
 		DWORD thid,
 		HANDLE thisthread,
 		HWND hwnd,
 		int delay,
 		const TSTRINGVECTOR* pdirs,
-		LPCTSTR pRegText)
+		LPCTSTR pRegText,
+		ULL minsize)
 	{
 		thid_=thid;
 		thisthread_=thisthread;
@@ -32,6 +34,7 @@ public:
 		curindex_=-1;
 		regtxt_=pRegText;
 		reg_=NULL;
+		minsize_=minsize;
 	}
 	bool MoveNext()
 	{
