@@ -119,7 +119,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="L:\MSSDK\2003\Include"
+				AdditionalIncludeDirectories="L:\MSSDK\2003\Include;&quot;L:\stlsoft-1.9.108\include&quot;;L:\check"
 				PreprocessorDefinitions="WIN32;NDEBUG"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
@@ -197,7 +197,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="3"
-				AdditionalIncludeDirectories="L:\MSSDK\2003\Include"
+				AdditionalIncludeDirectories="L:\MSSDK\2003\Include;&quot;L:\stlsoft-1.9.108\include&quot;;L:\check"
 				PreprocessorDefinitions="WIN32;NDEBUG"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
