@@ -10,15 +10,17 @@ namespace sff {
 	void FormMain::InitializeComponent(void)
 	{
 		this->components = (gcnew System::ComponentModel::Container());
+		System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(FormMain::typeid));
 		this->btnStart = (gcnew System::Windows::Forms::Button());
 		this->spRoot = (gcnew System::Windows::Forms::SplitContainer());
 		this->tabMain = (gcnew System::Windows::Forms::TabControl());
 		this->tpSettings = (gcnew System::Windows::Forms::TabPage());
+		this->cmbMinSize = (gcnew System::Windows::Forms::ComboBox());
 		this->cmbNameReg = (gcnew System::Windows::Forms::ComboBox());
 		this->txtInDir = (gcnew System::Windows::Forms::TextBox());
 		this->btnAdd = (gcnew System::Windows::Forms::Button());
 		this->tbResult = (gcnew System::Windows::Forms::TabPage());
-		this->lvResult = (gcnew sff::OptListView());
+		this->lvResult = (gcnew System::Windows::Forms::ListView());
 		this->chPath = (gcnew System::Windows::Forms::ColumnHeader());
 		this->chSize = (gcnew System::Windows::Forms::ColumnHeader());
 		this->chFilename = (gcnew System::Windows::Forms::ColumnHeader());
@@ -30,7 +32,8 @@ namespace sff {
 		this->btnResume = (gcnew System::Windows::Forms::Button());
 		this->ssMain = (gcnew System::Windows::Forms::StatusStrip());
 		this->slMain = (gcnew System::Windows::Forms::ToolStripStatusLabel());
-		this->cmbMinSize = (gcnew System::Windows::Forms::ComboBox());
+		this->toolStrip1 = (gcnew System::Windows::Forms::ToolStrip());
+		this->tsbRemoveNonExistFiles = (gcnew System::Windows::Forms::ToolStripButton());
 		this->spRoot->Panel1->SuspendLayout();
 		this->spRoot->Panel2->SuspendLayout();
 		this->spRoot->SuspendLayout();
@@ -42,6 +45,7 @@ namespace sff {
 		this->spBottom->Panel2->SuspendLayout();
 		this->spBottom->SuspendLayout();
 		this->ssMain->SuspendLayout();
+		this->toolStrip1->SuspendLayout();
 		this->SuspendLayout();
 		// 
 		// btnStart
@@ -91,13 +95,21 @@ namespace sff {
 		this->tpSettings->Controls->Add(this->cmbNameReg);
 		this->tpSettings->Controls->Add(this->txtInDir);
 		this->tpSettings->Controls->Add(this->btnAdd);
-		this->tpSettings->Location = System::Drawing::Point(4, 21);
+		this->tpSettings->Location = System::Drawing::Point(4, 22);
 		this->tpSettings->Name = L"tpSettings";
 		this->tpSettings->Padding = System::Windows::Forms::Padding(3);
-		this->tpSettings->Size = System::Drawing::Size(680, 273);
+		this->tpSettings->Size = System::Drawing::Size(680, 272);
 		this->tpSettings->TabIndex = 0;
 		this->tpSettings->Text = L"Settings";
 		this->tpSettings->UseVisualStyleBackColor = true;
+		// 
+		// cmbMinSize
+		// 
+		this->cmbMinSize->FormattingEnabled = true;
+		this->cmbMinSize->Location = System::Drawing::Point(16, 202);
+		this->cmbMinSize->Name = L"cmbMinSize";
+		this->cmbMinSize->Size = System::Drawing::Size(145, 20);
+		this->cmbMinSize->TabIndex = 2;
 		// 
 		// cmbNameReg
 		// 
@@ -129,10 +141,11 @@ namespace sff {
 		// tbResult
 		// 
 		this->tbResult->Controls->Add(this->lvResult);
-		this->tbResult->Location = System::Drawing::Point(4, 21);
+		this->tbResult->Controls->Add(this->toolStrip1);
+		this->tbResult->Location = System::Drawing::Point(4, 22);
 		this->tbResult->Name = L"tbResult";
 		this->tbResult->Padding = System::Windows::Forms::Padding(3);
-		this->tbResult->Size = System::Drawing::Size(680, 273);
+		this->tbResult->Size = System::Drawing::Size(680, 272);
 		this->tbResult->TabIndex = 1;
 		this->tbResult->Text = L"Result";
 		this->tbResult->UseVisualStyleBackColor = true;
@@ -146,9 +159,9 @@ namespace sff {
 		this->lvResult->FullRowSelect = true;
 		this->lvResult->GridLines = true;
 		this->lvResult->HideSelection = false;
-		this->lvResult->Location = System::Drawing::Point(3, 3);
+		this->lvResult->Location = System::Drawing::Point(3, 28);
 		this->lvResult->Name = L"lvResult";
-		this->lvResult->Size = System::Drawing::Size(674, 267);
+		this->lvResult->Size = System::Drawing::Size(674, 241);
 		this->lvResult->TabIndex = 0;
 		this->lvResult->UseCompatibleStateImageBehavior = false;
 		this->lvResult->View = System::Windows::Forms::View::Details;
@@ -246,13 +259,24 @@ namespace sff {
 		this->slMain->Name = L"slMain";
 		this->slMain->Size = System::Drawing::Size(0, 17);
 		// 
-		// cmbMinSize
+		// toolStrip1
 		// 
-		this->cmbMinSize->FormattingEnabled = true;
-		this->cmbMinSize->Location = System::Drawing::Point(16, 202);
-		this->cmbMinSize->Name = L"cmbMinSize";
-		this->cmbMinSize->Size = System::Drawing::Size(145, 20);
-		this->cmbMinSize->TabIndex = 2;
+		this->toolStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) {this->tsbRemoveNonExistFiles});
+		this->toolStrip1->Location = System::Drawing::Point(3, 3);
+		this->toolStrip1->Name = L"toolStrip1";
+		this->toolStrip1->Size = System::Drawing::Size(674, 25);
+		this->toolStrip1->TabIndex = 1;
+		this->toolStrip1->Text = L"toolStrip1";
+		// 
+		// tsbRemoveNonExistFiles
+		// 
+		this->tsbRemoveNonExistFiles->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
+		this->tsbRemoveNonExistFiles->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"tsbRemoveNonExistFiles.Image")));
+		this->tsbRemoveNonExistFiles->ImageTransparentColor = System::Drawing::Color::Magenta;
+		this->tsbRemoveNonExistFiles->Name = L"tsbRemoveNonExistFiles";
+		this->tsbRemoveNonExistFiles->Size = System::Drawing::Size(23, 22);
+		this->tsbRemoveNonExistFiles->Text = L"Remove Non Exist Files";
+		this->tsbRemoveNonExistFiles->Click += gcnew System::EventHandler(this, &FormMain::tsbRemoveNonExistFiles_Click);
 		// 
 		// FormMain
 		// 
@@ -263,8 +287,8 @@ namespace sff {
 		this->Controls->Add(this->ssMain);
 		this->Name = L"FormMain";
 		this->Text = L"FormMain";
-		this->Load += gcnew System::EventHandler(this, &FormMain::FormMain_Load);
 		this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &FormMain::FormMain_FormClosing);
+		this->Load += gcnew System::EventHandler(this, &FormMain::FormMain_Load);
 		this->spRoot->Panel1->ResumeLayout(false);
 		this->spRoot->Panel2->ResumeLayout(false);
 		this->spRoot->ResumeLayout(false);
@@ -272,12 +296,15 @@ namespace sff {
 		this->tpSettings->ResumeLayout(false);
 		this->tpSettings->PerformLayout();
 		this->tbResult->ResumeLayout(false);
+		this->tbResult->PerformLayout();
 		this->cmList->ResumeLayout(false);
 		this->spBottom->Panel1->ResumeLayout(false);
 		this->spBottom->Panel2->ResumeLayout(false);
 		this->spBottom->ResumeLayout(false);
 		this->ssMain->ResumeLayout(false);
 		this->ssMain->PerformLayout();
+		this->toolStrip1->ResumeLayout(false);
+		this->toolStrip1->PerformLayout();
 		this->ResumeLayout(false);
 		this->PerformLayout();
 

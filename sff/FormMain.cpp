@@ -296,4 +296,16 @@ namespace sff {
 
 		frmError.BringToFront();
 	}
+
+	System::Void FormMain::tsbRemoveNonExistFiles_Click(System::Object^  sender, System::EventArgs^  e)
+	{
+		
+		for each(ListViewItem^ item in this->lvResult->Items)
+		{
+			if(!System::IO::File::Exists(item->Text))
+				lvResult->Items->Remove(item);
+		}
+
+
+	}
 }

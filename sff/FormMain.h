@@ -32,6 +32,8 @@ namespace sff {
 	private: System::Windows::Forms::ColumnHeader^  chFilename;
 	private: System::Windows::Forms::ComboBox^  cmbNameReg;
 	private: System::Windows::Forms::ComboBox^  cmbMinSize;
+	private: System::Windows::Forms::ToolStrip^  toolStrip1;
+	private: System::Windows::Forms::ToolStripButton^  tsbRemoveNonExistFiles;
 
 
 
@@ -128,14 +130,12 @@ namespace sff {
 		 
 
 		System::Void lvResult_ColumnClick(System::Object^  sender, System::Windows::Forms::ColumnClickEventArgs^  e);
-
 		System::Void btnAdd_Click(System::Object^  sender, System::EventArgs^  e);
-
 		System::Void explorerToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
-
 		System::Void btnShowError_Click(System::Object^  sender, System::EventArgs^  e);
+		System::Void tsbRemoveNonExistFiles_Click(System::Object^  sender, System::EventArgs^  e);
 
-	};
+};
 	
 
 }
