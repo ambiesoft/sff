@@ -34,6 +34,7 @@ namespace sff {
 	private: System::Windows::Forms::ComboBox^  cmbMinSize;
 	private: System::Windows::Forms::ToolStrip^  toolStrip1;
 	private: System::Windows::Forms::ToolStripButton^  tsbRemoveNonExistFiles;
+	private: System::Windows::Forms::ColumnHeader^  chDriveType;
 
 
 
