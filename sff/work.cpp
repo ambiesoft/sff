@@ -29,6 +29,12 @@ typedef THEMM2::value_type THEMM2V;
 static THEMM dups2;
 
 static set<CFileData*> atodel;
+
+template<typename T> static void myfree(T*p)
+{
+	free((void*)p);
+}
+
 static LPTSTR credir(LPCTSTR pDir1, LPCTSTR pDir2)
 {
 	size_t nlen1 = _tcslen(pDir1);
@@ -70,15 +76,16 @@ static void processfound(THREADPASSDATA* pD, WIN32_FIND_DATA* pf, LPCTSTR pNext)
 	if(pf->dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
 	{
 		LPCTSTR p = credir(pDir, pf->cFileName);
-		struct CRTFreer {
-			void* p_;
-			CRTFreer(void* p) {
-				p_=p;
-			}
-			~CRTFreer() {
-				free(p_);
-			}
-		} crtfreer((void*)p);
+		//struct CRTFreer {
+		//	void* p_;
+		//	CRTFreer(void* p) {
+		//		p_=p;
+		//	}
+		//	~CRTFreer() {
+		//		free(p_);
+		//	}
+		//} crtfreer((void*)p);
+		stlsoft::scoped_handle<LPCTSTR> ma(p, myfree);
 
 		if(!SendMessage(pD->hwnd_, WM_APP_ADDPROGRESS, pD->thid_, (LPARAM)p))
 			return;
@@ -181,10 +188,7 @@ static LPTSTR newforfff(LPCTSTR pDir)
 
 
 
-template<typename T> static void myfree(T*p)
-{
-	free((void*)p);
-}
+
 void dowork(THREADPASSDATA* pD,LPCTSTR pNext)
 {
 	LPCTSTR pDir = pNext?pNext:pD->curdir_;
