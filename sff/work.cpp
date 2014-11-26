@@ -83,6 +83,9 @@ static void processfound(THREADPASSDATA* pD, WIN32_FIND_DATA* pf, LPCTSTR pNext)
 		if(!SendMessage(pD->hwnd_, WM_APP_ADDPROGRESS, pD->thid_, (LPARAM)p))
 			return;
 
+		if(pf->dwFileAttributes & FILE_ATTRIBUTE_REPARSE_POINT)
+			return;
+
 		dowork(pD,p);
 		return;
 	}
