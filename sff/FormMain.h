@@ -115,6 +115,8 @@ namespace sff {
 
 #pragma endregion
 
+	private:
+		System::Void onIdle(System::Object^, System::EventArgs^);
 		
 
 	private: 

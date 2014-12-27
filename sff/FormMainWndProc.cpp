@@ -152,6 +152,10 @@ namespace sff {
 				gthid++;
 				gcurthread = NULL;
 				ThreadOn(false);
+				MessageBox::Show(I18NLS(L"Done"), 
+					Application::ProductName,
+					MessageBoxButtons::OK,
+					MessageBoxIcon::Information);
 			}
 			break;
 

@@ -54,6 +54,13 @@ namespace sff {
 		ThreadOn(false);
 		cmbNameReg->Items->Add(L"\\.pdf$");
 		cmbNameReg->SelectedIndex = 0;
+
+		Application::Idle += gcnew EventHandler(this, &FormMain::onIdle);
+	}
+
+	System::Void FormMain::onIdle(System::Object^, System::EventArgs^)
+	{
+		status lvResult->Groups->Count
 	}
 
 	System::Void FormMain::lvResult_ColumnClick(System::Object^  sender, System::Windows::Forms::ColumnClickEventArgs^  e)
@@ -199,6 +206,7 @@ namespace sff {
 			
 			ThreadOn(true);
 			tabMain->SelectedTab= tbResult;
+
 		}
 		else
 		{
@@ -251,6 +259,7 @@ namespace sff {
 	{
 		e->Cancel=false;
 		CloseThread();
+		Application::Idle -= gcnew EventHandler(this, &FormMain::onIdle);
 	}
 
 		
