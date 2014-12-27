@@ -54,7 +54,13 @@ namespace sff {
 		ThreadOn(false);
 		cmbNameReg->Items->Add(L"\\.pdf$");
 		cmbNameReg->SelectedIndex = 0;
+		cmbNameReg->Text = L"";
 
+		cmbMinSize->Items->Add(L"10M");
+		cmbMinSize->SelectedIndex = 0;
+		cmbMinSize->Text = L"";
+
+		
 		Application::Idle += gcnew EventHandler(this, &FormMain::onIdle);
 	}
 
@@ -62,6 +68,13 @@ namespace sff {
 	{
 		slItemCount->Text = I18NLS(L"Items : ") + lvResult->Items->Count.ToString();
 		slGroupCount->Text = I18NLS(L"Groups : ") + lvResult->Groups->Count.ToString();
+
+		bool on =(gcurthread != NULL);
+
+		btnPause->Enabled=on  && !bSuspended_;
+		btnResume->Enabled=on && bSuspended_;
+
+		
 	}
 
 	System::Void FormMain::lvResult_ColumnClick(System::Object^  sender, System::Windows::Forms::ColumnClickEventArgs^  e)
@@ -108,7 +121,7 @@ namespace sff {
 					return;
 				}
 				// inlines->Add(inl);
-				vinlines.push_back(getStdWstring(inl));
+				vinlines.push_back(getStdWstring(inl->TrimEnd(L'\\')));
 			}
 
 			if(vinlines.size()==0)
@@ -211,7 +224,23 @@ namespace sff {
 		}
 		else
 		{
+			try
+			{
+				SuspendThread(gcurthread); // (gcurthread,THREAD_PRIORITY_LOWEST);
+				if(System::Windows::Forms::DialogResult::Yes != MessageBox::Show(I18NLS(L"Are you sure you want to cancel?"),
+					Application::ProductName,
+					MessageBoxButtons::YesNo,
+					MessageBoxIcon::Question))
+				{
+					return;
+				}
+			}
+			finally
+			{
+				ResumeThread(gcurthread);// SetThreadPriority(gcurthread,THREAD_PRIORITY_NORMAL);
+			}
 			CloseThread();
+
 			ThreadOn(false);
 		}
 	}
@@ -219,19 +248,19 @@ namespace sff {
 	void FormMain::ThreadOn(bool on)
 	{
 		btnStart->Text = on ? L"&Cancel" : L"&Start";
-		btnPause->Enabled=on;
-		btnResume->Enabled=on;
 	}
 	
 
 	System::Void FormMain::btnPause_Click(System::Object^  sender, System::EventArgs^  e)
 	{
 		SuspendThread(gcurthread);
+		bSuspended_ = true;
 	}
 	System::Void FormMain::btnResume_Click(System::Object^  sender, System::EventArgs^  e)
 	{
 		while(ResumeThread(gcurthread)>0)
 			;
+		bSuspended_ = false;
 	}
 
 
@@ -270,6 +299,8 @@ namespace sff {
 		if(System::Windows::Forms::DialogResult::OK != fbd_.ShowDialog())
 			return;
 
+		if(!txtInDir->Text->EndsWith(L"\n"))
+			txtInDir->Text += L"\r\n";
 		txtInDir->Text += fbd_.SelectedPath + L"\r\n";
 	}
 

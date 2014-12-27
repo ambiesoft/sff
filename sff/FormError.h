@@ -48,7 +48,20 @@ namespace sff {
 	private: System::Windows::Forms::ColumnHeader^  chError;
 	private: System::Windows::Forms::ColumnHeader^  chFile;
 
-	protected: 
+	internal:
+		int getErrorCount()
+		{
+			if(!lvError)
+				return 0;
+
+			//if(!lvError->Created)
+			//	return 0;
+
+			//if(!lvError->IsDisposed)
+			//	return 0;
+
+			return lvError->Items->Count;
+		}
 
 	private:
 		/// <summary>

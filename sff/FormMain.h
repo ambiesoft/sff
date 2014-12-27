@@ -41,7 +41,9 @@ namespace sff {
 
 
 
-			 FormError frmError;
+		FormError frmError;
+		bool bSuspended_;
+
 	protected:
 		virtual void WndProc(Message% m) override = Control::WndProc;
 
@@ -58,10 +60,11 @@ namespace sff {
 		FormMain(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: ここにコンストラクタ コードを追加します
-			//
+			orgShowErrorText_ = btnShowError->Text;
 		}
+	private:
+		initonly String^ orgShowErrorText_;
+
 	private: System::Windows::Forms::SplitContainer^  spBottom;
 	private: System::Windows::Forms::TabControl^  tabMain;
 	private: System::Windows::Forms::TabPage^  tpSettings;

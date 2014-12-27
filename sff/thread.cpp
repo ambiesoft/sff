@@ -41,7 +41,7 @@ unsigned  __stdcall startOfSearch(void * p)
 
 	processResult(pD);
 	clearwork();
-	SendMessage(pD->hwnd_, WM_APP_SEARCHDONE, 0,0);
+	SendMessage(pD->hwnd_, WM_APP_SEARCHDONE, pD->thid_,0);
 
 	DTRACE(String::Format("Last Thread {0} is exiting : ", (UINT64)pD->thisthread_));
 	DVERIFY(CloseHandle(pD->thisthread_));

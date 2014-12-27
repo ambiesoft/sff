@@ -145,17 +145,22 @@ namespace sff {
 			case WM_APP_SEARCHDONE:
 			{
 				Application::DoEvents();
-				
+				DWORD id = (DWORD)m.WParam.ToInt32();
 
 				slMain->Text=String::Empty;
 
+				bool bRealDone = id==gthid;
 				gthid++;
 				gcurthread = NULL;
 				ThreadOn(false);
-				MessageBox::Show(I18NLS(L"Done"), 
-					Application::ProductName,
-					MessageBoxButtons::OK,
-					MessageBoxIcon::Information);
+				if(bRealDone)
+				{
+					MessageBox::Show(I18NLS(L"Done"), 
+						Application::ProductName,
+						MessageBoxButtons::OK,
+						MessageBoxIcon::Information);
+				}
+				btnShowError->Text = orgShowErrorText_ + " : " +  frmError.getErrorCount().ToString();
 			}
 			break;
 

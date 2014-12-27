@@ -55,6 +55,8 @@ public:
 	}
 	bool match(LPCTSTR pName);
 	~THREADPASSDATA();
+
+
 };
 
 extern volatile HANDLE gcurthread;
