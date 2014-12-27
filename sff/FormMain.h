@@ -36,6 +36,9 @@ namespace sff {
 	private: System::Windows::Forms::ToolStripButton^  tsbRemoveNonExistFiles;
 	private: System::Windows::Forms::ColumnHeader^  chDriveType;
 
+	private: System::Windows::Forms::ToolStripStatusLabel^  slGroupCount;
+	private: System::Windows::Forms::ToolStripStatusLabel^  slItemCount;
+
 
 
 			 FormError frmError;

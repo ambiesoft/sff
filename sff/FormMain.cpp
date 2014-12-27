@@ -60,7 +60,8 @@ namespace sff {
 
 	System::Void FormMain::onIdle(System::Object^, System::EventArgs^)
 	{
-		status lvResult->Groups->Count
+		slItemCount->Text = I18NLS(L"Items : ") + lvResult->Items->Count.ToString();
+		slGroupCount->Text = I18NLS(L"Groups : ") + lvResult->Groups->Count.ToString();
 	}
 
 	System::Void FormMain::lvResult_ColumnClick(System::Object^  sender, System::Windows::Forms::ColumnClickEventArgs^  e)

@@ -24,6 +24,7 @@ namespace sff {
 		this->chPath = (gcnew System::Windows::Forms::ColumnHeader());
 		this->chSize = (gcnew System::Windows::Forms::ColumnHeader());
 		this->chFilename = (gcnew System::Windows::Forms::ColumnHeader());
+		this->chDriveType = (gcnew System::Windows::Forms::ColumnHeader());
 		this->cmList = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
 		this->explorerToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 		this->toolStrip1 = (gcnew System::Windows::Forms::ToolStrip());
@@ -34,7 +35,8 @@ namespace sff {
 		this->btnResume = (gcnew System::Windows::Forms::Button());
 		this->ssMain = (gcnew System::Windows::Forms::StatusStrip());
 		this->slMain = (gcnew System::Windows::Forms::ToolStripStatusLabel());
-		this->chDriveType = (gcnew System::Windows::Forms::ColumnHeader());
+		this->slGroupCount = (gcnew System::Windows::Forms::ToolStripStatusLabel());
+		this->slItemCount = (gcnew System::Windows::Forms::ToolStripStatusLabel());
 		this->spRoot->Panel1->SuspendLayout();
 		this->spRoot->Panel2->SuspendLayout();
 		this->spRoot->SuspendLayout();
@@ -51,9 +53,9 @@ namespace sff {
 		// 
 		// btnStart
 		// 
-		this->btnStart->Location = System::Drawing::Point(3, 7);
+		this->btnStart->Location = System::Drawing::Point(3, 8);
 		this->btnStart->Name = L"btnStart";
-		this->btnStart->Size = System::Drawing::Size(114, 38);
+		this->btnStart->Size = System::Drawing::Size(114, 41);
 		this->btnStart->TabIndex = 0;
 		this->btnStart->Text = L"&Start";
 		this->btnStart->UseVisualStyleBackColor = true;
@@ -75,8 +77,8 @@ namespace sff {
 		// spRoot.Panel2
 		// 
 		this->spRoot->Panel2->Controls->Add(this->spBottom);
-		this->spRoot->Size = System::Drawing::Size(688, 357);
-		this->spRoot->SplitterDistance = 298;
+		this->spRoot->Size = System::Drawing::Size(688, 389);
+		this->spRoot->SplitterDistance = 330;
 		this->spRoot->TabIndex = 2;
 		// 
 		// tabMain
@@ -87,7 +89,7 @@ namespace sff {
 		this->tabMain->Location = System::Drawing::Point(0, 0);
 		this->tabMain->Name = L"tabMain";
 		this->tabMain->SelectedIndex = 0;
-		this->tabMain->Size = System::Drawing::Size(688, 298);
+		this->tabMain->Size = System::Drawing::Size(688, 330);
 		this->tabMain->TabIndex = 1;
 		// 
 		// tpSettings
@@ -96,10 +98,10 @@ namespace sff {
 		this->tpSettings->Controls->Add(this->cmbNameReg);
 		this->tpSettings->Controls->Add(this->txtInDir);
 		this->tpSettings->Controls->Add(this->btnAdd);
-		this->tpSettings->Location = System::Drawing::Point(4, 21);
+		this->tpSettings->Location = System::Drawing::Point(4, 22);
 		this->tpSettings->Name = L"tpSettings";
 		this->tpSettings->Padding = System::Windows::Forms::Padding(3);
-		this->tpSettings->Size = System::Drawing::Size(680, 273);
+		this->tpSettings->Size = System::Drawing::Size(680, 304);
 		this->tpSettings->TabIndex = 0;
 		this->tpSettings->Text = L"Settings";
 		this->tpSettings->UseVisualStyleBackColor = true;
@@ -107,33 +109,33 @@ namespace sff {
 		// cmbMinSize
 		// 
 		this->cmbMinSize->FormattingEnabled = true;
-		this->cmbMinSize->Location = System::Drawing::Point(16, 202);
+		this->cmbMinSize->Location = System::Drawing::Point(16, 219);
 		this->cmbMinSize->Name = L"cmbMinSize";
-		this->cmbMinSize->Size = System::Drawing::Size(145, 20);
+		this->cmbMinSize->Size = System::Drawing::Size(145, 21);
 		this->cmbMinSize->TabIndex = 2;
 		// 
 		// cmbNameReg
 		// 
 		this->cmbNameReg->FormattingEnabled = true;
-		this->cmbNameReg->Location = System::Drawing::Point(16, 164);
+		this->cmbNameReg->Location = System::Drawing::Point(16, 178);
 		this->cmbNameReg->Name = L"cmbNameReg";
-		this->cmbNameReg->Size = System::Drawing::Size(145, 20);
+		this->cmbNameReg->Size = System::Drawing::Size(145, 21);
 		this->cmbNameReg->TabIndex = 2;
 		// 
 		// txtInDir
 		// 
-		this->txtInDir->Location = System::Drawing::Point(16, 25);
+		this->txtInDir->Location = System::Drawing::Point(16, 27);
 		this->txtInDir->Multiline = true;
 		this->txtInDir->Name = L"txtInDir";
 		this->txtInDir->ScrollBars = System::Windows::Forms::ScrollBars::Both;
-		this->txtInDir->Size = System::Drawing::Size(269, 133);
+		this->txtInDir->Size = System::Drawing::Size(269, 144);
 		this->txtInDir->TabIndex = 1;
 		// 
 		// btnAdd
 		// 
-		this->btnAdd->Location = System::Drawing::Point(294, 38);
+		this->btnAdd->Location = System::Drawing::Point(294, 41);
 		this->btnAdd->Name = L"btnAdd";
-		this->btnAdd->Size = System::Drawing::Size(81, 30);
+		this->btnAdd->Size = System::Drawing::Size(81, 33);
 		this->btnAdd->TabIndex = 0;
 		this->btnAdd->Text = L"button1";
 		this->btnAdd->UseVisualStyleBackColor = true;
@@ -143,10 +145,10 @@ namespace sff {
 		// 
 		this->tbResult->Controls->Add(this->lvResult);
 		this->tbResult->Controls->Add(this->toolStrip1);
-		this->tbResult->Location = System::Drawing::Point(4, 21);
+		this->tbResult->Location = System::Drawing::Point(4, 22);
 		this->tbResult->Name = L"tbResult";
 		this->tbResult->Padding = System::Windows::Forms::Padding(3);
-		this->tbResult->Size = System::Drawing::Size(680, 273);
+		this->tbResult->Size = System::Drawing::Size(680, 297);
 		this->tbResult->TabIndex = 1;
 		this->tbResult->Text = L"Result";
 		this->tbResult->UseVisualStyleBackColor = true;
@@ -162,7 +164,7 @@ namespace sff {
 		this->lvResult->HideSelection = false;
 		this->lvResult->Location = System::Drawing::Point(3, 28);
 		this->lvResult->Name = L"lvResult";
-		this->lvResult->Size = System::Drawing::Size(674, 242);
+		this->lvResult->Size = System::Drawing::Size(674, 266);
 		this->lvResult->TabIndex = 0;
 		this->lvResult->UseCompatibleStateImageBehavior = false;
 		this->lvResult->View = System::Windows::Forms::View::Details;
@@ -187,12 +189,12 @@ namespace sff {
 		// 
 		this->cmList->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) {this->explorerToolStripMenuItem});
 		this->cmList->Name = L"cmList";
-		this->cmList->Size = System::Drawing::Size(125, 26);
+		this->cmList->Size = System::Drawing::Size(122, 26);
 		// 
 		// explorerToolStripMenuItem
 		// 
 		this->explorerToolStripMenuItem->Name = L"explorerToolStripMenuItem";
-		this->explorerToolStripMenuItem->Size = System::Drawing::Size(124, 22);
+		this->explorerToolStripMenuItem->Size = System::Drawing::Size(121, 22);
 		this->explorerToolStripMenuItem->Text = L"&Explorer...";
 		this->explorerToolStripMenuItem->Click += gcnew System::EventHandler(this, &FormMain::explorerToolStripMenuItem_Click);
 		// 
@@ -238,9 +240,9 @@ namespace sff {
 		// 
 		// btnShowError
 		// 
-		this->btnShowError->Location = System::Drawing::Point(4, 7);
+		this->btnShowError->Location = System::Drawing::Point(4, 8);
 		this->btnShowError->Name = L"btnShowError";
-		this->btnShowError->Size = System::Drawing::Size(75, 38);
+		this->btnShowError->Size = System::Drawing::Size(75, 41);
 		this->btnShowError->TabIndex = 2;
 		this->btnShowError->Text = L"&Error";
 		this->btnShowError->UseVisualStyleBackColor = true;
@@ -248,9 +250,9 @@ namespace sff {
 		// 
 		// btnPause
 		// 
-		this->btnPause->Location = System::Drawing::Point(204, 7);
+		this->btnPause->Location = System::Drawing::Point(204, 8);
 		this->btnPause->Name = L"btnPause";
-		this->btnPause->Size = System::Drawing::Size(75, 38);
+		this->btnPause->Size = System::Drawing::Size(75, 41);
 		this->btnPause->TabIndex = 2;
 		this->btnPause->Text = L"&Pause";
 		this->btnPause->UseVisualStyleBackColor = true;
@@ -258,9 +260,9 @@ namespace sff {
 		// 
 		// btnResume
 		// 
-		this->btnResume->Location = System::Drawing::Point(123, 7);
+		this->btnResume->Location = System::Drawing::Point(123, 8);
 		this->btnResume->Name = L"btnResume";
-		this->btnResume->Size = System::Drawing::Size(75, 38);
+		this->btnResume->Size = System::Drawing::Size(75, 41);
 		this->btnResume->TabIndex = 3;
 		this->btnResume->Text = L"&Resume";
 		this->btnResume->UseVisualStyleBackColor = true;
@@ -268,8 +270,9 @@ namespace sff {
 		// 
 		// ssMain
 		// 
-		this->ssMain->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) {this->slMain});
-		this->ssMain->Location = System::Drawing::Point(0, 357);
+		this->ssMain->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {this->slMain, this->slGroupCount, 
+			this->slItemCount});
+		this->ssMain->Location = System::Drawing::Point(0, 389);
 		this->ssMain->Name = L"ssMain";
 		this->ssMain->Size = System::Drawing::Size(688, 22);
 		this->ssMain->TabIndex = 3;
@@ -277,19 +280,32 @@ namespace sff {
 		// slMain
 		// 
 		this->slMain->Name = L"slMain";
-		this->slMain->Size = System::Drawing::Size(0, 17);
+		this->slMain->Size = System::Drawing::Size(551, 17);
+		this->slMain->Spring = true;
+		// 
+		// slGroupCount
+		// 
+		this->slGroupCount->Name = L"slGroupCount";
+		this->slGroupCount->Size = System::Drawing::Size(50, 17);
+		this->slGroupCount->Text = L"Groups : ";
+		// 
+		// slItemCount
+		// 
+		this->slItemCount->Name = L"slItemCount";
+		this->slItemCount->Size = System::Drawing::Size(41, 17);
+		this->slItemCount->Text = L"Items : ";
 		// 
 		// FormMain
 		// 
-		this->AutoScaleDimensions = System::Drawing::SizeF(6, 12);
+		this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 		this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-		this->ClientSize = System::Drawing::Size(688, 379);
+		this->ClientSize = System::Drawing::Size(688, 411);
 		this->Controls->Add(this->spRoot);
 		this->Controls->Add(this->ssMain);
 		this->Name = L"FormMain";
 		this->Text = L"FormMain";
-		this->Load += gcnew System::EventHandler(this, &FormMain::FormMain_Load);
 		this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &FormMain::FormMain_FormClosing);
+		this->Load += gcnew System::EventHandler(this, &FormMain::FormMain_Load);
 		this->spRoot->Panel1->ResumeLayout(false);
 		this->spRoot->Panel2->ResumeLayout(false);
 		this->spRoot->ResumeLayout(false);
