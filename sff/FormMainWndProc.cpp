@@ -6,6 +6,8 @@
 //#include "ListGroup.h"
 #include "helper.h"
 
+#include "../../MyUtility/GetLastErrorString.h"
+
 namespace sff {
 
 	ref struct UpDate {

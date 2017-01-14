@@ -6,7 +6,10 @@
 #include "helper.h"
 #include "dnhelper.h"
 
+#include "../../MyUtility\getStdString.net.h"
+
 namespace sff {
+	using namespace Ambiesoft;
 
 	public ref class ListViewItemComparer : System::Collections::IComparer
 	{
@@ -55,8 +58,10 @@ namespace sff {
 		{
 			this->Text = Application::ProductName;
 		}
-
-		this->Text = addition + " - " + Application::ProductName;
+		else
+		{
+			this->Text = addition + " - " + Application::ProductName;
+		}
 	}
 	System::Void FormMain::FormMain_Load(System::Object^  sender, System::EventArgs^  e)
 	{
@@ -152,7 +157,7 @@ namespace sff {
 			}
 			catch(System::Exception^ ex)
 			{
-				ExceptionMessageBox(ex);
+				AmbLib::ExceptionMessageBox(ex);
 				return;
 			}
 

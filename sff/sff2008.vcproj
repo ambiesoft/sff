@@ -273,6 +273,15 @@
 			AssemblyName="System.Xml, Version=2.0.0.0, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL"
 			MinFrameworkVersion="131072"
 		/>
+		<ProjectReference
+			ReferencedProjectIdentifier="{87F0CE21-9CA6-448A-ACE8-B7FC9771DC87}"
+			RelativePathToProject="..\amblibcpp\amblibcpp\amblibcpp.vcproj"
+		/>
+		<AssemblyReference
+			RelativePath="..\..\amblib\amblib\bin\Release\Ambiesoft.amblib.dll"
+			AssemblyName="Ambiesoft.amblib, Version=1.0.0.0, processorArchitecture=MSIL"
+			MinFrameworkVersion="131072"
+		/>
 	</References>
 	<Files>
 		<Filter
@@ -326,6 +335,14 @@
 			</File>
 			<File
 				RelativePath=".\FormMainWndProc.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\MyUtility\GetLastErrorString.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\MyUtility\getStdString.net.cpp"
 				>
 			</File>
 			<File
@@ -410,6 +427,14 @@
 				</File>
 			</File>
 			<File
+				RelativePath="..\..\MyUtility\GetLastErrorString.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\MyUtility\getStdString.net.h"
+				>
+			</File>
+			<File
 				RelativePath=".\helper.h"
 				>
 			</File>
@@ -448,6 +473,10 @@
 				>
 			</File>
 		</Filter>
+		<File
+			RelativePath="..\..\amblibcpp\amblibcpp\amblibcpp.vcproj"
+			>
+		</File>
 		<File
 			RelativePath=".\ReadMe.txt"
 			>
