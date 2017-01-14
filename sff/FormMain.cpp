@@ -49,6 +49,15 @@ namespace sff {
 		}
 	};
 
+	void FormMain::SetTitle(String^ addition)
+	{
+		if(String::IsNullOrEmpty(addition))
+		{
+			this->Text = Application::ProductName;
+		}
+
+		this->Text = addition + " - " + Application::ProductName;
+	}
 	System::Void FormMain::FormMain_Load(System::Object^  sender, System::EventArgs^  e)
 	{
 		ThreadOn(false);
@@ -60,14 +69,14 @@ namespace sff {
 		cmbMinSize->SelectedIndex = 0;
 		cmbMinSize->Text = L"";
 
-		
+		SetTitle(nullptr);	
 		Application::Idle += gcnew EventHandler(this, &FormMain::onIdle);
 	}
 
 	System::Void FormMain::onIdle(System::Object^, System::EventArgs^)
 	{
-		slItemCount->Text = I18NLS(L"Items : ") + lvResult->Items->Count.ToString();
-		slGroupCount->Text = I18NLS(L"Groups : ") + lvResult->Groups->Count.ToString();
+		slItemCount->Text = I18NLS(L"Items : ") + lvProgress->Items->Count.ToString();
+		slGroupCount->Text = I18NLS(L"Groups : ") + lvProgress->Groups->Count.ToString();
 
 		bool on =(gcurthread != NULL);
 
@@ -77,11 +86,11 @@ namespace sff {
 		
 	}
 
-	System::Void FormMain::lvResult_ColumnClick(System::Object^  sender, System::Windows::Forms::ColumnClickEventArgs^  e)
+	System::Void FormMain::lvProgress_ColumnClick(System::Object^  sender, System::Windows::Forms::ColumnClickEventArgs^  e)
 	{
-		lvResult->ListViewItemSorter =
+		lvProgress->ListViewItemSorter =
 			gcnew ListViewItemComparer(e->Column);
-		lvResult->Sort();
+		lvProgress->Sort();
 
 
 	}
@@ -91,6 +100,7 @@ namespace sff {
 		{
 			// List<String^>^ inlines = gcnew List<String^>;
 			TSTRINGVECTOR vinlines;
+			String^ title = String::Empty;
 			for each(String^ inl in txtInDir->Lines)
 			{
 				inl=inl->TrimStart();
@@ -122,7 +132,9 @@ namespace sff {
 				}
 				// inlines->Add(inl);
 				vinlines.push_back(getStdWstring(inl->TrimEnd(L'\\')));
+				title += inl + "|";
 			}
+			title = title->TrimEnd('|');
 
 			if(vinlines.size()==0)
 			{
@@ -183,16 +195,16 @@ namespace sff {
 			// checkdone
 
 
-			lvResult->Items->Clear();
-			lvResult->Groups->Clear();
+			lvProgress->Items->Clear();
+			lvProgress->Groups->Clear();
 			groupI_.Clear();
 			frmError.lvError->Items->Clear();
 			
-			//LVDATA^ lvdata = (LVDATA^)lvResult->Tag;
+			//LVDATA^ lvdata = (LVDATA^)lvProgress->Tag;
 			//if(!lvdata)
 			//{
 			//	lvdata=gcnew LVDATA;
-			//	lvResult->Tag=lvdata;
+			//	lvProgress->Tag=lvdata;
 			//}
 			//lvdata->Clear();
 
@@ -219,7 +231,8 @@ namespace sff {
 			DVERIFY_NOT(ResumeThread((HANDLE)threadhandle), 0xFFFFFFFF);
 			
 			ThreadOn(true);
-			tabMain->SelectedTab= tbResult;
+			SetTitle(title);
+			tabMain->SelectedTab= tbProgress;
 
 		}
 		else
@@ -309,7 +322,7 @@ namespace sff {
 
 		try
 		{
-			pin_ptr<const wchar_t> pIn = PtrToStringChars(lvResult->SelectedItems[0]->Text);
+			pin_ptr<const wchar_t> pIn = PtrToStringChars(lvProgress->SelectedItems[0]->Text);
 			
 
 			tstring arg;
@@ -341,12 +354,15 @@ namespace sff {
 	System::Void FormMain::tsbRemoveNonExistFiles_Click(System::Object^  sender, System::EventArgs^  e)
 	{
 		
-		for each(ListViewItem^ item in this->lvResult->Items)
+		for each(ListViewItem^ item in this->lvProgress->Items)
 		{
 			if(!System::IO::File::Exists(item->Text))
-				lvResult->Items->Remove(item);
+				lvProgress->Items->Remove(item);
 		}
+	}
 
+	System::Void FormMain::linkHomepage_LinkClicked(System::Object^  sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^  e)
+	{
 
 	}
 }

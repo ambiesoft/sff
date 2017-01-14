@@ -8,7 +8,17 @@
 
 namespace sff {
 
-	
+	ref struct UpDate {
+					ListView^ lv_;
+					UpDate(ListView^ lv) {
+						lv_=lv;
+						lv_->BeginUpdate();
+					}
+					~UpDate() {
+						lv_->EndUpdate();
+					}
+				};
+
 	void FormMain::WndProc(Message% m) 
 	{
 		switch( m.Msg )
@@ -39,40 +49,42 @@ namespace sff {
 					break;
 				}
 				
+				UpDate upDate(lvProgress);
+
 				CFileData* pFD = (CFileData*)m.LParam.ToPointer();
-				ListViewGroup^ lvg;//= ((LVDATA^)lvResult->Tag)->getGroup(pFD->GetLeng());
+				ListViewGroup^ lvg;//= ((LVDATA^)lvProgress->Tag)->getGroup(pFD->GetLeng());
 
 				if(!false)
 				{
-					lvg = lvResult->Groups[pFD->GetLeng().ToString()];
+					lvg = lvProgress->Groups[pFD->GetLeng().ToString()];
 					if ( !lvg )
 					{
-						lvg = gcnew ListViewGroup(pFD->GetLeng().ToString(), pFD->GetLeng().ToString());
+						lvg = gcnew ListViewGroup(pFD->GetLeng().ToString(), GetBytelenFormatText(pFD->GetLeng()));
 						ULL len=pFD->GetLeng();
 						DASSERT(!groupI_.Contains(len));
-						// lvResult->Groups->Add(lvg);
+						// lvProgress->Groups->Add(lvg);
 						groupI_.Add(len);
 						groupI_.Sort();
 						int index = groupI_.IndexOf(len);
 						DASSERT(0 <= index);
 						if(index==0)
 						{
-							lvResult->Groups->Insert(index,lvg);// Add(lvg);
+							lvProgress->Groups->Insert(index,lvg);// Add(lvg);
 						}
 						else
 						{
 							//ULL prev = groupI_[index-1];
 							//index = groupI_.IndexOf(prev);
 							//DASSERT(0 <= index);
-							index = lvResult->Groups->IndexOf(lvResult->Groups[index-1]);
-							lvResult->Groups->Insert(index+1,lvg);// Add(lvg);
+							index = lvProgress->Groups->IndexOf(lvProgress->Groups[index-1]);
+							lvProgress->Groups->Insert(index+1,lvg);// Add(lvg);
 						}
 
 
 					}
 					else
 					{
-						lvg->Header = pFD->GetLeng().ToString();
+						lvg->Header = GetBytelenFormatText(pFD->GetLeng());
 					}
 				}					
 				
@@ -101,10 +113,20 @@ namespace sff {
 				item->Group=lvg;
 
 				
-				lvResult->Items->Add(item);
-				//lvResult->Sort();
+				
+				lvProgress->Items->Add(item);
 				
 
+				//if(0!=lvProgress->SelectedItems->Count)
+				//{
+				//	ListViewItem^ lvic = lvProgress->SelectedItems[0];
+				//	System::Drawing::Size s = lvProgress->Size;
+				//	System::Drawing::Rectangle r = lvic->Bounds;
+				//	if(r.Y > 0 && r.Y < s.Height)
+				//	{
+				//		lvic->EnsureVisible();
+				//	}
+				//}
 				m.Result=(IntPtr)1;							
 			}
 			break;

@@ -1,5 +1,8 @@
 #include "stdafx.h"
 #include "helper.h"
+
+using namespace System;
+
 tstring GetLastErrorString(DWORD dwErrorNo, BOOL* pSeikou)
 {
 	LPVOID lpMsgBuf = NULL;
@@ -81,4 +84,26 @@ void ExceptionMessageBox(System::Exception^ ex)
 		System::Windows::Forms::Application::ProductName,
 		System::Windows::Forms::MessageBoxButtons::OK,
 		System::Windows::Forms::MessageBoxIcon::Exclamation);
+}
+
+String^ humanReadableByteCount(ULL len) 
+{
+	array<String^>^ sizes = { "B", "KB", "MB", "GB", "TB" };
+	
+	int order = 0;
+	while (len >= 1024 && order < sizes->Length - 1) {
+		order++;
+		len = len/1024;
+	}
+
+	// Adjust the format string to your preferences. For example "{0:0.#}{1}" would
+	// show a single decimal place, and no space.
+	String^ result = String::Format("{0:0.##} {1}", len, sizes[order]);
+	return result;
+}
+String^ GetBytelenFormatText(ULL ull)
+{
+	return humanReadableByteCount(ull) + " (" + ull.ToString(L"N0") + L" bytes)";
+
+
 }

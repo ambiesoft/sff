@@ -4,8 +4,8 @@
 
 namespace sff {
 
-	// this->lvResult = (gcnew OptListView());
-	// this->lvResult = (gcnew System::Windows::Forms::ListView());
+	// this->lvProgress = (gcnew OptListView());
+	// this->lvProgress = (gcnew System::Windows::Forms::ListView());
 
 	void FormMain::InitializeComponent(void)
 	{
@@ -19,8 +19,8 @@ namespace sff {
 		this->cmbNameReg = (gcnew System::Windows::Forms::ComboBox());
 		this->txtInDir = (gcnew System::Windows::Forms::TextBox());
 		this->btnAdd = (gcnew System::Windows::Forms::Button());
-		this->tbResult = (gcnew System::Windows::Forms::TabPage());
-		this->lvResult = (gcnew System::Windows::Forms::ListView());
+		this->tbProgress = (gcnew System::Windows::Forms::TabPage());
+		this->lvProgress = (gcnew System::Windows::Forms::ListView());
 		this->chPath = (gcnew System::Windows::Forms::ColumnHeader());
 		this->chSize = (gcnew System::Windows::Forms::ColumnHeader());
 		this->chFilename = (gcnew System::Windows::Forms::ColumnHeader());
@@ -37,18 +37,22 @@ namespace sff {
 		this->slMain = (gcnew System::Windows::Forms::ToolStripStatusLabel());
 		this->slGroupCount = (gcnew System::Windows::Forms::ToolStripStatusLabel());
 		this->slItemCount = (gcnew System::Windows::Forms::ToolStripStatusLabel());
+		this->tbAbout = (gcnew System::Windows::Forms::TabPage());
+		this->lblVersion = (gcnew System::Windows::Forms::Label());
+		this->linkHomepage = (gcnew System::Windows::Forms::LinkLabel());
 		this->spRoot->Panel1->SuspendLayout();
 		this->spRoot->Panel2->SuspendLayout();
 		this->spRoot->SuspendLayout();
 		this->tabMain->SuspendLayout();
 		this->tpSettings->SuspendLayout();
-		this->tbResult->SuspendLayout();
+		this->tbProgress->SuspendLayout();
 		this->cmList->SuspendLayout();
 		this->toolStrip1->SuspendLayout();
 		this->spBottom->Panel1->SuspendLayout();
 		this->spBottom->Panel2->SuspendLayout();
 		this->spBottom->SuspendLayout();
 		this->ssMain->SuspendLayout();
+		this->tbAbout->SuspendLayout();
 		this->SuspendLayout();
 		// 
 		// btnStart
@@ -84,7 +88,8 @@ namespace sff {
 		// tabMain
 		// 
 		this->tabMain->Controls->Add(this->tpSettings);
-		this->tabMain->Controls->Add(this->tbResult);
+		this->tabMain->Controls->Add(this->tbProgress);
+		this->tabMain->Controls->Add(this->tbAbout);
 		this->tabMain->Dock = System::Windows::Forms::DockStyle::Fill;
 		this->tabMain->Location = System::Drawing::Point(0, 0);
 		this->tabMain->Name = L"tabMain";
@@ -141,34 +146,34 @@ namespace sff {
 		this->btnAdd->UseVisualStyleBackColor = true;
 		this->btnAdd->Click += gcnew System::EventHandler(this, &FormMain::btnAdd_Click);
 		// 
-		// tbResult
+		// tbProgress
 		// 
-		this->tbResult->Controls->Add(this->lvResult);
-		this->tbResult->Controls->Add(this->toolStrip1);
-		this->tbResult->Location = System::Drawing::Point(4, 22);
-		this->tbResult->Name = L"tbResult";
-		this->tbResult->Padding = System::Windows::Forms::Padding(3);
-		this->tbResult->Size = System::Drawing::Size(680, 297);
-		this->tbResult->TabIndex = 1;
-		this->tbResult->Text = L"Result";
-		this->tbResult->UseVisualStyleBackColor = true;
+		this->tbProgress->Controls->Add(this->lvProgress);
+		this->tbProgress->Controls->Add(this->toolStrip1);
+		this->tbProgress->Location = System::Drawing::Point(4, 22);
+		this->tbProgress->Name = L"tbProgress";
+		this->tbProgress->Padding = System::Windows::Forms::Padding(3);
+		this->tbProgress->Size = System::Drawing::Size(680, 304);
+		this->tbProgress->TabIndex = 1;
+		this->tbProgress->Text = L"Progress";
+		this->tbProgress->UseVisualStyleBackColor = true;
 		// 
-		// lvResult
+		// lvProgress
 		// 
-		this->lvResult->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(4) {this->chPath, this->chSize, 
+		this->lvProgress->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(4) {this->chPath, this->chSize, 
 			this->chFilename, this->chDriveType});
-		this->lvResult->ContextMenuStrip = this->cmList;
-		this->lvResult->Dock = System::Windows::Forms::DockStyle::Fill;
-		this->lvResult->FullRowSelect = true;
-		this->lvResult->GridLines = true;
-		this->lvResult->HideSelection = false;
-		this->lvResult->Location = System::Drawing::Point(3, 28);
-		this->lvResult->Name = L"lvResult";
-		this->lvResult->Size = System::Drawing::Size(674, 266);
-		this->lvResult->TabIndex = 0;
-		this->lvResult->UseCompatibleStateImageBehavior = false;
-		this->lvResult->View = System::Windows::Forms::View::Details;
-		this->lvResult->ColumnClick += gcnew System::Windows::Forms::ColumnClickEventHandler(this, &FormMain::lvResult_ColumnClick);
+		this->lvProgress->ContextMenuStrip = this->cmList;
+		this->lvProgress->Dock = System::Windows::Forms::DockStyle::Fill;
+		this->lvProgress->FullRowSelect = true;
+		this->lvProgress->GridLines = true;
+		this->lvProgress->HideSelection = false;
+		this->lvProgress->Location = System::Drawing::Point(3, 28);
+		this->lvProgress->Name = L"lvProgress";
+		this->lvProgress->Size = System::Drawing::Size(674, 273);
+		this->lvProgress->TabIndex = 0;
+		this->lvProgress->UseCompatibleStateImageBehavior = false;
+		this->lvProgress->View = System::Windows::Forms::View::Details;
+		this->lvProgress->ColumnClick += gcnew System::Windows::Forms::ColumnClickEventHandler(this, &FormMain::lvProgress_ColumnClick);
 		// 
 		// chPath
 		// 
@@ -189,12 +194,12 @@ namespace sff {
 		// 
 		this->cmList->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) {this->explorerToolStripMenuItem});
 		this->cmList->Name = L"cmList";
-		this->cmList->Size = System::Drawing::Size(122, 26);
+		this->cmList->Size = System::Drawing::Size(133, 26);
 		// 
 		// explorerToolStripMenuItem
 		// 
 		this->explorerToolStripMenuItem->Name = L"explorerToolStripMenuItem";
-		this->explorerToolStripMenuItem->Size = System::Drawing::Size(121, 22);
+		this->explorerToolStripMenuItem->Size = System::Drawing::Size(132, 22);
 		this->explorerToolStripMenuItem->Text = L"&Explorer...";
 		this->explorerToolStripMenuItem->Click += gcnew System::EventHandler(this, &FormMain::explorerToolStripMenuItem_Click);
 		// 
@@ -280,20 +285,51 @@ namespace sff {
 		// slMain
 		// 
 		this->slMain->Name = L"slMain";
-		this->slMain->Size = System::Drawing::Size(551, 17);
+		this->slMain->Size = System::Drawing::Size(557, 17);
 		this->slMain->Spring = true;
 		// 
 		// slGroupCount
 		// 
 		this->slGroupCount->Name = L"slGroupCount";
-		this->slGroupCount->Size = System::Drawing::Size(50, 17);
+		this->slGroupCount->Size = System::Drawing::Size(61, 17);
 		this->slGroupCount->Text = L"Groups : ";
 		// 
 		// slItemCount
 		// 
 		this->slItemCount->Name = L"slItemCount";
-		this->slItemCount->Size = System::Drawing::Size(41, 17);
+		this->slItemCount->Size = System::Drawing::Size(55, 17);
 		this->slItemCount->Text = L"Items : ";
+		// 
+		// tbAbout
+		// 
+		this->tbAbout->Controls->Add(this->linkHomepage);
+		this->tbAbout->Controls->Add(this->lblVersion);
+		this->tbAbout->Location = System::Drawing::Point(4, 22);
+		this->tbAbout->Name = L"tbAbout";
+		this->tbAbout->Size = System::Drawing::Size(680, 304);
+		this->tbAbout->TabIndex = 2;
+		this->tbAbout->Text = L"About";
+		this->tbAbout->UseVisualStyleBackColor = true;
+		// 
+		// lblVersion
+		// 
+		this->lblVersion->AutoSize = true;
+		this->lblVersion->Location = System::Drawing::Point(8, 14);
+		this->lblVersion->Name = L"lblVersion";
+		this->lblVersion->Size = System::Drawing::Size(62, 13);
+		this->lblVersion->TabIndex = 0;
+		this->lblVersion->Text = L"SFF ver 0.1";
+		// 
+		// linkHomepage
+		// 
+		this->linkHomepage->AutoSize = true;
+		this->linkHomepage->Location = System::Drawing::Point(8, 27);
+		this->linkHomepage->Name = L"linkHomepage";
+		this->linkHomepage->Size = System::Drawing::Size(86, 13);
+		this->linkHomepage->TabIndex = 1;
+		this->linkHomepage->TabStop = true;
+		this->linkHomepage->Text = L"Go to homepage";
+		this->linkHomepage->LinkClicked += gcnew System::Windows::Forms::LinkLabelLinkClickedEventHandler(this, &FormMain::linkHomepage_LinkClicked);
 		// 
 		// FormMain
 		// 
@@ -304,16 +340,16 @@ namespace sff {
 		this->Controls->Add(this->ssMain);
 		this->Name = L"FormMain";
 		this->Text = L"FormMain";
-		this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &FormMain::FormMain_FormClosing);
 		this->Load += gcnew System::EventHandler(this, &FormMain::FormMain_Load);
+		this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &FormMain::FormMain_FormClosing);
 		this->spRoot->Panel1->ResumeLayout(false);
 		this->spRoot->Panel2->ResumeLayout(false);
 		this->spRoot->ResumeLayout(false);
 		this->tabMain->ResumeLayout(false);
 		this->tpSettings->ResumeLayout(false);
 		this->tpSettings->PerformLayout();
-		this->tbResult->ResumeLayout(false);
-		this->tbResult->PerformLayout();
+		this->tbProgress->ResumeLayout(false);
+		this->tbProgress->PerformLayout();
 		this->cmList->ResumeLayout(false);
 		this->toolStrip1->ResumeLayout(false);
 		this->toolStrip1->PerformLayout();
@@ -322,6 +358,8 @@ namespace sff {
 		this->spBottom->ResumeLayout(false);
 		this->ssMain->ResumeLayout(false);
 		this->ssMain->PerformLayout();
+		this->tbAbout->ResumeLayout(false);
+		this->tbAbout->PerformLayout();
 		this->ResumeLayout(false);
 		this->PerformLayout();
 

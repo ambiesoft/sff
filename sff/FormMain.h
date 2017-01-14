@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "OptListView.h"
 #include "FormError.h"
 
@@ -12,13 +12,13 @@ namespace sff {
 	using namespace System::Drawing;
 
 	/// <summary>
-	/// FormMain ‚ÌŠT—v
+	/// FormMain ã®æ¦‚è¦
 	///
-	/// Œx: ‚±‚ÌƒNƒ‰ƒX‚Ì–¼‘O‚ğ•ÏX‚·‚éê‡A‚±‚ÌƒNƒ‰ƒX‚ªˆË‘¶‚·‚é‚·‚×‚Ä‚Ì .resx ƒtƒ@ƒCƒ‹‚ÉŠÖ˜A•t‚¯‚ç‚ê‚½
-	///          ƒ}ƒl[ƒW ƒŠƒ\[ƒX ƒRƒ“ƒpƒCƒ‰ ƒc[ƒ‹‚É‘Î‚µ‚Ä 'Resource File Name' ƒvƒƒpƒeƒB‚ğ
-	///          •ÏX‚·‚é•K—v‚ª‚ ‚è‚Ü‚·B‚±‚Ì•ÏX‚ğs‚í‚È‚¢‚ÆA
-	///          ƒfƒUƒCƒi‚ÆA‚±‚ÌƒtƒH[ƒ€‚ÉŠÖ˜A•t‚¯‚ç‚ê‚½ƒ[ƒJƒ‰ƒCƒYÏ‚İƒŠƒ\[ƒX‚Æ‚ªA
-	///          ³‚µ‚­‘ŠŒİ‚É—˜—p‚Å‚«‚È‚­‚È‚è‚Ü‚·B
+	/// è­¦å‘Š: ã“ã®ã‚¯ãƒ©ã‚¹ã®åå‰ã‚’å¤‰æ›´ã™ã‚‹å ´åˆã€ã“ã®ã‚¯ãƒ©ã‚¹ãŒä¾å­˜ã™ã‚‹ã™ã¹ã¦ã® .resx ãƒ•ã‚¡ã‚¤ãƒ«ã«é–¢é€£ä»˜ã‘ã‚‰ã‚ŒãŸ
+	///          ãƒãƒãƒ¼ã‚¸ ãƒªã‚½ãƒ¼ã‚¹ ã‚³ãƒ³ãƒ‘ã‚¤ãƒ© ãƒ„ãƒ¼ãƒ«ã«å¯¾ã—ã¦ 'Resource File Name' ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã‚’
+	///          å¤‰æ›´ã™ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚ã“ã®å¤‰æ›´ã‚’è¡Œã‚ãªã„ã¨ã€
+	///          ãƒ‡ã‚¶ã‚¤ãƒŠã¨ã€ã“ã®ãƒ•ã‚©ãƒ¼ãƒ ã«é–¢é€£ä»˜ã‘ã‚‰ã‚ŒãŸãƒ­ãƒ¼ã‚«ãƒ©ã‚¤ã‚ºæ¸ˆã¿ãƒªã‚½ãƒ¼ã‚¹ã¨ãŒã€
+	///          æ­£ã—ãç›¸äº’ã«åˆ©ç”¨ã§ããªããªã‚Šã¾ã™ã€‚
 	/// </summary>
 	public ref class FormMain : public System::Windows::Forms::Form
 	{
@@ -42,7 +42,10 @@ namespace sff {
 
 
 		FormError frmError;
-		bool bSuspended_;
+	private: System::Windows::Forms::TabPage^  tbAbout;
+	private: System::Windows::Forms::LinkLabel^  linkHomepage;
+	private: System::Windows::Forms::Label^  lblVersion;
+			 bool bSuspended_;
 
 	protected:
 		virtual void WndProc(Message% m) override = Control::WndProc;
@@ -68,7 +71,8 @@ namespace sff {
 	private: System::Windows::Forms::SplitContainer^  spBottom;
 	private: System::Windows::Forms::TabControl^  tabMain;
 	private: System::Windows::Forms::TabPage^  tpSettings;
-	private: System::Windows::Forms::TabPage^  tbResult;
+	private: System::Windows::Forms::TabPage^  tbProgress;
+
 	private: System::Windows::Forms::TextBox^  txtInDir;
 	private: System::Windows::Forms::Button^  btnAdd;
 	private: System::Windows::Forms::ContextMenuStrip^  cmList;
@@ -81,7 +85,7 @@ namespace sff {
 		List<ULL> groupI_;
 	protected:
 		/// <summary>
-		/// g—p’†‚ÌƒŠƒ\[ƒX‚ğ‚·‚×‚ÄƒNƒŠ[ƒ“ƒAƒbƒv‚µ‚Ü‚·B
+		/// ä½¿ç”¨ä¸­ã®ãƒªã‚½ãƒ¼ã‚¹ã‚’ã™ã¹ã¦ã‚¯ãƒªãƒ¼ãƒ³ã‚¢ãƒƒãƒ—ã—ã¾ã™ã€‚
 		/// </summary>
 		~FormMain()
 		{
@@ -98,7 +102,8 @@ namespace sff {
 	protected: 
 
 	private: System::Windows::Forms::SplitContainer^  spRoot;
-	private: System::Windows::Forms::ListView^  lvResult;
+	private: System::Windows::Forms::ListView^  lvProgress;
+
 	private: System::Windows::Forms::ColumnHeader^  chPath;
 	private: System::Windows::Forms::ColumnHeader^  chSize;
 	private: System::Windows::Forms::Button^  btnResume;
@@ -108,19 +113,20 @@ namespace sff {
 
 	private:
 		/// <summary>
-		/// •K—v‚ÈƒfƒUƒCƒi•Ï”‚Å‚·B
+		/// å¿…è¦ãªãƒ‡ã‚¶ã‚¤ãƒŠå¤‰æ•°ã§ã™ã€‚
 		/// </summary>
 
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// ƒfƒUƒCƒi ƒTƒ|[ƒg‚É•K—v‚Èƒƒ\ƒbƒh‚Å‚·B‚±‚Ìƒƒ\ƒbƒh‚Ì“à—e‚ğ
-		/// ƒR[ƒh ƒGƒfƒBƒ^‚Å•ÏX‚µ‚È‚¢‚Å‚­‚¾‚³‚¢B
+		/// ãƒ‡ã‚¶ã‚¤ãƒŠ ã‚µãƒãƒ¼ãƒˆã«å¿…è¦ãªãƒ¡ã‚½ãƒƒãƒ‰ã§ã™ã€‚ã“ã®ãƒ¡ã‚½ãƒƒãƒ‰ã®å†…å®¹ã‚’
+		/// ã‚³ãƒ¼ãƒ‰ ã‚¨ãƒ‡ã‚£ã‚¿ã§å¤‰æ›´ã—ãªã„ã§ãã ã•ã„ã€‚
 		/// </summary>
 		void InitializeComponent(void);
 
 #pragma endregion
-
+	private:
+		void SetTitle(String^ addition);
 	private:
 		System::Void onIdle(System::Object^, System::EventArgs^);
 		
@@ -138,11 +144,12 @@ namespace sff {
 
 		 
 
-		System::Void lvResult_ColumnClick(System::Object^  sender, System::Windows::Forms::ColumnClickEventArgs^  e);
+		System::Void lvProgress_ColumnClick(System::Object^  sender, System::Windows::Forms::ColumnClickEventArgs^  e);
 		System::Void btnAdd_Click(System::Object^  sender, System::EventArgs^  e);
 		System::Void explorerToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 		System::Void btnShowError_Click(System::Object^  sender, System::EventArgs^  e);
 		System::Void tsbRemoveNonExistFiles_Click(System::Object^  sender, System::EventArgs^  e);
+		System::Void linkHomepage_LinkClicked(System::Object^  sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^  e);
 
 };
 	
