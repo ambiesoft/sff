@@ -179,7 +179,8 @@ namespace sff {
 				ThreadOn(false);
 				if(bRealDone)
 				{
-					MessageBox::Show(I18NLS(L"Done"), 
+					MessageBox::Show(this,
+						I18NLS(L"Done"), 
 						Application::ProductName,
 						MessageBoxButtons::OK,
 						MessageBoxIcon::Information);
