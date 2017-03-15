@@ -16,6 +16,7 @@ public:
 	LPCTSTR curdir_;
 	tstring regtxt_;
 	ULL minsize_;
+	bool difforigin_;
 	THREADPASSDATA(
 		DWORD thid,
 		HANDLE thisthread,
@@ -23,7 +24,8 @@ public:
 		int delay,
 		const TSTRINGVECTOR* pdirs,
 		LPCTSTR pRegText,
-		ULL minsize)
+		ULL minsize,
+		bool difforigin)
 	{
 		thid_=thid;
 		thisthread_=thisthread;
@@ -35,6 +37,7 @@ public:
 		regtxt_=pRegText;
 		reg_=NULL;
 		minsize_=minsize;
+		difforigin_=difforigin;
 	}
 	bool MoveNext()
 	{
@@ -56,7 +59,13 @@ public:
 	bool match(LPCTSTR pName);
 	~THREADPASSDATA();
 
+	int getCurIndex() const {
+		return curindex_;
+	}
 
+	bool isDiffOrigin() const {
+		return difforigin_;
+	}
 };
 
 extern volatile HANDLE gcurthread;

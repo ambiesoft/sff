@@ -143,11 +143,21 @@ namespace sff {
 
 			if(vinlines.size()==0)
 			{
-				MessageBox::Show(L"No Folders specifies.",
+				MessageBox::Show(L"No Folders specified.",
 					Application::ProductName,
 					MessageBoxButtons::OK,
 					MessageBoxIcon::Exclamation);
 				return;
+			}
+
+			if(vinlines.size() < 2 && chkEachFolder->Checked)
+			{
+				MessageBox::Show(L"\"Find from each line\" is invalid when only one entry exists.",
+					Application::ProductName,
+					MessageBoxButtons::OK,
+					MessageBoxIcon::Exclamation);
+				return;
+
 			}
 
 			String^ namereg = cmbNameReg->Text;
@@ -222,7 +232,8 @@ namespace sff {
 				0,
 				&vinlines,
 				pWC,
-				uminsize);
+				uminsize,
+				chkEachFolder->Checked);
 			uintptr_t threadhandle = _beginthreadex(NULL, 0, startOfSearch, (void*)pData, CREATE_SUSPENDED, NULL);
 			if(threadhandle==0)
 			{

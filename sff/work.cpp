@@ -105,13 +105,16 @@ static void processfound(THREADPASSDATA* pD, WIN32_FIND_DATA* pf, LPCTSTR pNext)
 	if(ull < pD->minsize_)
 		return;
 
-	CFileData* pFD = new CFileData(pDir, pf->cFileName,ull);
+	CFileData* pFD = new CFileData(pD->getCurIndex(), pDir, pf->cFileName,ull);
 	atodel.insert(pFD);
 
 
 
 	if(alcheck1[ull] != NULL)
 	{
+		if( pD->isDiffOrigin() && alcheck1[ull]->getOrigIndex()==pFD->getOrigIndex())
+			return;
+
 		dups1.insert(THEMMV(ull,alcheck1[ull] ));
 		dups1.insert(THEMMV(ull,pFD ));
 

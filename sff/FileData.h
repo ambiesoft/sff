@@ -24,8 +24,10 @@ class CFileData
 	tstring name_;
 	ULL leng_;
 	CALC1* c1_;
+	int orgdir_;
+
 public:
-	CFileData(LPCTSTR pDir, LPCTSTR pN, ULL leng);
+	CFileData(int origindex, LPCTSTR pDir, LPCTSTR pN, ULL leng);
 	~CFileData()
 	{
 		delete c1_;
@@ -40,4 +42,8 @@ public:
 	string GetLengString() const ;
 
 	DWORD GetCalculate1(string& ret);
+
+	int getOrigIndex() const {
+		return orgdir_;
+	}
 };

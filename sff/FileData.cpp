@@ -143,7 +143,7 @@ string CALC1::getCalc(ULL leng)
 }
 
 
-CFileData::CFileData(LPCTSTR pDir, LPCTSTR pN, ULL leng)
+CFileData::CFileData(int dirindex, LPCTSTR pDir, LPCTSTR pN, ULL leng)
 {
 	c1_ = NULL;
 	name_ = pDir;
@@ -156,6 +156,8 @@ CFileData::CFileData(LPCTSTR pDir, LPCTSTR pN, ULL leng)
 	//aaa=p;
 	//System::Windows::Forms::MessageBox::Show(gcnew System::String(name_.c_str()));
 	leng_ = leng;
+
+	orgdir_ = dirindex;
 }
 
 string CFileData::GetLengString() const

@@ -11,5 +11,5 @@ using namespace System;
 
 String^ GetBytelenFormatText(System::UInt64 ull)
 {
-	return Ambiesoft::AmbLibCpp::humanReadableByteCount(ull) + " (" + ull.ToString(L"N0") + L" bytes)";
+	return Ambiesoft::CppUtils::humanReadableByteCount(ull) + " (" + ull.ToString(L"N0") + L" bytes)";
 }

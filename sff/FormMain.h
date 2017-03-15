@@ -45,6 +45,9 @@ namespace sff {
 	private: System::Windows::Forms::TabPage^  tbAbout;
 	private: System::Windows::Forms::LinkLabel^  linkHomepage;
 	private: System::Windows::Forms::Label^  lblVersion;
+	private: System::Windows::Forms::CheckBox^  chkEachFolder;
+	private: System::Windows::Forms::Label^  label2;
+	private: System::Windows::Forms::Label^  label1;
 			 bool bSuspended_;
 
 	protected:
@@ -68,7 +71,7 @@ namespace sff {
 	private:
 		initonly String^ orgShowErrorText_;
 
-	private: System::Windows::Forms::SplitContainer^  spBottom;
+
 	private: System::Windows::Forms::TabControl^  tabMain;
 	private: System::Windows::Forms::TabPage^  tpSettings;
 	private: System::Windows::Forms::TabPage^  tbProgress;
@@ -101,7 +104,7 @@ namespace sff {
 
 	protected: 
 
-	private: System::Windows::Forms::SplitContainer^  spRoot;
+
 	private: System::Windows::Forms::ListView^  lvProgress;
 
 	private: System::Windows::Forms::ColumnHeader^  chPath;
