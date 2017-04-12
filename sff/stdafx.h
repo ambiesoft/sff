@@ -117,4 +117,8 @@ typedef std::vector<tstring> TSTRINGVECTOR;
 
 #define I18NLS(t) (t)
 
-using namespace std;
+// using namespace std;
+using std::string;
+using std::map;
+using std::multimap;
+using std::set;
