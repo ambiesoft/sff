@@ -42,7 +42,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="L:\MSSDK\2003\Include;L:\check;../../MyUtility\stlsoft\include"
+				AdditionalIncludeDirectories="../../MyUtility\stlsoft\include"
 				PreprocessorDefinitions="WIN32;_DEBUG"
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="2"
@@ -119,7 +119,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="L:\MSSDK\2003\Include;L:\check;../../MyUtility\stlsoft\include"
+				AdditionalIncludeDirectories="../../MyUtility\stlsoft\include"
 				PreprocessorDefinitions="WIN32;NDEBUG"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
@@ -196,7 +196,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="3"
-				AdditionalIncludeDirectories="L:\MSSDK\2003\Include;L:\check;../../MyUtility\stlsoft\include"
+				AdditionalIncludeDirectories="../../MyUtility\stlsoft\include"
 				PreprocessorDefinitions="WIN32;NDEBUG"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
@@ -273,12 +273,13 @@
 			AssemblyName="System.Xml, Version=2.0.0.0, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL"
 			MinFrameworkVersion="131072"
 		/>
-		<ProjectReference
-			ReferencedProjectIdentifier="{87F0CE21-9CA6-448A-ACE8-B7FC9771DC87}"
-			RelativePathToProject="..\amblibcpp\amblibcpp\amblibcpp.vcproj"
+		<AssemblyReference
+			RelativePath="..\..\..\..\..\..\Linkout\DNAssembly2008\Ambiesoft.amblibcpp.dll"
+			AssemblyName="Ambiesoft.amblibcpp, Version=1.0.6311.24659, processorArchitecture=x86"
+			MinFrameworkVersion="131072"
 		/>
 		<AssemblyReference
-			RelativePath="..\..\amblib\amblib\bin\Release\Ambiesoft.amblib.dll"
+			RelativePath="..\..\..\..\..\..\Linkout\DNAssembly2008\Ambiesoft.amblib.dll"
 			AssemblyName="Ambiesoft.amblib, Version=1.0.0.0, processorArchitecture=MSIL"
 			MinFrameworkVersion="131072"
 		/>
@@ -291,6 +292,10 @@
 			>
 			<File
 				RelativePath=".\AssemblyInfo.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\MyUtility\browseFolder.cpp"
 				>
 			</File>
 			<File
@@ -395,6 +400,10 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath="..\..\MyUtility\browseFolder.h"
+				>
+			</File>
 			<File
 				RelativePath=".\dnhelper.h"
 				>

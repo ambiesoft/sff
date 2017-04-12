@@ -5,7 +5,7 @@
 
 // TODO: プログラムに必要な追加ヘッダーをここで参照してください。
 
-#include <checkaccess.h>
+// #include <checkaccess.h>
 #include <windows.h>
 #include <tchar.h>
 

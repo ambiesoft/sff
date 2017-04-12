@@ -6,7 +6,8 @@
 #include "helper.h"
 #include "dnhelper.h"
 
-#include "../../MyUtility\getStdString.net.h"
+#include "../../MyUtility/getStdString.net.h"
+#include "../../MyUtility/browseFolder.h"
 
 namespace sff {
 	using namespace Ambiesoft;
@@ -324,13 +325,16 @@ namespace sff {
 		
 	System::Void FormMain::btnAdd_Click(System::Object^  sender, System::EventArgs^  e)
 	{
+		String^ folder;
+		browseFolder(this, Application::ProductName, folder);
 
-		if(System::Windows::Forms::DialogResult::OK != fbd_.ShowDialog())
-			return;
+		//if(System::Windows::Forms::DialogResult::OK != fbd_.ShowDialog())
+		//	return;
+
 
 		if(!txtInDir->Text->EndsWith(L"\n"))
 			txtInDir->Text += L"\r\n";
-		txtInDir->Text += fbd_.SelectedPath + L"\r\n";
+		txtInDir->Text += folder + L"\r\n";
 	}
 
 	System::Void FormMain::explorerToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
