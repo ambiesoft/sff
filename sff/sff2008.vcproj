@@ -275,7 +275,7 @@
 		/>
 		<AssemblyReference
 			RelativePath="..\..\..\..\..\..\Linkout\DNAssembly2008\Ambiesoft.amblibcpp.dll"
-			AssemblyName="Ambiesoft.amblibcpp, Version=1.0.6311.24659, processorArchitecture=x86"
+			AssemblyName="Ambiesoft.amblibcpp, Version=1.0.6311.24977, processorArchitecture=x86"
 			MinFrameworkVersion="131072"
 		/>
 		<AssemblyReference
@@ -479,6 +479,10 @@
 			</File>
 			<File
 				RelativePath=".\app.rc"
+				>
+			</File>
+			<File
+				RelativePath=".\icon.ico"
 				>
 			</File>
 		</Filter>

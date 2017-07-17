@@ -20,7 +20,7 @@
 
 LANGUAGE 17, 1
 #pragma code_page(932)
-1           ICON         "app.ico"
+1           ICON         "icon.ico"
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////

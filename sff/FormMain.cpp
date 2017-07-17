@@ -77,6 +77,8 @@ namespace sff {
 
 		SetTitle(nullptr);	
 		Application::Idle += gcnew EventHandler(this, &FormMain::onIdle);
+
+		lblVersion->Text = "SFF ver" + System::Reflection::Assembly::GetExecutingAssembly()->GetName()->Version;
 	}
 
 	System::Void FormMain::onIdle(System::Object^, System::EventArgs^)
