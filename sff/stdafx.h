@@ -18,6 +18,7 @@
 #include <set>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 #include <stlsoft/smartptr/scoped_handle.hpp>
 

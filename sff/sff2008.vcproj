@@ -299,6 +299,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\MyUtility\CommandLineParser.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\dnhelper.cpp"
 				>
 				<FileConfiguration
@@ -402,6 +406,10 @@
 			>
 			<File
 				RelativePath="..\..\MyUtility\browseFolder.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\MyUtility\CommandLineParser.h"
 				>
 			</File>
 			<File

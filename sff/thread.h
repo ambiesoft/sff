@@ -6,6 +6,8 @@ private:
 	int curindex_;
 	gcroot<System::Text::RegularExpressions::Regex^> reg_;
 
+	std::set<std::wstring> dupset_;
+
 public:
 	DWORD thid_;
 	HANDLE thisthread_;
@@ -66,6 +68,9 @@ public:
 	bool isDiffOrigin() const {
 		return difforigin_;
 	}
+
+	bool IsProcessedDir(LPCTSTR pDir) const;
+	void SetProcessedDir(LPCTSTR pDir);
 };
 
 extern volatile HANDLE gcurthread;

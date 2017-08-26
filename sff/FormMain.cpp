@@ -11,6 +11,23 @@
 
 namespace sff {
 	using namespace Ambiesoft;
+	using namespace System::Text;
+
+	FormMain::FormMain(System::Collections::Generic::List<String^>^ args)
+	{
+		args_ = args;
+		InitializeComponent();
+
+		StringBuilder sb;
+		for each(String^ line in args)
+		{
+			sb.AppendLine(line);
+		}
+		txtInDir->Text = sb.ToString();
+
+		orgShowErrorText_ = btnShowError->Text;
+	}
+
 
 	public ref class ListViewItemComparer : System::Collections::IComparer
 	{
@@ -182,22 +199,31 @@ namespace sff {
 					break;
 
 				Char lc = text[text->Length-1];
-				text = text->Substring(0, text->Length-1);
 				ULL mul=1;
-				switch(lc)
+				if( L'0' <= lc && lc <= L'9')
 				{
-					case L'k':mul=1000;   break;
-					case L'K':mul=1024;   break;
-					case L'm':mul=1000 * 1000;   break;
-					case L'M':mul=1024 * 1024;   break;
-					case L'g':mul=1000 * 1000 * 1000;   break;
-					case L'G':mul=1024 * 1024 * 1024;   break;
-					default:
+				
+				}
+				else
+				{
+					text = text->Substring(0, text->Length-1);
+				
+				
+					switch(lc)
 					{
-						MessageBox::Show(L"File size illegal.");
-						return;
+						case L'k':mul=1000;   break;
+						case L'K':mul=1024;   break;
+						case L'm':mul=1000 * 1000;   break;
+						case L'M':mul=1024 * 1024;   break;
+						case L'g':mul=1000 * 1000 * 1000;   break;
+						case L'G':mul=1024 * 1024 * 1024;   break;
+						default:
+						{
+							MessageBox::Show(L"File size illegal.");
+							return;
+						}
+						break;
 					}
-					break;
 				}
 
 				if(!System::UInt64::TryParse(text, uminsize))
@@ -308,9 +334,15 @@ namespace sff {
 		while(ResumeThread(gcurthread)>0)
 			;
 
+		int waited=0;
 		while(gcurthread != NULL && WAIT_TIMEOUT==WaitForSingleObject(gcurthread, 500))
 		{
 			Application::DoEvents();
+			//if(waited++ > 10)
+			//{
+			//	TerminateThread(gcurthread, -1);
+			//	break;
+			//}
 		}
 		gcurthread=NULL;
 		Enabled=true;

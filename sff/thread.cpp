@@ -3,9 +3,11 @@
 #include "work.h"
 
 using namespace System;
+using namespace std;
 
 volatile HANDLE gcurthread;
 volatile DWORD gthid;
+
 
 THREADPASSDATA::~THREADPASSDATA()
 {
@@ -27,6 +29,22 @@ bool THREADPASSDATA::match(LPCTSTR pName)
 	return reg_->IsMatch(gcnew String(pName));
 }
 
+bool THREADPASSDATA::IsProcessedDir(LPCTSTR pDir) const
+{
+	wstring dir(pDir);
+	transform(dir.begin(), dir.end(), dir.begin(), ::towlower);
+
+	return dupset_.find(dir) != dupset_.end();
+}
+void THREADPASSDATA::SetProcessedDir(LPCTSTR pDir)
+{
+	DASSERT(pDir && pDir[0]);
+	
+	wstring dir(pDir);
+	transform(dir.begin(), dir.end(), dir.begin(), ::towlower);
+
+	dupset_.insert(dir);
+}
 unsigned  __stdcall startOfSearch(void * p)
 {
 	THREADPASSDATA* pD = (THREADPASSDATA*)p;
@@ -52,3 +70,4 @@ unsigned  __stdcall startOfSearch(void * p)
 
 	return 0;
 }
+

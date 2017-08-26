@@ -72,7 +72,10 @@ static void processfound(THREADPASSDATA* pD, WIN32_FIND_DATA* pf, LPCTSTR pNext)
 		return;
 
 
-	LPCTSTR pDir = pNext?pNext:pD->curdir_;;
+	LPCTSTR pDir = pNext?pNext:pD->curdir_;
+
+
+
 	if(pf->dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
 	{
 		LPCTSTR p = credir(pDir, pf->cFileName);
@@ -97,8 +100,10 @@ static void processfound(THREADPASSDATA* pD, WIN32_FIND_DATA* pf, LPCTSTR pNext)
 		return;
 	}
 
+	// filter check
 	if(!pD->match(pf->cFileName))
 		return;
+
 
 	ULL ull = MAKEULONGLONGWFD(*pf);
 	
@@ -195,6 +200,13 @@ static LPTSTR newforfff(LPCTSTR pDir)
 void dowork(THREADPASSDATA* pD,LPCTSTR pNext)
 {
 	LPCTSTR pDir = pNext?pNext:pD->curdir_;
+
+	// set dir for not causing duplicating result
+	if(pD->IsProcessedDir(pDir))
+		return;
+	pD->SetProcessedDir(pDir);
+
+
 	LPCTSTR pDirFFF = newforfff(pDir);
 	stlsoft::scoped_handle<LPCTSTR> ma(pDirFFF, myfree);
 

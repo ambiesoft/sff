@@ -63,12 +63,10 @@ namespace sff {
 
 
 	public:
-		FormMain(void)
-		{
-			InitializeComponent();
-			orgShowErrorText_ = btnShowError->Text;
-		}
+		FormMain(System::Collections::Generic::List<String^>^ args);
+
 	private:
+		initonly System::Collections::Generic::List<String^>^ args_;
 		initonly String^ orgShowErrorText_;
 
 
