@@ -1,0 +1,13 @@
+
+# /
+/Debug
+/Ship
+/ship
+/*.ncb
+/*.suo
+/.vs
+
+# /sff/
+/sff/Debug
+/sff/Ship
+/sff/*.user
