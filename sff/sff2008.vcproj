@@ -42,7 +42,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../MyUtility\stlsoft\include"
+				AdditionalIncludeDirectories="../../lsMisc\stlsoft\include"
 				PreprocessorDefinitions="WIN32;_DEBUG"
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="2"
@@ -119,7 +119,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../../MyUtility\stlsoft\include"
+				AdditionalIncludeDirectories="../../lsMisc\stlsoft\include"
 				PreprocessorDefinitions="WIN32;NDEBUG"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
@@ -141,83 +141,6 @@
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="L:\MSSDK\2003\Lib"
 				GenerateDebugInformation="true"
-				SubSystem="2"
-				EntryPointSymbol="main"
-				RandomizedBaseAddress="1"
-				DataExecutionPrevention="0"
-				TargetMachine="1"
-			/>
-			<Tool
-				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCManifestTool"
-			/>
-			<Tool
-				Name="VCXDCMakeTool"
-			/>
-			<Tool
-				Name="VCBscMakeTool"
-			/>
-			<Tool
-				Name="VCFxCopTool"
-			/>
-			<Tool
-				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCPostBuildEventTool"
-			/>
-		</Configuration>
-		<Configuration
-			Name="Ship|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="1"
-			CharacterSet="1"
-			ManagedExtensions="1"
-			WholeProgramOptimization="1"
-			>
-			<Tool
-				Name="VCPreBuildEventTool"
-			/>
-			<Tool
-				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"
-			/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"
-			/>
-			<Tool
-				Name="VCMIDLTool"
-			/>
-			<Tool
-				Name="VCCLCompilerTool"
-				Optimization="3"
-				AdditionalIncludeDirectories="../../MyUtility\stlsoft\include"
-				PreprocessorDefinitions="WIN32;NDEBUG"
-				RuntimeLibrary="2"
-				UsePrecompiledHeader="2"
-				WarningLevel="3"
-				DebugInformationFormat="0"
-			/>
-			<Tool
-				Name="VCManagedResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCPreLinkEventTool"
-			/>
-			<Tool
-				Name="VCLinkerTool"
-				AdditionalDependencies="user32.lib $(NOINHERIT)"
-				LinkIncremental="1"
-				AdditionalLibraryDirectories="L:\MSSDK\2003\Lib"
-				GenerateDebugInformation="false"
 				SubSystem="2"
 				EntryPointSymbol="main"
 				RandomizedBaseAddress="1"
@@ -295,11 +218,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\MyUtility\browseFolder.cpp"
+				RelativePath="..\..\lsMisc\browseFolder.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\MyUtility\CommandLineParser.cpp"
+				RelativePath="..\..\lsMisc\CommandLineParser.cpp"
 				>
 			</File>
 			<File
@@ -315,14 +238,6 @@
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="0"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Ship|Win32"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -347,11 +262,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\MyUtility\GetLastErrorString.cpp"
+				RelativePath="..\..\lsMisc\GetLastErrorString.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\MyUtility\getStdString.net.cpp"
+				RelativePath="..\..\lsMisc\getStdString.net.cpp"
 				>
 			</File>
 			<File
@@ -381,17 +296,17 @@
 						UsePrecompiledHeader="1"
 					/>
 				</FileConfiguration>
-				<FileConfiguration
-					Name="Ship|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="1"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\thread.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\lsMisc\UrlEncode.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\lsMisc\UTF16toUTF8.cpp"
 				>
 			</File>
 			<File
@@ -405,11 +320,11 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\..\MyUtility\browseFolder.h"
+				RelativePath="..\..\lsMisc\browseFolder.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\MyUtility\CommandLineParser.h"
+				RelativePath="..\..\lsMisc\CommandLineParser.h"
 				>
 			</File>
 			<File
@@ -444,11 +359,11 @@
 				</File>
 			</File>
 			<File
-				RelativePath="..\..\MyUtility\GetLastErrorString.h"
+				RelativePath="..\..\lsMisc\GetLastErrorString.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\MyUtility\getStdString.net.h"
+				RelativePath="..\..\lsMisc\getStdString.net.h"
 				>
 			</File>
 			<File
@@ -469,6 +384,14 @@
 			</File>
 			<File
 				RelativePath=".\thread.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\lsMisc\UrlEncode.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\lsMisc\UTF16toUTF8.h"
 				>
 			</File>
 			<File
@@ -494,10 +417,6 @@
 				>
 			</File>
 		</Filter>
-		<File
-			RelativePath="..\..\amblibcpp\amblibcpp\amblibcpp.vcproj"
-			>
-		</File>
 		<File
 			RelativePath=".\ReadMe.txt"
 			>

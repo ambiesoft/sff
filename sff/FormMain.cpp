@@ -6,17 +6,19 @@
 #include "helper.h"
 #include "dnhelper.h"
 
-#include "../../MyUtility/getStdString.net.h"
-#include "../../MyUtility/browseFolder.h"
+#include "../../lsMisc/getStdString.net.h"
+#include "../../lsMisc/browseFolder.h"
 
 namespace sff {
 	using namespace Ambiesoft;
 	using namespace System::Text;
+	using namespace System::Windows::Forms;
 
 	FormMain::FormMain(System::Collections::Generic::List<String^>^ args)
 	{
 		args_ = args;
 		InitializeComponent();
+		// lvProgress->SetStyle(ControlStyles::OptimizedDoubleBuffer, true);
 
 		StringBuilder sb;
 		for each(String^ line in args)

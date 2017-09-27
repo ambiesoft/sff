@@ -1,13 +1,10 @@
 
 # /
-/Debug
-/Ship
-/ship
+Debug/
+Release/
+
 /*.ncb
 /*.suo
 /.vs
 
-# /sff/
-/sff/Debug
-/sff/Ship
 /sff/*.user

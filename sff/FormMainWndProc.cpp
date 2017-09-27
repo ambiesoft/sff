@@ -6,7 +6,9 @@
 //#include "ListGroup.h"
 #include "helper.h"
 
-#include "../../MyUtility/GetLastErrorString.h"
+#include "../../lsMisc/GetLastErrorString.h"
+
+using namespace Ambiesoft;
 
 namespace sff {
 
