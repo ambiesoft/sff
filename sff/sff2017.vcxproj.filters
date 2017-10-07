@@ -18,9 +18,6 @@
     <ClCompile Include="AssemblyInfo.cpp">
       <Filter>2 Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\MyUtility\browseFolder.cpp">
-      <Filter>2 Source</Filter>
-    </ClCompile>
     <ClCompile Include="dnhelper.cpp">
       <Filter>2 Source</Filter>
     </ClCompile>
@@ -34,12 +31,6 @@
       <Filter>2 Source</Filter>
     </ClCompile>
     <ClCompile Include="FormMainWndProc.cpp">
-      <Filter>2 Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\MyUtility\GetLastErrorString.cpp">
-      <Filter>2 Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\MyUtility\getStdString.net.cpp">
       <Filter>2 Source</Filter>
     </ClCompile>
     <ClCompile Include="helper.cpp">
@@ -57,14 +48,29 @@
     <ClCompile Include="work.cpp">
       <Filter>2 Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\lsMisc\browseFolder.cpp">
+      <Filter>2 Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lsMisc\GetLastErrorString.cpp">
+      <Filter>2 Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lsMisc\getStdString.net.cpp">
+      <Filter>2 Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lsMisc\CommandLineParser.cpp">
+      <Filter>2 Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lsMisc\UrlEncode.cpp">
+      <Filter>2 Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lsMisc\UTF16toUTF8.cpp">
+      <Filter>2 Source</Filter>
+    </ClCompile>
     <ClCompile Include="FormError.cpp">
-      <Filter>1 Header</Filter>
+      <Filter>2 Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\MyUtility\browseFolder.h">
-      <Filter>1 Header</Filter>
-    </ClInclude>
     <ClInclude Include="dnhelper.h">
       <Filter>1 Header</Filter>
     </ClInclude>
@@ -75,12 +81,6 @@
       <Filter>1 Header</Filter>
     </ClInclude>
     <ClInclude Include="FormMain.h">
-      <Filter>1 Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\MyUtility\GetLastErrorString.h">
-      <Filter>1 Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\MyUtility\getStdString.net.h">
       <Filter>1 Header</Filter>
     </ClInclude>
     <ClInclude Include="helper.h">
@@ -101,12 +101,29 @@
     <ClInclude Include="work.h">
       <Filter>1 Header</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\lsMisc\browseFolder.h">
+      <Filter>1 Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lsMisc\GetLastErrorString.h">
+      <Filter>1 Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lsMisc\getStdString.net.h">
+      <Filter>1 Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lsMisc\CommandLineParser.h">
+      <Filter>1 Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lsMisc\UrlEncode.h">
+      <Filter>1 Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lsMisc\UTF16toUTF8.h">
+      <Filter>1 Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.ico">
       <Filter>3 Resource</Filter>
     </None>
-    <None Include="..\..\amblibcpp\amblibcpp\amblibcpp.vcproj" />
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>

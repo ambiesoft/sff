@@ -20,24 +20,24 @@
 #include <stlsoft/smartptr/scoped_handle.hpp>
 
 
-#if _DEBUG
-#include <crtdbg.h>
-#define malloc(size) _malloc_dbg(size, _NORMAL_BLOCK, __FILE__, __LINE__ )
-#define calloc(s1,s2) _calloc_dbg(s1, s2, _NORMAL_BLOCK, __FILE__, __LINE__ )
-#define realloc(p,s) _realloc_dbg(p, s, _NORMAL_BLOCK, __FILE__, __LINE__)
-#define free(p)  _free_dbg(p, _NORMAL_BLOCK)
-inline void* operator new(size_t nSize, LPCSTR lpszFileName, int nLine)
-{
- return _malloc_dbg(nSize, _NORMAL_BLOCK, lpszFileName, nLine);
-}
-inline void operator delete(void *p)
-{
- _free_dbg(p, _NORMAL_BLOCK);
-}
-#define DEBUG_NEW new(__FILE__, __LINE__)
-#define new DEBUG_NEW
-#endif
-
+//#if _DEBUG
+//#include <crtdbg.h>
+//#define malloc(size) _malloc_dbg(size, _NORMAL_BLOCK, __FILE__, __LINE__ )
+//#define calloc(s1,s2) _calloc_dbg(s1, s2, _NORMAL_BLOCK, __FILE__, __LINE__ )
+//#define realloc(p,s) _realloc_dbg(p, s, _NORMAL_BLOCK, __FILE__, __LINE__)
+//#define free(p)  _free_dbg(p, _NORMAL_BLOCK)
+//inline void* operator new(size_t nSize, LPCSTR lpszFileName, int nLine)
+//{
+// return _malloc_dbg(nSize, _NORMAL_BLOCK, lpszFileName, nLine);
+//}
+//inline void operator delete(void *p)
+//{
+// _free_dbg(p, _NORMAL_BLOCK);
+//}
+//#define DEBUG_NEW new(__FILE__, __LINE__)
+//#define new DEBUG_NEW
+//#endif
+#include "../../lsMisc/DebugNew.h"
 
 #if defined(_DEBUG) || defined(_RELEASE)
 #define DASSERT(s) System::Diagnostics::Debug::Assert(!!(s))
@@ -95,12 +95,10 @@ inline bool isDerived(System::Object^ o, System::Type^ t)
 
 enum {
 	WM_APP_SEARCHDONE = WM_APP + 1,
-	WM_APP_ADDLINE,
 	WM_APP_ADDLINE2,
 	WM_APP_ADDSEPARATOR,
 	WM_APP_ADDPROGRESS,
 	WM_APP_APIERROR,
-
 };
 
 
