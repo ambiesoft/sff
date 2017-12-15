@@ -1,0 +1,27 @@
+{
+    "name": "sff",
+    "solution": "sff2013.sln",
+    "targetproject": "sff",
+    "configuration": "Release",
+    "targets": [
+        {
+            "platform": "Win32",
+            "outdir": "c:\\Linkout\\sff",
+            "setoutdirforbuild": 1
+        }
+    ],
+    "ShouldBeFiles": [
+        "Ambiesoft.amblib.dll",
+        "Ambiesoft.amblib.pdb",
+        "Ambiesoft.amblibcpp.dll",
+        "sff.exe"
+    ],
+    "TotalFileCount": 4,
+    "archivedir": "C:\\MyArchive",
+    "remotedir": "http://example.com/ffdav/uploads/sff/",
+    "remotesha1": "http://example.com/ffdav/uploads/getSha1.php?file=sff/{}",
+    "ShouldNotBeFiles": [],
+    "ShouldBeOneOfThem": [],
+    "obtainverfrom": "history.txt",
+    "obtainverregex": "\\d+\\.\\d+"
+}
