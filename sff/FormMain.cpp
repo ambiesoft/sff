@@ -151,10 +151,7 @@ namespace sff {
 				}
 				catch(System::Exception^ ex)
 				{
-					MessageBox::Show(ex->Message + L"\"" + inl + L"\"",
-						Application::ProductName,
-						MessageBoxButtons::OK,
-						MessageBoxIcon::Exclamation);
+					CppUtils::Alert(ex->Message + L"\"" + inl + L"\"");
 					return;
 				}
 				// inlines->Add(inl);
@@ -165,19 +162,13 @@ namespace sff {
 
 			if(vinlines.size()==0)
 			{
-				MessageBox::Show(L"No Folders specified.",
-					Application::ProductName,
-					MessageBoxButtons::OK,
-					MessageBoxIcon::Exclamation);
+				CppUtils::Alert(L"No Folders specified.");
 				return;
 			}
 
 			if(vinlines.size() < 2 && chkEachFolder->Checked)
 			{
-				MessageBox::Show(L"\"Find from each line\" is invalid when only one entry exists.",
-					Application::ProductName,
-					MessageBoxButtons::OK,
-					MessageBoxIcon::Exclamation);
+				CppUtils::Alert(L"\"Find from each line\" is invalid when only one entry exists.");
 				return;
 
 			}
@@ -189,7 +180,7 @@ namespace sff {
 			}
 			catch(System::Exception^ ex)
 			{
-				AmbLib::ExceptionMessageBox(ex);
+				CppUtils::Alert(ex->Message);
 				return;
 			}
 
