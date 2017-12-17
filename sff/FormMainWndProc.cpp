@@ -58,7 +58,8 @@ namespace sff {
 				CFileData* pFD = (CFileData*)m.LParam.ToPointer();
 				ListViewGroup^ lvg;//= ((LVDATA^)lvProgress->Tag)->getGroup(pFD->GetLeng());
 
-				if(!false)
+				lvProgress->BeginUpdate();
+				try
 				{
 					lvg = lvProgress->Groups[pFD->GetLeng().ToString()];
 					if ( !lvg )
@@ -83,14 +84,16 @@ namespace sff {
 							index = lvProgress->Groups->IndexOf(lvProgress->Groups[index-1]);
 							lvProgress->Groups->Insert(index+1,lvg);// Add(lvg);
 						}
-
-
 					}
 					else
 					{
 						lvg->Header = GetBytelenFormatText(pFD->GetLeng());
 					}
-				}					
+				}	
+				finally
+				{
+					lvProgress->EndUpdate();
+				}
 				
 
 				

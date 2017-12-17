@@ -25,7 +25,17 @@ namespace sff {
 	private:
 		void CloseThread();
 		void ThreadOn(bool on);
-		
+		System::Windows::Forms::ContextMenuStrip ctxRecents_;
+		property String^ Ini
+		{
+			String^ get()
+			{
+				String^ dir = System::IO::Path::GetDirectoryName(System::Windows::Forms::Application::ExecutablePath);
+				String^ filepart = System::IO::Path::GetFileNameWithoutExtension(System::Windows::Forms::Application::ExecutablePath);
+				String^ ret = System::IO::Path::Combine(dir, filepart + ".ini");
+				return ret;
+			}
+		}
 		System::Windows::Forms::FolderBrowserDialog fbd_;
 	private: System::Windows::Forms::StatusStrip^  ssMain;
 	private: System::Windows::Forms::ToolStripStatusLabel^  slMain;
@@ -48,6 +58,8 @@ namespace sff {
 	private: System::Windows::Forms::CheckBox^  chkEachFolder;
 	private: System::Windows::Forms::Label^  label2;
 	private: System::Windows::Forms::Label^  label1;
+	private: System::Windows::Forms::Button^  btnRecents;
+
 			 bool bSuspended_;
 
 	protected:
@@ -127,10 +139,12 @@ namespace sff {
 
 #pragma endregion
 	private:
+		System::Collections::Generic::List<String^> recents_;
+
 		void SetTitle(String^ addition);
 	private:
 		System::Void onIdle(System::Object^, System::EventArgs^);
-		
+		void AddtoDirs(... array<String^>^ folders);
 
 	private: 
 		System::Void FormMain_Load(System::Object^  sender, System::EventArgs^  e);
@@ -151,7 +165,9 @@ namespace sff {
 		System::Void btnShowError_Click(System::Object^  sender, System::EventArgs^  e);
 		System::Void tsbRemoveNonExistFiles_Click(System::Object^  sender, System::EventArgs^  e);
 		System::Void linkHomepage_LinkClicked(System::Object^  sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^  e);
+		System::Void btnRecents_Click(System::Object^  sender, System::EventArgs^  e);
 
+		void OnClick(System::Object ^sender, System::EventArgs ^e);
 };
 	
 

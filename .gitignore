@@ -9,3 +9,5 @@ Release/
 /.vs
 
 /sff/*.user
+ipch/
+

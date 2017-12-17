@@ -28,6 +28,15 @@ namespace sff {
 		txtInDir->Text = sb.ToString();
 
 		orgShowErrorText_ = btnShowError->Text;
+
+		array<String^>^ as;
+		Profile::GetStringArray("option", "recents", as, Ini);
+		for each(String^ t in as)
+		{
+			if (recents_.IndexOf(t) >= 0)
+				continue;
+			recents_.Add(t);
+		}
 	}
 
 
@@ -109,8 +118,6 @@ namespace sff {
 
 		btnPause->Enabled=on  && !bSuspended_;
 		btnResume->Enabled=on && bSuspended_;
-
-		
 	}
 
 	System::Void FormMain::lvProgress_ColumnClick(System::Object^  sender, System::Windows::Forms::ColumnClickEventArgs^  e)
@@ -118,8 +125,6 @@ namespace sff {
 		lvProgress->ListViewItemSorter =
 			gcnew ListViewItemComparer(e->Column);
 		lvProgress->Sort();
-
-
 	}
 	System::Void FormMain::btnStart_Click(System::Object^  sender, System::EventArgs^  e)
 	{
@@ -164,6 +169,22 @@ namespace sff {
 			{
 				CppUtils::Alert(L"No Folders specified.");
 				return;
+			}
+
+			// save recents
+			{
+				int insertPos = 0;
+				for each(const tstring& t in vinlines)
+				{
+					String^ dir = gcnew String(t.c_str());
+					if (String::IsNullOrEmpty(dir))
+						continue;
+					int nFound = recents_.IndexOf(dir);
+					if (nFound >= 0)
+						recents_.RemoveAt(nFound);
+
+					recents_.Insert(insertPos++, dir);
+				}
 			}
 
 			if(vinlines.size() < 2 && chkEachFolder->Checked)
@@ -278,10 +299,8 @@ namespace sff {
 			try
 			{
 				SuspendThread(gcurthread); // (gcurthread,THREAD_PRIORITY_LOWEST);
-				if(System::Windows::Forms::DialogResult::Yes != MessageBox::Show(I18NLS(L"Are you sure you want to cancel?"),
-					Application::ProductName,
-					MessageBoxButtons::YesNo,
-					MessageBoxIcon::Question))
+				if(System::Windows::Forms::DialogResult::Yes !=
+					CppUtils::YesOrNo(this,I18NLS(L"Are you sure you want to cancel?"),MessageBoxDefaultButton::Button1))
 				{
 					return;
 				}
@@ -345,32 +364,66 @@ namespace sff {
 	System::Void FormMain::FormMain_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e)
 	{
 		e->Cancel=false;
+
+		// save
+		bool bSaveOK = true;
+		bSaveOK &= Profile::WriteStringArray("option", "recents", recents_.ToArray(), Ini);
+		if (!bSaveOK)
+		{
+			CppUtils::Alert(I18NLS(L"Failed to save ini."));
+		}
+
 		CloseThread();
 		Application::Idle -= gcnew EventHandler(this, &FormMain::onIdle);
 	}
 
-		
+	void FormMain::AddtoDirs(... array<String^>^ folders)
+	{
+		for each(String^ folder in folders)
+		{
+			if (!txtInDir->Text->EndsWith(L"\n"))
+				txtInDir->Text += L"\r\n";
+			txtInDir->Text += folder + L"\r\n";
+		}
+	}
 	System::Void FormMain::btnAdd_Click(System::Object^  sender, System::EventArgs^  e)
 	{
 		String^ folder;
 		browseFolder(this, Application::ProductName, folder);
 
-		//if(System::Windows::Forms::DialogResult::OK != fbd_.ShowDialog())
-		//	return;
+		AddtoDirs(folder);
+	}
+	void FormMain::OnClick(System::Object ^sender, System::EventArgs ^e)
+	{
+		ToolStripMenuItem^ tsi = (ToolStripMenuItem^)sender;
 
+		AddtoDirs(tsi->Tag->ToString());
+	}
 
-		if(!txtInDir->Text->EndsWith(L"\n"))
-			txtInDir->Text += L"\r\n";
-		txtInDir->Text += folder + L"\r\n";
+	System::Void FormMain::btnRecents_Click(System::Object^  sender, System::EventArgs^  e)
+	{
+		ctxRecents_.Items->Clear();
+
+		for each(String^ recent in recents_)
+		{
+			ToolStripMenuItem^ tsi = gcnew ToolStripMenuItem();
+			tsi->Text = recent;
+			tsi->Tag = recent;
+			tsi->Click += gcnew System::EventHandler(this, &sff::FormMain::OnClick);
+			ctxRecents_.Items->Add(tsi);
+		}
+		
+		//ctxRecents_.Show();// btnRecents->PointToScreen(btnRecents->Location));
+		System::Drawing::Point pt(btnRecents->Parent->PointToScreen(btnRecents->Location));
+		pt.X += btnRecents->Size.Width;
+		ctxRecents_.Show(pt);
 	}
 
 	System::Void FormMain::explorerToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
 	{
-
 		try
 		{
 			pin_ptr<const wchar_t> pIn = PtrToStringChars(lvProgress->SelectedItems[0]->Text);
-			
 
 			tstring arg;
 			arg += _T("/select,\"");
@@ -400,7 +453,6 @@ namespace sff {
 
 	System::Void FormMain::tsbRemoveNonExistFiles_Click(System::Object^  sender, System::EventArgs^  e)
 	{
-		
 		for each(ListViewItem^ item in this->lvProgress->Items)
 		{
 			if(!System::IO::File::Exists(item->Text))
@@ -412,4 +464,7 @@ namespace sff {
 	{
 
 	}
+
+
 }
+
