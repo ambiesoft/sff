@@ -1,5 +1,3 @@
-// samefile.cpp : コンソール アプリケーション用のエントリ ポイントの定義
-//
 
 #include "stdafx.h"
 #include "FileData.h"
