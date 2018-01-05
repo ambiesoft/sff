@@ -10,4 +10,5 @@ Release/
 
 /sff/*.user
 ipch/
+libsff/obj/
 
