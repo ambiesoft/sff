@@ -98,6 +98,9 @@ static void processfound(THREADPASSDATA* pD, WIN32_FIND_DATA* pf, LPCTSTR pNext)
 		return;
 	}
 
+	if (pf->dwFileAttributes & FILE_ATTRIBUTE_REPARSE_POINT)
+		return;
+
 	// filter check
 	if(!pD->match(pf->cFileName))
 		return;
