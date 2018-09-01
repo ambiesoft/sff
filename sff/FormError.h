@@ -11,13 +11,8 @@ using namespace System::Drawing;
 namespace sff {
 
 	/// <summary>
-	/// FormError の概要
+	/// FormError
 	///
-	/// 警告: このクラスの名前を変更する場合、このクラスが依存するすべての .resx ファイルに関連付けられた
-	///          マネージ リソース コンパイラ ツールに対して 'Resource File Name' プロパティを
-	///          変更する必要があります。この変更を行わないと、
-	///          デザイナと、このフォームに関連付けられたローカライズ済みリソースとが、
-	///          正しく相互に利用できなくなります。
 	/// </summary>
 	public ref class FormError : public System::Windows::Forms::Form
 	{
@@ -25,14 +20,10 @@ namespace sff {
 		FormError(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: ここにコンストラクタ コードを追加します
-			//
 		}
 
 	protected:
 		/// <summary>
-		/// 使用中のリソースをすべてクリーンアップします。
 		/// </summary>
 		~FormError()
 		{
@@ -65,14 +56,11 @@ namespace sff {
 
 	private:
 		/// <summary>
-		/// 必要なデザイナ変数です。
 		/// </summary>
 		System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// デザイナ サポートに必要なメソッドです。このメソッドの内容を
-		/// コード エディタで変更しないでください。
 		/// </summary>
 		void InitializeComponent(void)
 		{

@@ -12,13 +12,7 @@ namespace sff {
 	using namespace System::Drawing;
 
 	/// <summary>
-	/// FormMain の概要
-	///
-	/// 警告: このクラスの名前を変更する場合、このクラスが依存するすべての .resx ファイルに関連付けられた
-	///          マネージ リソース コンパイラ ツールに対して 'Resource File Name' プロパティを
-	///          変更する必要があります。この変更を行わないと、
-	///          デザイナと、このフォームに関連付けられたローカライズ済みリソースとが、
-	///          正しく相互に利用できなくなります。
+	/// FormMain
 	/// </summary>
 	public ref class FormMain : public System::Windows::Forms::Form
 	{
@@ -98,7 +92,7 @@ namespace sff {
 		List<ULL> groupI_;
 	protected:
 		/// <summary>
-		/// 使用中のリソースをすべてクリーンアップします。
+		/// 
 		/// </summary>
 		~FormMain()
 		{
@@ -126,14 +120,14 @@ namespace sff {
 
 	private:
 		/// <summary>
-		/// 必要なデザイナ変数です。
+		/// 
 		/// </summary>
 
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// デザイナ サポートに必要なメソッドです。このメソッドの内容を
-		/// コード エディタで変更しないでください。
+		/// 
+		/// 
 		/// </summary>
 		void InitializeComponent(void);
 
@@ -145,7 +139,10 @@ namespace sff {
 	private:
 		System::Void onIdle(System::Object^, System::EventArgs^);
 		void AddtoDirs(... array<String^>^ folders);
-
+		property bool IsThreadWorking
+		{
+			bool get();
+		}
 	private: 
 		System::Void FormMain_Load(System::Object^  sender, System::EventArgs^  e);
 

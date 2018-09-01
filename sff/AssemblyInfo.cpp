@@ -9,14 +9,14 @@ using namespace System::Security::Permissions;
 [assembly:AssemblyTitleAttribute("sff")];
 [assembly:AssemblyDescriptionAttribute("")];
 [assembly:AssemblyConfigurationAttribute("")];
-[assembly:AssemblyCompanyAttribute("")];
+[assembly:AssemblyCompanyAttribute("Ambiesoft")];
 [assembly:AssemblyProductAttribute("sff")];
-[assembly:AssemblyCopyrightAttribute("Copyright (c)  2017")];
+[assembly:AssemblyCopyrightAttribute("Copyright (c) Ambiesoft 2018")];
 [assembly:AssemblyTrademarkAttribute("")];
 [assembly:AssemblyCultureAttribute("")];
 
 
-[assembly:AssemblyVersionAttribute("1.3.*")];
+[assembly:AssemblyVersionAttribute("1.4.*")];
 
 [assembly:ComVisible(false)];
 

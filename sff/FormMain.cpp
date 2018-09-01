@@ -64,22 +64,22 @@ namespace sff {
 		virtual int Compare(Object^ o1, Object^ o2)
 		{
 			//ListViewItem�̎擾
-			ListViewItem^ item1 = (ListViewItem^) o1;
-			ListViewItem^ item2 = (ListViewItem^) o2;
+			ListViewItem^ item1 = (ListViewItem^)o1;
+			ListViewItem^ item2 = (ListViewItem^)o2;
 
 			ULL u1;
 			ULL u2;
 			System::UInt64::TryParse(item1->SubItems[_column]->Text, u1);
 			System::UInt64::TryParse(item2->SubItems[_column]->Text, u2);
 
-			LONGLONG uret=u1-u2;
-			int ret=0;
-			if(uret==0)
-				ret =0;
-			else if(uret>0)
-				ret=1;
+			LONGLONG uret = u1 - u2;
+			int ret = 0;
+			if (uret == 0)
+				ret = 0;
+			else if (uret > 0)
+				ret = 1;
 			else
-				ret=-1;
+				ret = -1;
 
 			return ret * rev_;
 		}
@@ -87,7 +87,7 @@ namespace sff {
 
 	void FormMain::SetTitle(String^ addition)
 	{
-		if(String::IsNullOrEmpty(addition))
+		if (String::IsNullOrEmpty(addition))
 		{
 			this->Text = Application::ProductName;
 		}
@@ -107,7 +107,7 @@ namespace sff {
 		cmbMinSize->SelectedIndex = 0;
 		cmbMinSize->Text = L"";
 
-		SetTitle(nullptr);	
+		SetTitle(nullptr);
 		Application::Idle += gcnew EventHandler(this, &FormMain::onIdle);
 
 		// lblVersion->Text = "SFF ver" + System::Reflection::Assembly::GetExecutingAssembly()->GetName()->Version;
@@ -119,10 +119,10 @@ namespace sff {
 		slItemCount->Text = I18NLS(L"Items : ") + lvProgress->Items->Count.ToString();
 		slGroupCount->Text = I18NLS(L"Groups : ") + lvProgress->Groups->Count.ToString();
 
-		bool on =(gcurthread != NULL);
+		bool on = (gcurthread != NULL);
 
-		btnPause->Enabled=on  && !bSuspended_;
-		btnResume->Enabled=on && bSuspended_;
+		btnPause->Enabled = on && !bSuspended_;
+		btnResume->Enabled = on && bSuspended_;
 	}
 
 	System::Void FormMain::lvProgress_ColumnClick(System::Object^  sender, System::Windows::Forms::ColumnClickEventArgs^  e)
@@ -133,23 +133,23 @@ namespace sff {
 	}
 	System::Void FormMain::btnStart_Click(System::Object^  sender, System::EventArgs^  e)
 	{
-		if(gcurthread==NULL)
+		if (gcurthread == NULL)
 		{
 			// List<String^>^ inlines = gcnew List<String^>;
 			TSTRINGVECTOR vinlines;
 			String^ title = String::Empty;
 			for each(String^ inl in txtInDir->Lines)
 			{
-				inl=inl->TrimStart();
-				if(String::IsNullOrEmpty(inl))
+				inl = inl->TrimStart();
+				if (String::IsNullOrEmpty(inl))
 					continue;
 
 				try
 				{
 					System::IO::DirectoryInfo di(inl);
-					if(!di.Exists)
+					if (!di.Exists)
 					{
-						if(System::Windows::Forms::DialogResult::Yes != MessageBox::Show(L"\"" + inl + L"\"" + L" does not exist.\r\nContinue?",
+						if (System::Windows::Forms::DialogResult::Yes != MessageBox::Show(L"\"" + inl + L"\"" + L" does not exist.\r\nContinue?",
 							Application::ProductName,
 							MessageBoxButtons::YesNo,
 							MessageBoxIcon::Question,
@@ -159,7 +159,7 @@ namespace sff {
 						}
 					}
 				}
-				catch(System::Exception^ ex)
+				catch (System::Exception^ ex)
 				{
 					CppUtils::Alert(ex->Message + L"\"" + inl + L"\"");
 					return;
@@ -170,7 +170,7 @@ namespace sff {
 			}
 			title = title->TrimEnd('|');
 
-			if(vinlines.size()==0)
+			if (vinlines.size() == 0)
 			{
 				CppUtils::Alert(L"No Folders specified.");
 				return;
@@ -192,7 +192,7 @@ namespace sff {
 				}
 			}
 
-			if(vinlines.size() < 2 && chkEachFolder->Checked)
+			if (vinlines.size() < 2 && chkEachFolder->Checked)
 			{
 				CppUtils::Alert(L"\"Find from each line\" is invalid when only one entry exists.");
 				return;
@@ -204,7 +204,7 @@ namespace sff {
 			{
 				gcnew System::Text::RegularExpressions::Regex(namereg);
 			}
-			catch(System::Exception^ ex)
+			catch (System::Exception^ ex)
 			{
 				CppUtils::Alert(ex->Message);
 				return;
@@ -214,47 +214,47 @@ namespace sff {
 			do
 			{
 				String^ text = cmbMinSize->Text;
-				if(String::IsNullOrEmpty(text))
+				if (String::IsNullOrEmpty(text))
 					break;
 
-				Char lc = text[text->Length-1];
-				ULL mul=1;
-				if( L'0' <= lc && lc <= L'9')
+				Char lc = text[text->Length - 1];
+				ULL mul = 1;
+				if (L'0' <= lc && lc <= L'9')
 				{
-				
+
 				}
 				else
 				{
-					text = text->Substring(0, text->Length-1);
-				
-				
-					switch(lc)
+					text = text->Substring(0, text->Length - 1);
+
+
+					switch (lc)
 					{
-						case L'k':mul=1000;   break;
-						case L'K':mul=1024;   break;
-						case L'm':mul=1000 * 1000;   break;
-						case L'M':mul=1024 * 1024;   break;
-						case L'g':mul=1000 * 1000 * 1000;   break;
-						case L'G':mul=1024 * 1024 * 1024;   break;
-						default:
-						{
-							MessageBox::Show(L"File size illegal.");
-							return;
-						}
-						break;
+					case L'k':mul = 1000;   break;
+					case L'K':mul = 1024;   break;
+					case L'm':mul = 1000 * 1000;   break;
+					case L'M':mul = 1024 * 1024;   break;
+					case L'g':mul = 1000 * 1000 * 1000;   break;
+					case L'G':mul = 1024 * 1024 * 1024;   break;
+					default:
+					{
+						MessageBox::Show(L"File size illegal.");
+						return;
+					}
+					break;
 					}
 				}
 
-				if(!System::UInt64::TryParse(text, uminsize))
+				if (!System::UInt64::TryParse(text, uminsize))
 				{
 					MessageBox::Show(L"File size illegal.");
 					return;
 				}
 
 				uminsize = uminsize * mul;
-			} while(false);
-			
-			
+			} while (false);
+
+
 			// checkdone
 
 
@@ -262,7 +262,7 @@ namespace sff {
 			lvProgress->Groups->Clear();
 			groupI_.Clear();
 			frmError.lvError->Items->Clear();
-			
+
 			//LVDATA^ lvdata = (LVDATA^)lvProgress->Tag;
 			//if(!lvdata)
 			//{
@@ -283,7 +283,7 @@ namespace sff {
 				uminsize,
 				chkEachFolder->Checked);
 			uintptr_t threadhandle = _beginthreadex(NULL, 0, startOfSearch, (void*)pData, CREATE_SUSPENDED, NULL);
-			if(threadhandle==0)
+			if (threadhandle == 0)
 			{
 				MessageBox::Show(L"thread creation failed");
 				return;
@@ -293,10 +293,10 @@ namespace sff {
 			pData->thid_ = gthid;
 			pData->thisthread_ = (HANDLE)threadhandle;
 			DVERIFY_NOT(ResumeThread((HANDLE)threadhandle), 0xFFFFFFFF);
-			
+
 			ThreadOn(true);
 			SetTitle(title);
-			tabMain->SelectedTab= tbProgress;
+			tabMain->SelectedTab = tbProgress;
 
 		}
 		else
@@ -304,8 +304,8 @@ namespace sff {
 			try
 			{
 				SuspendThread(gcurthread); // (gcurthread,THREAD_PRIORITY_LOWEST);
-				if(System::Windows::Forms::DialogResult::Yes !=
-					CppUtils::YesOrNo(this,I18NLS(L"Are you sure you want to cancel?"),MessageBoxDefaultButton::Button1))
+				if (System::Windows::Forms::DialogResult::Yes !=
+					CppUtils::YesOrNo(this, I18NLS(L"Are you sure you want to cancel?"), MessageBoxDefaultButton::Button1))
 				{
 					return;
 				}
@@ -319,12 +319,12 @@ namespace sff {
 			ThreadOn(false);
 		}
 	}
-		
+
 	void FormMain::ThreadOn(bool on)
 	{
 		btnStart->Text = on ? L"&Cancel" : L"&Start";
 	}
-	
+
 
 	System::Void FormMain::btnPause_Click(System::Object^  sender, System::EventArgs^  e)
 	{
@@ -333,7 +333,7 @@ namespace sff {
 	}
 	System::Void FormMain::btnResume_Click(System::Object^  sender, System::EventArgs^  e)
 	{
-		while(ResumeThread(gcurthread)>0)
+		while (ResumeThread(gcurthread) > 0)
 			;
 		bSuspended_ = false;
 	}
@@ -341,18 +341,18 @@ namespace sff {
 
 	void FormMain::CloseThread()
 	{
-		if(gcurthread == NULL)
+		if (gcurthread == NULL)
 			return;
 
-		Enabled=false;		
+		Enabled = false;
 		Application::DoEvents();
 
 		gthid++;
-		while(ResumeThread(gcurthread)>0)
+		while (ResumeThread(gcurthread) > 0)
 			;
 
-		int waited=0;
-		while(gcurthread != NULL && WAIT_TIMEOUT==WaitForSingleObject(gcurthread, 500))
+		int waited = 0;
+		while (gcurthread != NULL && WAIT_TIMEOUT == WaitForSingleObject(gcurthread, 500))
 		{
 			Application::DoEvents();
 			//if(waited++ > 10)
@@ -361,21 +361,35 @@ namespace sff {
 			//	break;
 			//}
 		}
-		gcurthread=NULL;
-		Enabled=true;
+		gcurthread = NULL;
+		Enabled = true;
 		DTRACE(L"Closing Done.");
-
 	}
+
+	bool FormMain::IsThreadWorking::get()
+	{
+		return gcurthread != NULL;
+	}
+
 	System::Void FormMain::FormMain_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e)
 	{
-		e->Cancel=false;
+		if (IsThreadWorking)
+		{
+			if (System::Windows::Forms::DialogResult::Yes != CppUtils::YesOrNo(I18NLS("Are you sure you want to close the application?")))
+			{
+				e->Cancel = true;
+				return;
+			}
+		}
+
+		e->Cancel = false;
 
 		// save
 		bool bSaveOK = true;
 		HashIni^ ini = Profile::ReadAll(IniPath);
 		bSaveOK &= Profile::WriteStringArray("recents", "recent", recents_.ToArray(), ini);
 		bSaveOK &= AmbLib::SaveFormXYWH(this, "option", ini);
-		if(bSaveOK)
+		if (bSaveOK)
 			bSaveOK &= Profile::WriteAll(ini, IniPath);
 		if (!bSaveOK)
 		{
@@ -421,7 +435,7 @@ namespace sff {
 			tsi->Click += gcnew System::EventHandler(this, &sff::FormMain::OnClick);
 			ctxRecents_.Items->Add(tsi);
 		}
-		
+
 		//ctxRecents_.Show();// btnRecents->PointToScreen(btnRecents->Location));
 		System::Drawing::Point pt(btnRecents->Parent->PointToScreen(btnRecents->Location));
 		pt.X += btnRecents->Size.Width;
@@ -439,22 +453,22 @@ namespace sff {
 			arg += pIn;
 			arg += _T("\",/n");
 #pragma comment(lib, "shell32.lib")
-			ShellExecute((HWND)this->Handle.ToPointer(), _T("open"), _T("explorer.exe"), 
-					arg.c_str()  ,NULL, SW_SHOW);
+			ShellExecute((HWND)this->Handle.ToPointer(), _T("open"), _T("explorer.exe"),
+				arg.c_str(), NULL, SW_SHOW);
 		}
-		catch(System::Exception^ )
+		catch (System::Exception^)
 		{
 			// ExceptionMessageBox(ex);
 		}
 		finally
 		{
-			
+
 		}
 	}
-	
+
 	System::Void FormMain::btnShowError_Click(System::Object^  sender, System::EventArgs^  e)
 	{
-		if(!frmError.Visible)
+		if (!frmError.Visible)
 			frmError.Show();
 
 		frmError.BringToFront();
@@ -464,7 +478,7 @@ namespace sff {
 	{
 		for each(ListViewItem^ item in this->lvProgress->Items)
 		{
-			if(!System::IO::File::Exists(item->Text))
+			if (!System::IO::File::Exists(item->Text))
 				lvProgress->Items->Remove(item);
 		}
 	}
