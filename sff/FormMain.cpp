@@ -388,7 +388,7 @@ namespace sff {
 	{
 		for each(String^ folder in folders)
 		{
-			if (!txtInDir->Text->EndsWith(L"\n"))
+			if (!txtInDir->Text->EndsWith(L"\n") && !String::IsNullOrEmpty(txtInDir->Text))
 				txtInDir->Text += L"\r\n";
 			txtInDir->Text += folder + L"\r\n";
 		}
