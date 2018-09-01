@@ -26,7 +26,7 @@ namespace sff {
 		void CloseThread();
 		void ThreadOn(bool on);
 		System::Windows::Forms::ContextMenuStrip ctxRecents_;
-		property String^ Ini
+		property String^ IniPath
 		{
 			String^ get()
 			{

@@ -29,14 +29,17 @@ namespace sff {
 
 		orgShowErrorText_ = btnShowError->Text;
 
+		HashIni^ ini = Profile::ReadAll(IniPath);
 		array<String^>^ as;
-		Profile::GetStringArray("option", "recents", as, Ini);
+		Profile::GetStringArray("recents", "recent", as, ini);
 		for each(String^ t in as)
 		{
 			if (recents_.IndexOf(t) >= 0)
 				continue;
 			recents_.Add(t);
 		}
+
+		AmbLib::LoadFormXYWH(this, "option", ini);
 	}
 
 
@@ -367,7 +370,11 @@ namespace sff {
 
 		// save
 		bool bSaveOK = true;
-		bSaveOK &= Profile::WriteStringArray("option", "recents", recents_.ToArray(), Ini);
+		HashIni^ ini = Profile::ReadAll(IniPath);
+		bSaveOK &= Profile::WriteStringArray("recents", "recent", recents_.ToArray(), ini);
+		bSaveOK &= AmbLib::SaveFormXYWH(this, "option", ini);
+		if(bSaveOK)
+			bSaveOK &= Profile::WriteAll(ini, IniPath);
 		if (!bSaveOK)
 		{
 			CppUtils::Alert(I18NLS(L"Failed to save ini."));
