@@ -1,6 +1,6 @@
 {
     "name": "sff",
-    "solution": "sff2013.sln",
+    "solution": "sff2017.sln",
     "targetproject": "sff",
     "configuration": "Release",
     "targets": [
@@ -11,15 +11,21 @@
         }
     ],
     "ShouldBeFiles": [
-        "Ambiesoft.amblib.dll",
-        "Ambiesoft.amblib.pdb",
-        "Ambiesoft.amblibcpp.dll",
-        "sff.exe"
+		"Ambiesoft.AmbLib.dll",
+		"Ambiesoft.AmbLib.pdb",
+		"Ambiesoft.AmbLibcpp.dll",
+		"Ambiesoft.AmbLibcpp.pdb",
+		"Ambiesoft.Profile.dll",
+		"Ambiesoft.Profile.pdb",
+		"history.txt",
+		"README.md",
+		"sff.exe",
+		"sff.pdb"
     ],
-    "TotalFileCount": 4,
-    "archivedir": "C:\\MyArchive",
-    "remotedir": "http://example.com/ffdav/uploads/sff/",
-    "remotesha1": "http://example.com/ffdav/uploads/getSha1.php?file=sff/{}",
+    "TotalFileCount": "exact",
+    "archivedir": "C:\\Linkout",
+    "remotedir": "https://ambiesoft.fam.cx/ffdav/uploads/sff/",
+    "remotesha1": "https://ambiesoft.fam.cx/ffdav/uploads/getSha1.php?file=sff/{}",
     "ShouldNotBeFiles": [],
     "ShouldBeOneOfThem": [],
     "obtainverfrom": "history.txt",

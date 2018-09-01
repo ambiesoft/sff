@@ -13,6 +13,7 @@ namespace sff {
 	using namespace Ambiesoft;
 	using namespace System::Text;
 	using namespace System::Windows::Forms;
+	using namespace System::Reflection;
 
 	FormMain::FormMain(System::Collections::Generic::List<String^>^ args)
 	{
@@ -109,7 +110,8 @@ namespace sff {
 		SetTitle(nullptr);	
 		Application::Idle += gcnew EventHandler(this, &FormMain::onIdle);
 
-		lblVersion->Text = "SFF ver" + System::Reflection::Assembly::GetExecutingAssembly()->GetName()->Version;
+		// lblVersion->Text = "SFF ver" + System::Reflection::Assembly::GetExecutingAssembly()->GetName()->Version;
+		lblVersion->Text = "SFF ver " + AmbLib::GetSimpleVersion(Assembly::GetExecutingAssembly());
 	}
 
 	System::Void FormMain::onIdle(System::Object^, System::EventArgs^)
@@ -469,7 +471,7 @@ namespace sff {
 
 	System::Void FormMain::linkHomepage_LinkClicked(System::Object^  sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^  e)
 	{
-
+		AmbLib::OpenUrlWithBrowser("https://ambiesoft.github.io/sff/");
 	}
 
 
