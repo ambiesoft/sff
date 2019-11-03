@@ -184,7 +184,7 @@ namespace sff {
 				ThreadOn(false);
 				if(bRealDone)
 				{
-					CppUtils::Info(this, I18NLS(L"Done"));
+					CppUtils::Info(this, I18N(L"Done"));
 				}
 				btnShowError->Text = orgShowErrorText_ + " : " +  frmError.getErrorCount().ToString();
 			}

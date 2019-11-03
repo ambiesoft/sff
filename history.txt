@@ -1,4 +1,7 @@
-﻿2018/09/02 ver1.4
+﻿2019/11/03 ver1.5.1
+HighDPI
+
+2018/09/02 ver1.4
 Show dialog before closing the application if it is working
 
 2018/09/01 ver1.3

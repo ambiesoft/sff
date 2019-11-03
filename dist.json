@@ -1,6 +1,6 @@
 {
     "name": "sff",
-    "solution": "sff2017.sln",
+    "solution": "sff.sln",
     "targetproject": "sff",
     "configuration": "Release",
     "targets": [
@@ -24,10 +24,10 @@
     ],
     "TotalFileCount": "exact",
     "archivedir": "C:\\Linkout",
-    "remotedir": "https://ambiesoft.fam.cx/ffdav/uploads/sff/",
-    "remotesha1": "https://ambiesoft.fam.cx/ffdav/uploads/getSha1.php?file=sff/{}",
+    "remotedir": "http://ambiesoft.mooo.com/ffdav/uploads/sff/",
+    "remotesha1": "http://ambiesoft.mooo.com/ffdav/uploads/getSha1.php?file=sff/{}",
     "ShouldNotBeFiles": [],
     "ShouldBeOneOfThem": [],
     "obtainverfrom": "history.txt",
-    "obtainverregex": "\\d+\\.\\d+"
+    "obtainverregex": "\\d+\\.\\d+\\.\\d+"
 }

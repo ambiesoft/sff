@@ -111,7 +111,7 @@ typedef ULONGLONG ULL;
 typedef std::vector<tstring> TSTRINGVECTOR;
 
 
-#define I18NLS(t) (t)
+#define I18N(t) (t)
 
 
 // using namespace std;

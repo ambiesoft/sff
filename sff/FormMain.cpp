@@ -116,8 +116,8 @@ namespace sff {
 
 	System::Void FormMain::onIdle(System::Object^, System::EventArgs^)
 	{
-		slItemCount->Text = I18NLS(L"Items : ") + lvProgress->Items->Count.ToString();
-		slGroupCount->Text = I18NLS(L"Groups : ") + lvProgress->Groups->Count.ToString();
+		slItemCount->Text = I18N(L"Items : ") + lvProgress->Items->Count.ToString();
+		slGroupCount->Text = I18N(L"Groups : ") + lvProgress->Groups->Count.ToString();
 
 		bool on = (gcurthread != NULL);
 
@@ -305,7 +305,7 @@ namespace sff {
 			{
 				SuspendThread(gcurthread); // (gcurthread,THREAD_PRIORITY_LOWEST);
 				if (System::Windows::Forms::DialogResult::Yes !=
-					CppUtils::YesOrNo(this, I18NLS(L"Are you sure you want to cancel?"), MessageBoxDefaultButton::Button1))
+					CppUtils::YesOrNo(this, I18N(L"Are you sure you want to cancel?"), MessageBoxDefaultButton::Button1))
 				{
 					return;
 				}
@@ -375,7 +375,7 @@ namespace sff {
 	{
 		if (IsThreadWorking)
 		{
-			if (System::Windows::Forms::DialogResult::Yes != CppUtils::YesOrNo(I18NLS("Are you sure you want to close the application?")))
+			if (System::Windows::Forms::DialogResult::Yes != CppUtils::YesOrNo(I18N("Are you sure you want to close the application?")))
 			{
 				e->Cancel = true;
 				return;
@@ -393,7 +393,7 @@ namespace sff {
 			bSaveOK &= Profile::WriteAll(ini, IniPath);
 		if (!bSaveOK)
 		{
-			CppUtils::Alert(I18NLS(L"Failed to save ini."));
+			CppUtils::Alert(I18N(L"Failed to save ini."));
 		}
 
 		CloseThread();
