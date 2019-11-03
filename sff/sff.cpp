@@ -17,6 +17,8 @@ int main()
 	 _CrtSetDbgFlag(_CRTDBG_LEAK_CHECK_DF | _CRTDBG_CHECK_ALWAYS_DF | _CrtSetDbgFlag(_CRTDBG_REPORT_FLAG));
 	#endif
 	
+	Ambiesoft::CppUtils::AmbSetProcessDPIAware();
+
 	CCommandLineParser parser;
 
 	// default argument (without option like -- or /)
