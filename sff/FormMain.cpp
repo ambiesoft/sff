@@ -14,6 +14,8 @@ namespace sff {
 	using namespace System::Text;
 	using namespace System::Windows::Forms;
 	using namespace System::Reflection;
+	using namespace System::IO;
+	using namespace Miszou::ToolManager;
 
 	FormMain::FormMain(System::Collections::Generic::List<String^>^ args)
 	{
@@ -41,9 +43,73 @@ namespace sff {
 		}
 
 		AmbLib::LoadFormXYWH(this, "option", ini);
+
+		// Initialize Tools
+		// List of Command Macros supported by your application
+		List<Macro^>^ macroList = gcnew List<Macro^>();
+		macroList->Add(gcnew Macro("${file}", I18N(L"File to open")));
+
+		// filder list
+		List<Macro^>^ folderList = gcnew List<Macro^>();
+
+		// Create the ToolManager
+		do
+		{
+			try
+			{
+				mTools = gcnew Tools(
+					ToolsPath,
+					macroList,
+					folderList,
+					gcnew Tools::MacroExpander(this, &FormMain::ExpandToolMacros),
+					gcnew System::Windows::Forms::ImageList);
+			}
+			catch (Exception^ e)
+			{
+				if (MessageBox::Show(
+					I18N(L"Failed to load.") + L" \"" + ToolsPath + L"\"\r\n\r\n" + I18N(L"Reason") + L":\r\n" +
+					e->Message + L"\r\n\r\n" + I18N(L"Fix the file and press OK or press Cancel to exit.") + L"\r\n" +
+					I18N(L"If this probrem continues, delete the file but you will lost all information about External Tools."),
+					Application::ProductName,
+					MessageBoxButtons::OKCancel,
+					MessageBoxIcon::Error) != System::Windows::Forms::DialogResult::OK)
+				{
+					exit(-1);
+				}
+			}
+		} while (mTools == nullptr);
 	}
+	String^ FormMain::ExpandToolMacros(String^ str)
+	{
+		if (String::IsNullOrEmpty(str))
+			return str;
+		if (lvProgress->SelectedItems->Count == 0)
+			return String::Empty;
+		str = str->Replace("${file}", lvProgress->SelectedItems[0]->Text);
+		return str;
+	}
+	void FormMain::BuildExternalToolMenu(ToolStripMenuItem^ item, int startindex)
+	{
+		// extMacroUrl_ = extMacroActiveTabUrl_ = extMacroSelectedTabUrl_ = String::Empty;
+		mTools->BuildToolMenu(item, startindex);
 
+		if (item->DropDownItems->Count == 0)
+		{
+			ToolStripMenuItem^ subitem = gcnew ToolStripMenuItem();
+			subitem->Text = I18N(L"<No External Tools registered>");
+			subitem->Enabled = false;
+			item->DropDownItems->Add(subitem);
+		}
 
+		// add menu for launch the dialog of external tools
+		item->DropDownItems->Add(gcnew ToolStripSeparator());
+
+		ToolStripMenuItem^ externalToolsItem = gcnew ToolStripMenuItem();
+		externalToolsItem->Text = tsmiExternalTools->Text;
+		externalToolsItem->Click += gcnew System::EventHandler(this, &FormMain::tsmiExternalTools_Click);
+		item->DropDownItems->Add(externalToolsItem);
+
+	}
 	public ref class ListViewItemComparer : System::Collections::IComparer
 	{
 	private:
@@ -111,7 +177,7 @@ namespace sff {
 		Application::Idle += gcnew EventHandler(this, &FormMain::onIdle);
 
 		// lblVersion->Text = "SFF ver" + System::Reflection::Assembly::GetExecutingAssembly()->GetName()->Version;
-		lblVersion->Text = "SFF ver " + AmbLib::GetSimpleVersion(Assembly::GetExecutingAssembly());
+		lblVersion->Text = "SFF ver " + AmbLib::getAssemblyVersion(Assembly::GetExecutingAssembly(),3);
 	}
 
 	System::Void FormMain::onIdle(System::Object^, System::EventArgs^)
@@ -416,7 +482,7 @@ namespace sff {
 
 		AddtoDirs(folder);
 	}
-	void FormMain::OnClick(System::Object ^sender, System::EventArgs ^e)
+	void FormMain::OnRecentItemClick(System::Object ^sender, System::EventArgs ^e)
 	{
 		ToolStripMenuItem^ tsi = (ToolStripMenuItem^)sender;
 
@@ -432,7 +498,7 @@ namespace sff {
 			ToolStripMenuItem^ tsi = gcnew ToolStripMenuItem();
 			tsi->Text = recent;
 			tsi->Tag = recent;
-			tsi->Click += gcnew System::EventHandler(this, &sff::FormMain::OnClick);
+			tsi->Click += gcnew System::EventHandler(this, &sff::FormMain::OnRecentItemClick);
 			ctxRecents_.Items->Add(tsi);
 		}
 
@@ -488,6 +554,34 @@ namespace sff {
 		AmbLib::OpenUrlWithBrowser("https://ambiesoft.github.io/sff/");
 	}
 
+	System::Void FormMain::tsmiExit_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+		Close();
+	}
+	System::Void FormMain::cmExternalTools_DropDownOpening(System::Object^ sender, System::EventArgs^ e)
+	{
+		cmExternalTools->DropDownItems->Clear();
+		BuildExternalToolMenu(cmExternalTools, 0);
+	}
+	System::Void FormMain::tsmiExternalTools_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+		// We need try-catch because m_Tools_->Edit writes to file.
+		try
+		{
+			if (System::Windows::Forms::DialogResult::OK !=
+				mTools->Edit(
+					Miszou::ToolManager::Tools::EditFlags::AllowLockedUIEdit)
+				)
+			{
+				return;
+			}
+		}
+		catch (Exception^ ex)
+		{
+			CppUtils::Alert(ex->Message);
+			return;
+		}
+	}
 
 }
 

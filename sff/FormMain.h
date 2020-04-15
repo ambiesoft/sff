@@ -30,13 +30,23 @@ namespace sff {
 				return ret;
 			}
 		}
+		property String^ ToolsPath
+		{
+			String^ get()
+			{
+				String^ dir = System::IO::Path::GetDirectoryName(System::Windows::Forms::Application::ExecutablePath);
+				String^ ret = System::IO::Path::Combine(dir, L"ExternalTools.xml");
+				return ret;
+			}
+		}
 		System::Windows::Forms::FolderBrowserDialog fbd_;
 	private: System::Windows::Forms::StatusStrip^  ssMain;
 	private: System::Windows::Forms::ToolStripStatusLabel^  slMain;
 	private: System::Windows::Forms::ColumnHeader^  chFilename;
 	private: System::Windows::Forms::ComboBox^  cmbNameReg;
 	private: System::Windows::Forms::ComboBox^  cmbMinSize;
-	private: System::Windows::Forms::ToolStrip^  toolStrip1;
+	private: System::Windows::Forms::ToolStrip^ tsList;
+
 	private: System::Windows::Forms::ToolStripButton^  tsbRemoveNonExistFiles;
 	private: System::Windows::Forms::ColumnHeader^  chDriveType;
 
@@ -53,6 +63,19 @@ namespace sff {
 	private: System::Windows::Forms::Label^  label2;
 	private: System::Windows::Forms::Label^  label1;
 	private: System::Windows::Forms::Button^  btnRecents;
+	private: System::Windows::Forms::MenuStrip^ menuMain;
+	private: System::Windows::Forms::ToolStripMenuItem^ tsmiFile;
+	private: System::Windows::Forms::ToolStripMenuItem^ tsmiExit;
+	private: System::Windows::Forms::ToolStripMenuItem^ tsmiHelp;
+	private: System::Windows::Forms::ToolStripMenuItem^ tsmiAbout;
+	private: System::Windows::Forms::ToolStripMenuItem^ tsmiTools;
+	private: System::Windows::Forms::ToolStripMenuItem^ tsmiExternalTools;
+	private: System::Windows::Forms::ToolStripMenuItem^ cmExternalTools;
+	private: System::Windows::Forms::ToolStripMenuItem^ cmDummy;
+
+
+
+
 
 			 bool bSuspended_;
 
@@ -136,13 +159,17 @@ namespace sff {
 		System::Collections::Generic::List<String^> recents_;
 
 		void SetTitle(String^ addition);
-	private:
+		Miszou::ToolManager::Tools^ mTools;
 		System::Void onIdle(System::Object^, System::EventArgs^);
 		void AddtoDirs(... array<String^>^ folders);
 		property bool IsThreadWorking
 		{
 			bool get();
 		}
+	protected:
+		String^ ExpandToolMacros(String^ str);
+		void BuildExternalToolMenu(ToolStripMenuItem^ item, int startindex);
+
 	private: 
 		System::Void FormMain_Load(System::Object^  sender, System::EventArgs^  e);
 
@@ -164,7 +191,11 @@ namespace sff {
 		System::Void linkHomepage_LinkClicked(System::Object^  sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^  e);
 		System::Void btnRecents_Click(System::Object^  sender, System::EventArgs^  e);
 
-		void OnClick(System::Object ^sender, System::EventArgs ^e);
+		void OnRecentItemClick(System::Object ^sender, System::EventArgs ^e);
+		System::Void tsmiExit_Click(System::Object^ sender, System::EventArgs^ e);
+		System::Void tsmiExternalTools_Click(System::Object^ sender, System::EventArgs^ e);
+		System::Void cmExternalTools_DropDownOpening(System::Object^ sender, System::EventArgs^ e);
+
 };
 	
 

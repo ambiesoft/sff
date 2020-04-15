@@ -137,6 +137,9 @@ copy "$(SolutionDir)README.md" "$(TargetDir)"
       <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
       <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
     </Reference>
+    <Reference Include="ToolManager">
+      <HintPath>..\..\..\..\..\..\Linkout\DNAssembly.NET4\ToolManager.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\lsMisc\browseFolder.cpp" />
@@ -202,6 +205,9 @@ copy "$(SolutionDir)README.md" "$(TargetDir)"
       <DependentUpon>FormMain.h</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\history.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

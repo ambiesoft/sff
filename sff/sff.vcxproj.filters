@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
     </Filter>
+    <Filter Include="4 Dist">
+      <UniqueIdentifier>{f4781d70-0ad0-41f0-af64-c0a9d9a8cd59}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp">
@@ -137,5 +140,10 @@
     <EmbeddedResource Include="FormMain.resX">
       <Filter>3 Resource</Filter>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\history.txt">
+      <Filter>4 Dist</Filter>
+    </Text>
   </ItemGroup>
 </Project>

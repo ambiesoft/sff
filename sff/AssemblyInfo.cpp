@@ -11,12 +11,12 @@ using namespace System::Security::Permissions;
 [assembly:AssemblyConfigurationAttribute("")];
 [assembly:AssemblyCompanyAttribute("Ambiesoft")];
 [assembly:AssemblyProductAttribute("sff")];
-[assembly:AssemblyCopyrightAttribute("Copyright (c) Ambiesoft 2019")];
+[assembly:AssemblyCopyrightAttribute("Copyright (c) Ambiesoft 2020")];
 [assembly:AssemblyTrademarkAttribute("")];
 [assembly:AssemblyCultureAttribute("")];
 
 
-[assembly:AssemblyVersionAttribute("1.5.1.*")];
+[assembly:AssemblyVersionAttribute("1.5.2.*")];
 
 [assembly:ComVisible(false)];
 

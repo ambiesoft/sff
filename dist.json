@@ -6,7 +6,7 @@
     "targets": [
         {
             "platform": "Win32",
-            "outdir": "c:\\Linkout\\sff",
+            "outdir": "build\\sff",
             "setoutdirforbuild": 1
         }
     ],
@@ -17,6 +17,9 @@
 		"Ambiesoft.AmbLibcpp.pdb",
 		"Ambiesoft.Profile.dll",
 		"Ambiesoft.Profile.pdb",
+		"ToolManager.dll",
+		"ToolManager.pdb",
+		"ja-JP\\ToolManager.resources.dll",
 		"history.txt",
 		"README.md",
 		"sff.exe",

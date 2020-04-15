@@ -3,6 +3,7 @@ sff2013.sdf
 # /
 Debug/
 Release/
+build/
 
 /*.ncb
 /*.suo
