@@ -96,10 +96,10 @@ namespace sff {
         this->tpSettings->Controls->Add(this->cmbNameReg);
         this->tpSettings->Controls->Add(this->txtInDir);
         this->tpSettings->Controls->Add(this->btnAdd);
-        this->tpSettings->Location = System::Drawing::Point(4, 22);
+        this->tpSettings->Location = System::Drawing::Point(4, 24);
         this->tpSettings->Name = L"tpSettings";
         this->tpSettings->Padding = System::Windows::Forms::Padding(3);
-        this->tpSettings->Size = System::Drawing::Size(685, 366);
+        this->tpSettings->Size = System::Drawing::Size(685, 364);
         this->tpSettings->TabIndex = 0;
         this->tpSettings->Text = L"Settings";
         this->tpSettings->UseVisualStyleBackColor = true;
@@ -119,9 +119,9 @@ namespace sff {
         // 
         this->chkEachFolder->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
         this->chkEachFolder->AutoSize = true;
-        this->chkEachFolder->Location = System::Drawing::Point(16, 319);
+        this->chkEachFolder->Location = System::Drawing::Point(16, 315);
         this->chkEachFolder->Name = L"chkEachFolder";
-        this->chkEachFolder->Size = System::Drawing::Size(122, 17);
+        this->chkEachFolder->Size = System::Drawing::Size(148, 19);
         this->chkEachFolder->TabIndex = 8;
         this->chkEachFolder->Text = L"Find from &each entry";
         this->chkEachFolder->UseVisualStyleBackColor = true;
@@ -130,9 +130,9 @@ namespace sff {
         // 
         this->label2->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
         this->label2->AutoSize = true;
-        this->label2->Location = System::Drawing::Point(14, 284);
+        this->label2->Location = System::Drawing::Point(14, 282);
         this->label2->Name = L"label2";
-        this->label2->Size = System::Drawing::Size(30, 13);
+        this->label2->Size = System::Drawing::Size(36, 15);
         this->label2->TabIndex = 6;
         this->label2->Text = L"&Size:";
         // 
@@ -140,9 +140,9 @@ namespace sff {
         // 
         this->label1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
         this->label1->AutoSize = true;
-        this->label1->Location = System::Drawing::Point(14, 256);
+        this->label1->Location = System::Drawing::Point(14, 254);
         this->label1->Name = L"label1";
-        this->label1->Size = System::Drawing::Size(32, 13);
+        this->label1->Size = System::Drawing::Size(42, 15);
         this->label1->TabIndex = 3;
         this->label1->Text = L"&Filter:";
         // 
@@ -150,18 +150,18 @@ namespace sff {
         // 
         this->cmbMinSize->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
         this->cmbMinSize->FormattingEnabled = true;
-        this->cmbMinSize->Location = System::Drawing::Point(54, 281);
+        this->cmbMinSize->Location = System::Drawing::Point(62, 279);
         this->cmbMinSize->Name = L"cmbMinSize";
-        this->cmbMinSize->Size = System::Drawing::Size(145, 21);
+        this->cmbMinSize->Size = System::Drawing::Size(145, 23);
         this->cmbMinSize->TabIndex = 7;
         // 
         // cmbNameReg
         // 
         this->cmbNameReg->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
         this->cmbNameReg->FormattingEnabled = true;
-        this->cmbNameReg->Location = System::Drawing::Point(54, 253);
+        this->cmbNameReg->Location = System::Drawing::Point(62, 250);
         this->cmbNameReg->Name = L"cmbNameReg";
-        this->cmbNameReg->Size = System::Drawing::Size(145, 21);
+        this->cmbNameReg->Size = System::Drawing::Size(145, 23);
         this->cmbNameReg->TabIndex = 4;
         // 
         // txtInDir
@@ -173,7 +173,7 @@ namespace sff {
         this->txtInDir->Multiline = true;
         this->txtInDir->Name = L"txtInDir";
         this->txtInDir->ScrollBars = System::Windows::Forms::ScrollBars::Both;
-        this->txtInDir->Size = System::Drawing::Size(589, 239);
+        this->txtInDir->Size = System::Drawing::Size(589, 237);
         this->txtInDir->TabIndex = 0;
         // 
         // btnAdd
@@ -191,10 +191,10 @@ namespace sff {
         // 
         this->tbProgress->Controls->Add(this->lvProgress);
         this->tbProgress->Controls->Add(this->tsList);
-        this->tbProgress->Location = System::Drawing::Point(4, 22);
+        this->tbProgress->Location = System::Drawing::Point(4, 24);
         this->tbProgress->Name = L"tbProgress";
         this->tbProgress->Padding = System::Windows::Forms::Padding(3);
-        this->tbProgress->Size = System::Drawing::Size(441, 159);
+        this->tbProgress->Size = System::Drawing::Size(685, 364);
         this->tbProgress->TabIndex = 1;
         this->tbProgress->Text = L"Progress";
         this->tbProgress->UseVisualStyleBackColor = true;
@@ -212,7 +212,7 @@ namespace sff {
         this->lvProgress->HideSelection = false;
         this->lvProgress->Location = System::Drawing::Point(3, 28);
         this->lvProgress->Name = L"lvProgress";
-        this->lvProgress->Size = System::Drawing::Size(435, 128);
+        this->lvProgress->Size = System::Drawing::Size(679, 333);
         this->lvProgress->TabIndex = 0;
         this->lvProgress->UseCompatibleStateImageBehavior = false;
         this->lvProgress->View = System::Windows::Forms::View::Details;
@@ -240,12 +240,12 @@ namespace sff {
                 this->cmExternalTools
         });
         this->cmList->Name = L"cmList";
-        this->cmList->Size = System::Drawing::Size(156, 48);
+        this->cmList->Size = System::Drawing::Size(155, 48);
         // 
         // explorerToolStripMenuItem
         // 
         this->explorerToolStripMenuItem->Name = L"explorerToolStripMenuItem";
-        this->explorerToolStripMenuItem->Size = System::Drawing::Size(155, 22);
+        this->explorerToolStripMenuItem->Size = System::Drawing::Size(154, 22);
         this->explorerToolStripMenuItem->Text = L"&Explorer...";
         this->explorerToolStripMenuItem->Click += gcnew System::EventHandler(this, &FormMain::explorerToolStripMenuItem_Click);
         // 
@@ -253,14 +253,14 @@ namespace sff {
         // 
         this->cmExternalTools->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->cmDummy });
         this->cmExternalTools->Name = L"cmExternalTools";
-        this->cmExternalTools->Size = System::Drawing::Size(155, 22);
+        this->cmExternalTools->Size = System::Drawing::Size(154, 22);
         this->cmExternalTools->Text = L"External &Tools...";
         this->cmExternalTools->DropDownOpening += gcnew System::EventHandler(this, &FormMain::cmExternalTools_DropDownOpening);
         // 
         // cmDummy
         // 
         this->cmDummy->Name = L"cmDummy";
-        this->cmDummy->Size = System::Drawing::Size(180, 22);
+        this->cmDummy->Size = System::Drawing::Size(108, 22);
         this->cmDummy->Text = L"dummy";
         // 
         // tsList
@@ -268,7 +268,7 @@ namespace sff {
         this->tsList->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->tsbRemoveNonExistFiles });
         this->tsList->Location = System::Drawing::Point(3, 3);
         this->tsList->Name = L"tsList";
-        this->tsList->Size = System::Drawing::Size(435, 25);
+        this->tsList->Size = System::Drawing::Size(679, 25);
         this->tsList->TabIndex = 1;
         this->tsList->Text = L"toolStrip1";
         // 
@@ -286,9 +286,9 @@ namespace sff {
         // 
         this->tbAbout->Controls->Add(this->linkHomepage);
         this->tbAbout->Controls->Add(this->lblVersion);
-        this->tbAbout->Location = System::Drawing::Point(4, 22);
+        this->tbAbout->Location = System::Drawing::Point(4, 24);
         this->tbAbout->Name = L"tbAbout";
-        this->tbAbout->Size = System::Drawing::Size(441, 159);
+        this->tbAbout->Size = System::Drawing::Size(685, 364);
         this->tbAbout->TabIndex = 2;
         this->tbAbout->Text = L"About";
         this->tbAbout->UseVisualStyleBackColor = true;
@@ -298,7 +298,7 @@ namespace sff {
         this->linkHomepage->AutoSize = true;
         this->linkHomepage->Location = System::Drawing::Point(8, 27);
         this->linkHomepage->Name = L"linkHomepage";
-        this->linkHomepage->Size = System::Drawing::Size(86, 13);
+        this->linkHomepage->Size = System::Drawing::Size(104, 15);
         this->linkHomepage->TabIndex = 1;
         this->linkHomepage->TabStop = true;
         this->linkHomepage->Text = L"Go to homepage";
@@ -309,7 +309,7 @@ namespace sff {
         this->lblVersion->AutoSize = true;
         this->lblVersion->Location = System::Drawing::Point(8, 14);
         this->lblVersion->Name = L"lblVersion";
-        this->lblVersion->Size = System::Drawing::Size(0, 13);
+        this->lblVersion->Size = System::Drawing::Size(0, 15);
         this->lblVersion->TabIndex = 0;
         // 
         // btnShowError
@@ -359,20 +359,20 @@ namespace sff {
         // slMain
         // 
         this->slMain->Name = L"slMain";
-        this->slMain->Size = System::Drawing::Size(590, 17);
+        this->slMain->Size = System::Drawing::Size(591, 17);
         this->slMain->Spring = true;
         this->slMain->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
         // 
         // slGroupCount
         // 
         this->slGroupCount->Name = L"slGroupCount";
-        this->slGroupCount->Size = System::Drawing::Size(54, 17);
+        this->slGroupCount->Size = System::Drawing::Size(51, 17);
         this->slGroupCount->Text = L"Groups : ";
         // 
         // slItemCount
         // 
         this->slItemCount->Name = L"slItemCount";
-        this->slItemCount->Size = System::Drawing::Size(45, 17);
+        this->slItemCount->Size = System::Drawing::Size(44, 17);
         this->slItemCount->Text = L"Items : ";
         // 
         // menuMain
@@ -391,13 +391,13 @@ namespace sff {
         // 
         this->tsmiFile->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->tsmiExit });
         this->tsmiFile->Name = L"tsmiFile";
-        this->tsmiFile->Size = System::Drawing::Size(37, 20);
+        this->tsmiFile->Size = System::Drawing::Size(35, 20);
         this->tsmiFile->Text = L"&File";
         // 
         // tsmiExit
         // 
         this->tsmiExit->Name = L"tsmiExit";
-        this->tsmiExit->Size = System::Drawing::Size(93, 22);
+        this->tsmiExit->Size = System::Drawing::Size(92, 22);
         this->tsmiExit->Text = L"&Exit";
         this->tsmiExit->Click += gcnew System::EventHandler(this, &FormMain::tsmiExit_Click);
         // 
@@ -405,13 +405,13 @@ namespace sff {
         // 
         this->tsmiTools->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->tsmiExternalTools });
         this->tsmiTools->Name = L"tsmiTools";
-        this->tsmiTools->Size = System::Drawing::Size(46, 20);
+        this->tsmiTools->Size = System::Drawing::Size(44, 20);
         this->tsmiTools->Text = L"&Tools";
         // 
         // tsmiExternalTools
         // 
         this->tsmiExternalTools->Name = L"tsmiExternalTools";
-        this->tsmiExternalTools->Size = System::Drawing::Size(180, 22);
+        this->tsmiExternalTools->Size = System::Drawing::Size(142, 22);
         this->tsmiExternalTools->Text = L"&External Tools";
         this->tsmiExternalTools->Click += gcnew System::EventHandler(this, &FormMain::tsmiExternalTools_Click);
         // 
@@ -419,19 +419,19 @@ namespace sff {
         // 
         this->tsmiHelp->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->tsmiAbout });
         this->tsmiHelp->Name = L"tsmiHelp";
-        this->tsmiHelp->Size = System::Drawing::Size(44, 20);
+        this->tsmiHelp->Size = System::Drawing::Size(40, 20);
         this->tsmiHelp->Text = L"&Help";
         // 
         // tsmiAbout
         // 
         this->tsmiAbout->Name = L"tsmiAbout";
-        this->tsmiAbout->Size = System::Drawing::Size(116, 22);
+        this->tsmiAbout->Size = System::Drawing::Size(115, 22);
         this->tsmiAbout->Text = L"&About...";
         // 
         // FormMain
         // 
-        this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
-        this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+        this->AutoScaleDimensions = System::Drawing::SizeF(96, 96);
+        this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Dpi;
         this->ClientSize = System::Drawing::Size(701, 494);
         this->Controls->Add(this->menuMain);
         this->Controls->Add(this->tabMain);
@@ -440,6 +440,8 @@ namespace sff {
         this->Controls->Add(this->btnShowError);
         this->Controls->Add(this->btnStart);
         this->Controls->Add(this->ssMain);
+        this->Font = (gcnew System::Drawing::Font(L"Meiryo UI", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+            static_cast<System::Byte>(0)));
         this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
         this->MainMenuStrip = this->menuMain;
         this->MinimumSize = System::Drawing::Size(534, 395);

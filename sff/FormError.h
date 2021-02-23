@@ -71,11 +71,12 @@ namespace sff {
 			// 
 			// lvError
 			// 
-			this->lvError->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(2) {this->chError, this->chFile});
+			this->lvError->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(2) { this->chError, this->chFile });
 			this->lvError->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->lvError->HideSelection = false;
 			this->lvError->Location = System::Drawing::Point(0, 0);
 			this->lvError->Name = L"lvError";
-			this->lvError->Size = System::Drawing::Size(668, 266);
+			this->lvError->Size = System::Drawing::Size(668, 288);
 			this->lvError->TabIndex = 0;
 			this->lvError->UseCompatibleStateImageBehavior = false;
 			this->lvError->View = System::Windows::Forms::View::Details;
@@ -92,10 +93,12 @@ namespace sff {
 			// 
 			// FormError
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 12);
-			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(668, 266);
+			this->AutoScaleDimensions = System::Drawing::SizeF(96, 96);
+			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Dpi;
+			this->ClientSize = System::Drawing::Size(668, 288);
 			this->Controls->Add(this->lvError);
+			this->Font = (gcnew System::Drawing::Font(L"Meiryo UI", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
 			this->MaximizeBox = false;
 			this->MinimizeBox = false;
 			this->Name = L"FormError";

@@ -1,4 +1,7 @@
-﻿2020/04/15 ver1.5.2
+﻿2021/02/23 ver1.5.3
+HighDPI Form
+
+2020/04/15 ver1.5.2
 External Tools
 
 2019/11/03 ver1.5.1
