@@ -179,7 +179,16 @@ namespace sff {
 		// lblVersion->Text = "SFF ver" + System::Reflection::Assembly::GetExecutingAssembly()->GetName()->Version;
 		lblVersion->Text = "SFF ver " + AmbLib::getAssemblyVersion(Assembly::GetExecutingAssembly(),3);
 	}
-
+	System::Void FormMain::tpSettings_Resize(System::Object^ sender, System::EventArgs^ e)
+	{
+		int marginX = 8;
+		int marginY = 4;
+		System::Drawing::Size size(
+			btnAnchor->Location.X - lblFilter->Location.X - marginX,
+			btnAnchor->Location.Y - btnAdd->Location.Y -marginY
+		);
+		txtInDir->Size = size;
+	}
 	System::Void FormMain::onIdle(System::Object^, System::EventArgs^)
 	{
 		slItemCount->Text = I18N(L"Items : ") + lvProgress->Items->Count.ToString();

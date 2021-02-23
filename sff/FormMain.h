@@ -60,8 +60,10 @@ namespace sff {
 	private: System::Windows::Forms::LinkLabel^  linkHomepage;
 	private: System::Windows::Forms::Label^  lblVersion;
 	private: System::Windows::Forms::CheckBox^  chkEachFolder;
-	private: System::Windows::Forms::Label^  label2;
-	private: System::Windows::Forms::Label^  label1;
+	private: System::Windows::Forms::Label^ lblSize;
+
+	private: System::Windows::Forms::Label^ lblFilter;
+
 	private: System::Windows::Forms::Button^  btnRecents;
 	private: System::Windows::Forms::MenuStrip^ menuMain;
 	private: System::Windows::Forms::ToolStripMenuItem^ tsmiFile;
@@ -72,6 +74,7 @@ namespace sff {
 	private: System::Windows::Forms::ToolStripMenuItem^ tsmiExternalTools;
 	private: System::Windows::Forms::ToolStripMenuItem^ cmExternalTools;
 	private: System::Windows::Forms::ToolStripMenuItem^ cmDummy;
+	private: System::Windows::Forms::Button^ btnAnchor;
 
 
 
@@ -195,6 +198,7 @@ namespace sff {
 		System::Void tsmiExit_Click(System::Object^ sender, System::EventArgs^ e);
 		System::Void tsmiExternalTools_Click(System::Object^ sender, System::EventArgs^ e);
 		System::Void cmExternalTools_DropDownOpening(System::Object^ sender, System::EventArgs^ e);
+		System::Void tpSettings_Resize(System::Object^ sender, System::EventArgs^ e);
 
 };
 	
