@@ -1,4 +1,7 @@
-﻿2021/02/23 ver1.5.3
+﻿2021/02/24 ver1.5.4
+Control Position at Load
+
+2021/02/23 ver1.5.3
 HighDPI Form
 
 2020/04/15 ver1.5.2

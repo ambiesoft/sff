@@ -178,6 +178,8 @@ namespace sff {
 
 		// lblVersion->Text = "SFF ver" + System::Reflection::Assembly::GetExecutingAssembly()->GetName()->Version;
 		lblVersion->Text = "SFF ver " + AmbLib::getAssemblyVersion(Assembly::GetExecutingAssembly(),3);
+
+		tpSettings_Resize(this, nullptr);
 	}
 	System::Void FormMain::tpSettings_Resize(System::Object^ sender, System::EventArgs^ e)
 	{
